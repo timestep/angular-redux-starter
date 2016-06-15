@@ -1,16 +1,268 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
   <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
+    <title>KagenAir™ - Discover how your environment affects your health.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rangle.io - Angular / Redux Seed</title>
-    <base href="/">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="bower_components/toastr/toastr.css"/>
+    <link rel="stylesheet" href="bower_components/ngprogress/ngProgress.css"/>
+    <link rel="stylesheet" href="styles/iconFonts.css">
+    <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.min.css"/>
+    <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog.css"/>
+    <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog-theme-default.css"/>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/webAllerrhythmPrint.css">
+    <link rel="stylesheet" href="app/sections/allerrhythm/styles/switch.css">
+    <!-- endbuild -->
+
   </head>
-   <body>
-    <div>
-      <rio-sample-app></rio-sample-app>
+
+  <body ng-app="kagenSite" ng-cloak class="ng-cloak">
+
+    <!-- HEADER -->
+    <div data-ng-include data-src="'header.html'"></div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" ng-hide="session">
+
+      <section class="container-full" ng-controller="LoginCtrl as login">
+        <div class="row top-space">
+          <div class="col-md-7"
+            style="background-color: white; padding: 40px; float: inherit; margin: 0 auto;">
+            <form role="login"
+                id="loginForm"
+                name="loginForm"
+                ng-submit="login.doLogin($event, login.inputUsername, login.inputPassword)">
+
+              <h3 style="color: #5A9EF0; text-shadow: inherit;">Welcome to the KagenAir Portal</h3>
+
+              <div class="form-group">
+                <input type="text"
+                       id="login-field"
+                       class="form-control"
+                       ng-model="login.inputUsername"
+                       placeholder="Email"
+                       ng-disabled="login.spinner"
+                       required/>
+              </div>
+              <div class="form-group">
+                <input type="password"
+                       class="form-control"
+                       id="password-field"
+                       ng-model="login.inputPassword"
+                       placeholder="Password"
+                       ng-disabled="login.spinner"
+                       required/>
+              </div>
+              <button type="submit"
+                      id="login-button"
+                      class="btn btn-blue center-block"
+                      ng-disabled="login.spinner">Login
+              </button>
+
+              <div class='spinner' ng-show="login.spinner">
+                <i class="fa fa-4x fa-spinner fa-spin"></i>
+              </div>
+            </form>
+
+            <br>
+            <div ng-click="login.reset(login.inputUsername)"
+                 class="btn btn-blue center-block navbar-static-top"
+                 ng-disabled="login.spinner">Forgot password
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
+
+    <!-- APPLICATION CONTENT -->
+    <div ui-view=""></div>
+
+    <!-- FOOTER -->
+    <div class="footer" id="footer">
+      <div class="container">
+        <div class="row">
+          <small>
+            <span>Copyright &copy; 2012-2016 KagenAir, LLC. All Rights Reserved. Patent Pending. |</span>
+            <a href="/resources/TERMS_OF_USE.pdf" target="_blank"> Terms of Use.</a>
+            <a href="/resources/PRIVACY_POLICY.pdf" target="_blank"> Privacy Policy</a>
+          </small>
+        </div>
+        <div class="row">
+          <small class="small-print">Weather-Ready Nation Ambassador<sup>&trade;</sup> and the Weather-Ready Nation Ambassador<sup>&trade;</sup> and NOAA logos are trademarks of the U.S. Department of Commerce, National Oceanic and Atmospheric Administration, used with permission.</small>
+        </div>
+      </div>
+    </div>
+
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js1 js/app.js -->
+    <script src="bower_components/fetch/fetch.js"></script>
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/react/react-with-addons.js"></script>
+    <script src="bower_components/react/react-dom.min.js"></script>
+    <script src="bower_components/react-bootstrap/react-bootstrap.js"></script>
+    <script src="bower_components/d3/d3.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-ui-select/dist/select.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/ngprogress/build/ngProgress.js"></script>
+    <script src="bower_components/ramda/ramda.js"></script>
+    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <script src="bower_components/toastr/toastr.js"></script>
+    <script src="bower_components/ngDialog/js/ngDialog.js"></script>
+    <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
+    <script src="bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
+    <script src="bower_components/raphael/raphael.js"></script>
+    <script src="bower_components/justgage/justgage.js"></script>
+    <script src="bower_components/jstzdetect/jstz.js"></script>
+    <script src="bower_components/angular-jstz/angular-jstz.js"></script>
+    <script src="app/lib/alasql.min.js"></script>
+    <script src="app/lib/angularjs-dropdown-multiselect.js"></script>
+    <script src="app/lib/html2canvas.js"></script>
+    <script src="app/core/timezone-autocomplete.js"></script>
+    <script src="app/core/time-field-formatter.js"></script>
+    <script src="app/core/generic-paginator/generic-paginator-service.js"></script>
+    <script src="app/core/organizations/organizations-service.js"></script>
+    <script src="app/sections/associates/_associates.js"></script>
+    <script src="app/sections/associates/associates-service.js"></script>
+    <script src="app/sections/associates/associates-controller.js"></script>
+    <script src="app/sections/contact/contact-controller.js"></script>
+    <script src="app/core/members/members-service.js"></script>
+    <script src="app/sections/members/members-controller.js"></script>
+    <script src="app/core/users/users-service.js"></script>
+    <script src="app/sections/users/users-controller.js"></script>
+    <script src="app/core/notifications/notifications-service.js"></script>
+    <script src="app/core/watches/watches-service.js"></script>
+    <script src="app/core/allergens/allergens-service.js"></script>
+    <script src="app/sections/allerrhythm/allerrhythm-controller.js"></script>
+    <script src="app/sections/allerrhythm/allerrhythm-service.js"></script>
+    <script src="app/sections/notifications/notifications-controller.js"></script>
+    <script src="app/sections/notifications/notification-edit-controller.js"></script>
+    <script src="app/sections/notifications/notification-criteria-controller.js"></script>
+    <script src="app/sections/watches/watches-controller.js"></script>
+    <script src="app/sections/associates/associates-edit-controller.js"></script>
+    <script src="app/sections/associates/associates-admin-user-controller.js"></script>
+    <script src="app/sections/profile/_profile.js"></script>
+    <script src="app/sections/profile/profile-data.js"></script>
+    <script src="app/sections/profile/profile-directive.js"></script>
+    <script src="app/sections/profile/profile-results-directive.js"></script>
+    <script src="app/sections/profile/profile-service.js"></script>
+    <script src="app/sections/profile/profile-controller.js"></script>
+    <script src="app/sections/reports/reports-service/reports-service.js"></script>
+    <script src="app/sections/reports/list/reports-list-controller.js"></script>
+    <script src="app/sections/reports/edit/reports-edit-controller.js"></script>
+    <script src="app/sections/reports/create/reports-create-controller.js"></script>
+    <script src="app/sections/reports/allergen-portal/_reports.js"></script>
+    <script src="app/sections/reports/allergen-portal/reports-filter.js"></script>
+    <script src="app/sections/reports/allergen-portal/top-allergens-controller.js"></script>
+    <script src="app/sections/reports/allergen-portal/reports-entry-controller.js"></script>
+    <script src="app/sections/reports/allergen-portal/reports-history-controller.js"></script>
+    <script src="app/sections/reports/reports-app.js"></script>
+    <script src="app/sections/sensitivity-test/_sensitivity-test.js"></script>
+    <script src="app/sections/sensitivity-test/sensitivity-test-service.js"></script>
+    <script src="app/sections/sensitivity-test/sensitivity-test-data.js"></script>
+    <script src="app/sections/sensitivity-test/sensitivity-test-controller.js"></script>
+    <script src="app/sections/sensitivity-test/sensitivity-test-result-controller.js"></script>
+    <script src="app/sections/login/login-controller.js"></script>
+    <script src="app/sections/main/main-controller.js"></script>
+    <script src="app/sections/video-chat/video-chat-controller.js"></script>
+    <script src="app/sections/video-chat/video-chat-reject-controller.js"></script>
+    <script src="app/sections/video-chat/video-chat-preferences-controller.js"></script>
+    <script src="app/sections/video-chat/video-chat-data-controller.js"></script>
+    <script src="app/sections/quick-chat-billing/quick-chat-billing-controller.js"></script>
+    <script src="app/core/geolocation/geolocation-service.js"></script>
+    <script src="app/core/video-chat/video-chat-controls-service.js"></script>
+    <script src="app/core/video-chat/video-chat-queue-service.js"></script>
+    <script src="app/core/video-chat/video-chat-prefs-sync-service.js"></script>
+    <script src="app/core/video-chat/video-chat-frame-service.js"></script>
+    <script src="app/core/video-chat/video-chat-session-service.js"></script>
+    <script src="app/core/video-chat/video-chat-log-formatter-service.js"></script>
+    <script src="app/core/video-chat/video-chat-logs-service.js"></script>
+    <script src="app/core/quick-chat-billing/quick-chat-usage-data-service.js"></script>
+    <script src="app/core/search/search-service.js"></script>
+    <script src="app/core/csv-worker/csv-worker-instantiator-service.js"></script>
+    <script src="app/core/csv-worker/csv-worker-service.js"></script>
+    <script src="app/core/session/session-service.js"></script>
+    <script src="app/core/helper/helper-service.js"></script>
+    <script src="app/core/capitalize/capitalize-filter.js"></script>
+    <script src="app/core/allergy-reports/allergy-reports-service.js"></script>
+    <script src="app/core/allergen-categories/allergen-categories-service.js"></script>
+    <script src="app/core/kagen-core.js"></script>
+    <script src="app/app.js"></script>
+
+    <script src="app/sections/allerrhythm/scripts/JSONDateParser.js"></script>
+    <!-- Make sure to run 'gulp build-react' to generate this file -->
+    <script src="app/app-react.js"></script>
+    <!-- endbuild -->
+
+    <script>
+      JSON.useDateParser();
+    </script>
+    <script src="//static.opentok.com/webrtc/v2.8.0/js/opentok.min.js"></script>
+
+    <!-- scroll-To- Top -->
+    <script type="text/javascript">
+    $(document).ready(function() {
+      //Check to see if the window is top if not then display button
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 400) {
+          $('.scrollToTop').fadeIn();
+        } else {
+          $('.scrollToTop').fadeOut();
+        }
+      });
+      //Click event to scroll to top
+      $('.scrollToTop').click(function() {
+        $('html, body').animate({
+          scrollTop: 0
+        }, 1000);
+        return false;
+      });
+    });
+    </script>
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-70390007-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
+      <defs>
+        <g id="icon-call">
+          <path d="M180,16v121.6H16V16H180 M192.2,0H3.8C1.7,0,0,1.7,0,3.8v145.9c0,2.1,1.7,3.8,3.8,3.8h188.3c2.1,0,3.8-1.7,3.8-3.8V3.8
+            C196,1.7,194.3,0,192.2,0L192.2,0z M98,40.2c-11.3,0-20.5,9.2-20.5,20.5S86.7,81.2,98,81.2s20.5-9.2,20.5-20.5S109.3,40.2,98,40.2z
+            M140.3,121c0-24.2-18.9-34.9-42.3-34.9S55.7,96.7,55.7,121H140.3z M146.5,186c0-5.5-4.5-10-10-10h-77c-5.5,0-10,4.5-10,10
+            s4.5,10,10,10h77C142,196,146.5,191.5,146.5,186z"/>
+        </g>
+      </defs>
+    </svg>
   </body>
 </html>
