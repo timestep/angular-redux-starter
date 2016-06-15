@@ -1,23 +1,19 @@
 'use strict';
 
-exports.tslint = {
+exports.eslint = {
   test: /\.ts$/,
-  loader: 'tslint',
+  loader: 'esint-loader',
   exclude: /node_modules/,
 };
 
-exports.tsTest = loadTs('ts', true);
-exports.istanbulInstrumenter = loadTs('istanbul-instrumenter');
-exports.ts = loadTs();
-
-function loadTs(loader, inTest) {
-  return {
-    test: /\.ts$/,
-    loader: loader || 'ts',
-    exclude: inTest ? /node_modules/ :
-      /(node_modules\/|\.test\.ts$|tests\.\w+\.ts$)/,
-  };
-}
+exports.babel = {
+  test: /\.jsx?$/,
+  exclude: /node_modules/,
+  loader: 'babel-loader',
+  query: {
+    presets: ['es2015'],
+  },
+};
 
 exports.html = {
   test: /\.html$/,
