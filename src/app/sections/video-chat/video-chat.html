@@ -1,0 +1,264 @@
+<div class="container top-space-50" id="video-chat">
+  <section class="row">
+    <div class="col-md-9">
+      <iframe src="/video-frame.html" class="video-chat-iframe"></iframe>
+      <section>
+        <ul class="controls">
+          <li>
+            <button class="btn btn-default {{videoChat.sessionstate.online? 'on': 'off'}}line"
+                    ng-click="videoChat.control.online()">
+              <!-- This button has a class of 'online' when switch is on, and 'offline' otherwise -->
+              <span class="fa fa-toggle-{{videoChat.sessionstate.online? 'on': 'off'}} fa-lg" aria-hidden="true"> {{videoChat.sessionstate.online? 'Online': 'Offline'}}</span>
+            </button>
+          </li>
+          <!-- <li ng-show="videoChat.sessionstate.currentCall"> -->
+          <!--   <button class="btn btn-default {{videoChat.control.state.hold? 'on': 'off'}}-hold" -->
+          <!--           ng-click="videoChat.control.hold()"> -->
+          <!--     <\!-- This button has a class of 'on-hold' when hold is activated, and 'off-hold' otherwise -\-> -->
+          <!--     <span class="fa fa-{{videoChat.control.state.hold? 'play': 'pause'}} fa-lg" aria-hidden="true"> {{videoChat.control.state.hold? 'Continue': 'Hold'}}</span> -->
+          <!--   </button> -->
+          <!-- </li> -->
+          <li ng-show="videoChat.sessionstate.currentCall">
+            <button class="btn btn-default" ng-click="videoChat.control.endCall(); videoChat.closeProfile();">
+              <span class="fa fa-phone fa-lg" aria-hidden="true"> End Call</span>
+            </button>
+          </li>
+          <!-- <li ng-show="videoChat.sessionstate.online"> -->
+          <!--   <button class="btn btn-default" ng-click="videoChat.control.startCall()"> -->
+          <!--     <span class="fa fa-forward fa-lg" aria-hidden="true"> Next Call</span> -->
+          <!--   </button> -->
+          <!-- </li> -->
+        </ul>
+        <ul class="controls pull-right">
+          <li class="">
+            <button class="btn btn-default" ng-click="videoChat.open.callHistory()">
+              <span class="fa fa-history fa-lg" aria-hidden="true"> Call History</span>
+            </button>
+          </li>
+          <li class="">
+            <button class="btn btn-default" ng-click="videoChat.open.preferences()">
+              <span class="fa fa-cog fa-lg" aria-hidden="true"> </span>
+            </button>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <div class="col-md-3">
+      <h4 class="text-left">Requested video-calls<span class="badge">{{videoChat.queue.queue.length}}</span></h4>
+      <div class="panel panel-info">
+        <!-- Default panel contents -->
+        <div class="panel-body" ng-show="videoChat.queue.queue.length === 0">
+          <span>No callers waiting.</span>
+        </div>
+        <div class="panel-body" ng-show="videoChat.queue.queue.length === undefined">
+          <span>Loading call request Queue...</span>
+        </div>
+
+        <!-- List group -->
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="call in videoChat.queue.queue">
+            <ul class="list-unstyled">
+              <li>Name: {{call.name}}</li>
+              <li ng-if="call.phoneNumber !== ''">Phone: {{call.phoneNumber}}</li>
+            </ul>
+            <button ng-click="videoChat.answerCall(call)"
+                    ng-if="videoChat.sessionstate.currentCall !== call.callId && !call.started"
+                    class="btn btn-success">
+              <span class="fa fa-phone" aria-hidden="true"> Answer</span>
+            </button>
+            <button ng-click="videoChat.control.continueCall(call.callId)" ng-if="call.hold" class="btn btn-positive">
+              <span class="fa fa-play" aria-hidden="true"> Continue</span>
+            </button>
+            <button ng-if="call.started && !call.hold" class="btn">
+              <span class="fa" aria-hidden="true" disabled> Call in progress</span>
+            </button>
+            <button ng-click="videoChat.control.rejectCall(call.callId)"
+                    ng-if="videoChat.sessionstate.currentCall !== call.callId"
+                    class="btn btn-danger">
+              <span class="fa fa-exclamation" aria-hidden="true"> Reject</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <tabset ng-if="videoChat.sessionstate.currentCall !== call.callId && videoChat.callerProfile">
+    <tab heading="Profile" active="true">
+      <div ng-if="!videoChat.callerProfile">Loading profile...</div>
+      <div class="col-md-12"  ng-if="videoChat.sessionstate.currentCall !== call.callId && videoChat.callerProfile"  >
+        <h4 class="text-left">Caller Profile:</h4>
+        <div class="col-md-12 white">
+          <!--   NAME AND AVATAR -->
+          <h2>{{videoChat.session.firstName + " " + videoChat.session.lastName }}</h2>
+          <img class="img-circle avatar" ng-src="{{videoChat.profilePhoto}}" width="40px" height="40px" alt=""/>
+          <center>
+            <fieldset id="name" class="profile form_group" ng-disabled="!videoChat.saveButton">
+              <!--   GENDER -->
+              <hr />
+              <h4>Gender</h4>
+              <div class="row gender-select">
+                <div class="col-sm-6 gender-select-right">
+                  <i ng-class="{active : videoChat.genderSelectedMale}"
+                     class="fa fa-2x fa-male">
+                  </i>
+                </div>
+                <div class="col-sm-6 gender-select-left">
+                  <i ng-class="{active : videoChat.genderSelectedFemale}"
+                     class="fa fa-2x fa-female">
+                  </i>
+                </div>
+              </div>
+              <!-- DATE OF BIRTH -->
+              <hr />
+              <h4>Date of Birth</h4>
+              <div id="birthday_select_group" class="form_group select_group">
+                <div class="select_wrap">
+                  <select id="birthday_day"
+                          name="birthday_day"
+                          placeholder="Day"
+                          ng-model="videoChat.session.birthdayDay"
+                          ng-options="d for d in videoChat.days">
+                  </select>
+                  <label for="birthday_day">Day</label>
+                </div>
+                <div class="select_wrap">
+                  <select id="birthday_month"
+                          name="birthday_month"
+                          placeholder="Month"
+                          ng-model="videoChat.session.birthdayMonth">
+                    <option value="01">Jan</option>
+                    <option value="02">Feb</option>
+                    <option value="03">Mar</option>
+                    <option value="04">Apr</option>
+                    <option value="05">May</option>
+                    <option value="06">Jun</option>
+                    <option value="07">Jul</option>
+                    <option value="08">Aug</option>
+                    <option value="09">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                  </select>
+                  <label for="birthday_month">Month</label>
+                </div>
+                <div class="select_wrap">
+                  <select id="birthday_year"
+                          name="birthday_year"
+                          placeholder="Year"
+                          ng-model="videoChat.session.birthdayYear"
+                          ng-options="y for y in videoChat.years">
+                  </select>
+                  <label for="birthday_year">Year</label>
+                </div>
+              </div>
+              <!-- NAME AND ADDRESS -->
+              <hr />
+              <h4>Name & Address</h4>
+              <input class="form-control" type="text" placeholder="First Name" ng-model="videoChat.session.firstName"/>
+              <input class="form-control" type="text" placeholder="Last Name"  ng-model="videoChat.session.lastName"/>
+              <input class="form-control" type="text" placeholder="Home Phone" ng-model="videoChat.session.phone" />
+              <input class="form-control" type="text" placeholder="Cell"       ng-model="videoChat.session.cell" />
+              <input class="form-control" type="text" placeholder="Street"     ng-model="videoChat.session.street1" />
+              <input class="form-control" type="text" placeholder="Street"     ng-model="videoChat.session.street2" />
+              <input class="form-control" type="text" placeholder="City"       ng-model="videoChat.session.city" />
+              <input class="form-control" type="text" placeholder="Zip"        ng-model="videoChat.session.zipCode" />
+              <div>
+                <label for='state'>
+                <select class="form-control" placeholder='State / Province'
+                        ng-model="videoChat.session.state"
+                        ng-options="state.name for state in videoChat.states track by state.name">
+                </select>
+              </div>
+              <!-- Medical Conditions / Household Pets / Current Medications / Known Allergies -->
+              <hr />
+              <div class="row">
+                <div class="col-sm-6">
+                  <multiselect title="Medical Conditions"
+                        icon="user-md"
+                        toggle="showMedCond"
+                        data="videoChat.medsData"
+                        model="videoChat.medsModel">
+                  </multiselect>
+                </div>
+                <div class="col-sm-6">
+                  <multiselect title="Household Pets"
+                        icon="heart"
+                        toggle="showPets"
+                        data="videoChat.petsData"
+                        model="videoChat.petsModel">
+                  </multiselect>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <multiselect title="Current Medications"
+                        icon="medkit"
+                        toggle="showMeds"
+                        dropdown-list="videoChat.setup"
+                        profile="videoChat">
+                  </multiselect>
+                </div>
+                <div class="col-sm-6">
+                  <multiselect title="Known Allergies"
+                        icon="stethoscope"
+                        toggle="showMeds"
+                        dropdown-list="videoChat.foodSetup"
+                        profile="videoChat">
+                  </multiselect>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <results
+                    data="videoChat.resultsData"
+                    model="videoChat.resultsModel"
+                    profile="videoChat">
+                  </results>
+                </div>
+              </div>
+            </fieldset>
+          </center>
+          <!-- SAVE/EDIT BUTTON -->
+          <hr />
+          <button class="btn btn-success"
+                  ng-click="videoChat.toggleSaveEditButtons()"
+                  ng-hide="videoChat.saveButton">Edit
+          </button>
+          <button class="btn btn-primary"
+                  ng-click="videoChat.saveProfile()"
+                  ng-disabled="videoChat.pageReady === false"
+                  ng-show="videoChat.saveButton">Save
+          </button>
+          <button class="btn btn-danger"
+                  ng-click="videoChat.resetProfile()"
+                  ng-disabled="videoChat.pageReady === false"
+                  ng-show="videoChat.saveButton">Cancel
+          </button>
+          <p>
+            <strong class="text-danger" ng-show="videoChat.saveProfileSuccess">Profile Saved</strong>
+          <p>
+        </div>
+      </div>
+    </tab>
+    <tab heading="AllerRhythm" select="videoChat.resizeAllerRhythm()">
+      <div id="kagendash" style="margin-left: -100px; margin-right: -100px;">
+        <!-- loader - React will remove this when it renders -->
+        <div class="sk-circle">
+          <div class="sk-circle1 sk-child"></div>
+          <div class="sk-circle2 sk-child"></div>
+          <div class="sk-circle3 sk-child"></div>
+          <div class="sk-circle4 sk-child"></div>
+          <div class="sk-circle5 sk-child"></div>
+          <div class="sk-circle6 sk-child"></div>
+          <div class="sk-circle7 sk-child"></div>
+          <div class="sk-circle8 sk-child"></div>
+          <div class="sk-circle9 sk-child"></div>
+          <div class="sk-circle10 sk-child"></div>
+          <div class="sk-circle11 sk-child"></div>
+          <div class="sk-circle12 sk-child"></div>
+        </div>
+      </div>
+    </tab>
+  </tabset>
+</div>

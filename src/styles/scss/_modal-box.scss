@@ -1,0 +1,47 @@
+@import "variables";
+@import "z-index";
+
+.modal-box {
+  &__container {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: $base-radius;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.10), 0 3px 6px rgba(0, 0, 0, 0.10);
+    height: 250px;
+    margin-top: 3px;
+    min-width: 225px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    z-index: z('ModalContainer');
+
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      background-color: $scrollbar-bg;
+      border: 1px solid $scrollbar-border;
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $scrollbar-thumb;
+      border-radius: $base-radius;
+    }
+  }
+
+  &__inner {
+    padding: 5px 12px;
+
+    .checkbox {
+      margin: 0;
+      padding: 5px 0;
+    }
+
+    .form-group {
+      margin: 0;
+    }
+  }
+
+  &__hr {
+    margin: 4px 0;
+  }
+}

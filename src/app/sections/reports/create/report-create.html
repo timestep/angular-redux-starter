@@ -1,0 +1,104 @@
+<div class="top-space-50 report">
+
+  <div ng-show="create.pageReady">
+    <h1>Create <i class="fa fa-edit"></i></h1><hr />
+    <h4>{{create.report.clinicId}} - {{create.report.timestamp | date}} {{create.report.timestamp | date: 'shortTime'}} </h4>
+
+    <form class="form-horizontal report"
+          ng-show="create.report"
+          ng-submit="create.save(create.report, create.reportId)">
+
+      <div class="reports-display-cards"
+           ng-repeat="allergenCategory in create.allergenCategories">
+
+        <div class="row">
+
+          <div class="col-md-2 risk-level-status">
+            <!-- STATUS -->
+            {{allergenCategory | capitalize}}</br>
+            <i class="risk-level-{{create.report.report[allergenCategory].level}} fa-3x fa fa-circle"></i>
+          </div>
+
+          <div class="col-md-10">
+
+            <!-- LEVEL -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="{{allergenCategory}}Level"
+                       class="control-label">Level</label>
+              </div>
+
+              <div class="col-md-4">
+                <select class="form-control"
+                        id="{{allergenCategory}}Level"
+                        ng-model="create.report.report[allergenCategory].level"
+                        ng-options="level as create.allergenLevelLabels[level] for level in create.allergenLevels"
+                        ng-disabled="create.report.report[allergenCategory].levelNotAvailable"
+                        placeholder="Level"></select>
+              </div>
+
+              <div class="col-md-4">
+                  <label><input type="checkbox" ng-click="create.clearAllergenLevel(create.report.report[allergenCategory])" ng-model="create.report.report[allergenCategory].levelNotAvailable"> N/A</label>
+
+              </div>
+            </div><!-- LEVEL -->
+
+            <!-- CONCENTRATION -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="{{allergenCategory}}Concentration"
+                       class="control-label">Concentration</label>
+              </div>
+
+              <div class="col-md-4">
+                <input type="text"
+                       class="form-control"
+                       id="{{allergenCategory}}Concentration"
+                       placeholder="concentration"
+                       ng-disabled="create.report.report[allergenCategory].concentrationNotAvailable"
+                       ng-model="create.report.report[allergenCategory].concentration"
+                       Required />
+              </div>
+
+              <div class="col-md-4">
+                <label>
+                  <input type="checkbox" ng-click="create.clearConcentrationLevel(create.report.report[allergenCategory])" ng-model="create.report.report[allergenCategory].concentrationNotAvailable" />
+                  N/A
+                </label>
+              </div>
+            </div><!-- CONCENTRATION -->
+
+            <!-- CONCENTRATION BREAKDOWN -->
+            <div ng-show="!create.report.report[allergenCategory].concentrationNotAvailable"
+                 ng-if="create.report.report[allergenCategory].detailedConcentrations.length">
+
+              <table class="table table-striped">
+                <tr>
+                  <th style="width:50%">Allergen</th>
+                  <th>Concentration</th>
+                </tr>
+                <tr ng-repeat="detail in create.report.report[allergenCategory].detailedConcentrations">
+                  <td>
+                    {{detail.allergen}}
+                  </td>
+                  <td>
+                    <input type="number" min="0" ng-model="detail.concentration" />
+                  </td>
+                </tr>
+              </table>
+            </div><!-- CONCENTRATION BREAKDOWN -->
+          </div>
+        </div>
+      </div>
+
+      <div class="pull-right">
+        <button type="submit" class="btn btn-success">Save</button>
+      </div>
+
+      <div class="pull-left">
+        <a href='' ng-click="create.goBack()" class="btn btn-danger">Cancel</a>
+      </div>
+
+    </form>
+  </div>
+</div>

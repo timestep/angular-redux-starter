@@ -1,0 +1,48 @@
+<div class="top-space-50">
+  <div class="row form-group">
+    <div class="col-md-2 form-group">
+      <h4 class="pull-right"><i class="fa fa-search"></i>Search</h4>
+    </div>
+    <div class="col-md-2 form-group">
+      <input type="text" class="form-control pull-right" ng-model="WatchList.search"/>
+    </div>
+  </div>
+  <div class="box-watches">
+    <table class="table table-striped" ng-init="WatchList.showActive(session.userCtx.orgId)">
+      <thead>
+      <tr class="filter-carets">
+        <th ng-click="WatchList.changeFilter('updated')">Updated<span class="caret"></span></th>
+        <th ng-click="WatchList.changeFilter('title')" class="text-center">Title<span class="caret"></span></th>
+        <th ng-click="WatchList.changeFilter('summary')" class="text-center">Summary<span class="caret"></span></th>
+        <th ng-click="WatchList.changeFilter('event')" class="text-center">Event<span class="caret"></span></th>
+        <th ng-click="WatchList.changeFilter('effective')">Effective<span class="caret"></span></th>
+        <th ng-click="WatchList.changeFilter('expires')">Expires<span class="caret"></span></th>
+        <th ng-click="WatchList.changeFilter('status')">Status<span class="caret"></span></th>
+        <th ng-click="WatchList.changeFilter('msgType')">Type<span class="caret"></span></th>
+        <th ng-click="WatchList.changeFilter('category')">Category<span class="caret"></span></th>
+        <th ng-click="WatchList.changeFilter('urgency')">Urgency<span class="caret"></span></th>
+        <th ng-click="WatchList.changeFilter('severity')">Severity<span class="caret"></span></th>
+        <th ng-click="WatchList.changeFilter('certainty')">Certainy<span class="caret"></span></th>
+        <th ng-click="WatchList.changeFilter('areaDesc')">Area<span class="caret"></span></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="watch in WatchList.WatchList | orderBy:WatchList.field | filter:WatchList.search">
+        <td class="text-center">{{watch.updated | date}} {{watch.updated | date: 'shortTime'}}</td>
+        <td class="text-center"><a target="_blank" ng-href="{{watch.link}}">{{watch.title}}</a></td>
+        <td class="text-center">{{watch.summary}}</td>
+        <td class="text-center">{{watch.event}}</td>
+        <td class="text-center">{{watch.effective | date}} {{watch.effective | date: 'shortTime'}}</td>
+        <td class="text-center">{{watch.expires | date}} {{watch.expires | date: 'shortTime'}}</td>
+        <td class="text-center">{{watch.status}}</td>
+        <td class="text-center">{{watch.msgType}}</td>
+        <td class="text-center">{{watch.category}}</td>
+        <td class="text-center">{{watch.urgency}}</td>
+        <td class="text-center">{{watch.severity}}</td>
+        <td class="text-center">{{watch.certainty}}</td>
+        <td class="text-center">{{watch.areaDesc}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,164 @@
+<div class="container users top-space-50">
+
+  <div class="row bottom-space">
+    <div class="col-md-5">
+      <h3 class="text-left">Users Portal</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <h4>Total Users <span class="badge">{{UserList.totalRows}}</span></h4>
+      <h4><i class="fa fa-search"></i>Search</h4>
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-md-12">
+      <ul class="list-inline">
+        <li ng-repeat="searchField in UserList.searchFieldsCollection">
+          <label for="{{searchField.model}}"><h6>{{searchField.label}}</h6></label>
+          <div ng-hide="{{searchField.label === 'Birth-month' || searchField.label === 'Birth-year'}}">
+            <input class="form-control input-sm" id="{{searchField.model}}" type="text" class="form-control"
+                   placeholder="{{searchField.label}}"
+                   ng-model="searchField.model"
+                   ng-keydown="$event.which === 13 && UserList.searchForUsers()"
+                   typeahead="value as value for value in searchField.suggestions | filter: $viewValue"
+                   typeahead-min-length="3"
+                   typeahead-wait-ms="300"
+                   typeahead-on-select="UserList.searchForUsers()"/>
+          </div>
+          <div ng-hide="{{searchField.label !== 'Birth-month' && searchField.label !== 'Birth-year'}}">
+            <select ng-model="searchField.model" ng-change = 'UserList.searchForUsers()' ng-options="option for option in searchField.suggestions" />
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-md-6">
+      <button class="btn btn-default" ng-click="UserList.searchForUsers()">Search</button>
+      <button class="btn btn-default" ng-click="UserList.resetSearch()">Reset</button>
+    </div>
+  </div>
+
+  <div class="box">
+    <table class="table table-hover info">
+      <thead>
+      <tr class="filter-carets">
+
+        <!-- Organization Name -->
+        <th ng-click="UserList.changeSorting('organization_name')">
+          Organization<span class="caret"></span>
+        </th>
+
+        <!-- First Name -->
+        <th ng-click="UserList.changeSorting('first_name')">
+          First Name <span class="caret"></span>
+        </th>
+
+        <!-- Last Name -->
+        <th ng-click="UserList.changeSorting('last_name')">
+          Last Name <span class="caret"></span>
+        </th>
+
+        <!-- User Address -->
+        <th ng-click="UserList.changeSorting('street_1')">
+          Address <span class="caret"></span>
+        </th>
+
+        <!-- User City -->
+        <th ng-click="UserList.changeSorting('city')">
+          City <span class="caret"></span>
+        </th>
+
+        <!-- User State -->
+        <th ng-click="UserList.changeSorting('state')">
+          State <span class="caret"></span>
+        </th>
+
+        <!-- User ZipCode -->
+        <th ng-click="UserList.changeSorting('zip_code')">
+          Zip Code <span class="caret"></span>
+        </th>
+
+        <!-- User Email -->
+        <th ng-click="UserList.changeSorting('email')">
+          Email <span class="caret"></span>
+        </th>
+
+        <!-- User Birthday -->
+        <th ng-click="UserList.changeSorting('birth_date')">
+          Birthday <span class="caret"></span>
+        </th>
+
+        <!-- User Telephone -->
+        <th ng-click="UserList.changeSorting('phone_number')" class="th-width-125">
+          Phone<span class="caret"></span>
+        </th>
+
+        <!-- Action tab -->
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="user in UserList.users track by $index">
+
+        <!-- User Organization -->
+        <td>{{user.organization}}</td>
+
+        <!-- User First Name -->
+        <td>{{user.firstName}}</td>
+
+        <!-- User Last Name -->
+        <td>{{user.lastName}}</td>
+
+        <!-- User Address -->
+        <td>{{user.street1}}</td>
+
+        <!-- User City -->
+        <td>{{user.city}}</td>
+
+        <!-- User State -->
+        <td>{{user.state.name}}</td>
+
+        <!-- User ZipCode -->
+        <td>{{user.zipCode}}</td>
+
+        <!-- User Email -->
+        <td>{{user.email}}</td>
+
+        <!-- User Birthday - adjusted for two different data formats when doing getUsers() and getUserById()-->
+        <td>{{user.birthDate || user.birthdayYear + "-" + user.birthdayMonth + "-" + user.birthdayDay | date}}</td>
+
+        <!-- User Telephone -->
+        <td>
+          <i class="fa fa-phone"></i>{{user.phone}}<br/>
+        </td>
+
+        <!-- Action Tab -->
+        <td>
+          <div class="btn-group bottom-space" dropdown>
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+              Select <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li ng-click="UserList.createNotification(user.email)"><a href="">Send Notification</a></li>
+              <li ng-click="UserList.viewUsersPortal(user)"><a href="#">View Portal</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="pagination-users">
+      <pagination total-items="UserList.totalRows"
+                  items-per-page="UserList.itemsPerPage"
+                  max-size="8"
+                  ng-model="UserList.currentPage"
+                  ng-change="UserList.pageChanged()"
+                  boundary-links="true"
+                  class="pagination-sm">
+      </pagination>
+    </div>
+  </div>
+</div>

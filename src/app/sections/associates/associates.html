@@ -1,0 +1,226 @@
+<div class="container associates top-space-50">
+
+  <div class="row bottom-space">
+
+    <div class="col-md-5">
+      <h3 class="text-left">Associates Portal</h3>
+    </div>
+
+    <div class="col-md-2 pull-right">
+      <button type="button" ng-click="OrgList.toggle()" class="btn btn-md btn-default">
+        <div ng-show="!OrgList.archiveToggle"><i class="fa fa-eye"></i> Archive</div>
+        <div ng-show="OrgList.archiveToggle"><i class="fa fa-reply"></i></div>
+      </button>
+    </div>
+
+   </div>
+
+  <div class="row form-group">
+    <div class="col-md-8">
+      <button type="button" ng-show="!OrgList.archiveToggle" ng-click="OrgList.createOrg()" class="btn btn-md btn-default">
+      <i class="fa fa-plus"></i> Add Associate
+    </button>
+
+    </div>
+
+    <div class="col-md-2 form-group" ng-show="!OrgList.archiveToggle">
+      <h4 class="pull-right"><i class="fa fa-search"></i>Search</h4>
+    </div>
+
+    <div class="col-md-2 form-group">
+      <input type="text" class="form-control" placeholder="Search..."
+             ng-show="!OrgList.archiveToggle"
+             ng-model="OrgList.searchValue"
+             ng-change="OrgList.searchValueOnChange()"
+             typeahead="org as org.id for org in OrgList.orgIds | filter:{id:$viewValue}"
+             typeahead-min-length="3"
+             typeahead-wait-ms="300"
+             typeahead-on-select="OrgList.searchOnSelect($item, $model, $label)" />
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-2">
+      <h4>Total Users <span class="badge">{{UserList.totalRows}}</span></h4>
+      <h4><i class="fa fa-search"></i>Search</h4>
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-md-12">
+      <ul class="list-inline">
+        <li ng-repeat="searchField in UserList.searchFieldsCollection">
+          <label for="{{searchField.model}}"><h6>{{searchField.label}}</h6></label>
+          <input class="form-control input-sm" id="{{searchField.model}}" type="text" class="form-control"
+                 placeholder="{{searchField.label}}"
+                 ng-model="searchField.model"
+                 ng-keydown="$event.which === 13 && UserList.searchForUsers()"
+                 typeahead="value as value for value in searchField.suggestions | filter: $viewValue"
+                 typeahead-min-length="3"
+                 typeahead-wait-ms="300"
+                 typeahead-on-select="UserList.searchForUsers()"/>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-md-6">
+      <button class="btn btn-default" ng-click="UserList.searchForUsers()">Search</button>
+      <button class="btn btn-default" ng-click="UserList.resetSearch()">Reset</button>
+    </div>
+  </div>
+
+  <!-- <br /><br /> -->
+  <div class="box">
+  <table class="table table-hover info">
+    <thead>
+      <tr class="filter-carets">
+        <!-- Organization ID -->
+        <th ng-click="OrgList.changeFilter('_id')">
+          Name <span class="caret"></span>
+        </th>
+
+        <!-- Organization Address / City / State / ZipCode -->
+        <th ng-click="OrgList.changeFilter('City')">
+          Address <span class="caret"></span>
+        </th>
+
+        <!-- Organization Email -->
+        <th ng-click="OrgList.changeFilter('Email')">
+          Email <span class="caret"></span>
+        </th>
+
+        <!-- Organization Telephone / Fax -->
+        <th ng-click="OrgList.changeFilter('Telephone')" class="th-width-125">
+          Phone / Fax <span class="caret"></span>
+        </th>
+
+        <!-- Organization Type -->
+        <th ng-click="OrgList.changeFilter('type')">
+          type <span class="caret"></span>
+        </th>
+
+        <!-- Organization Partner -->
+        <th ng-click="OrgList.changeFilter('isPartner')">
+          In App? <span class="caret"></span>
+        </th>
+
+        <!-- Organization Notification flag -->
+        <th ng-click="OrgList.changeFilter('canSendNotifications')" class="th-width-85">
+          <i class="fa fa-envelope"></i><span class="caret"></span>
+        </th>
+
+        <!-- Organization videoChat flag -->
+        <th ng-click="OrgList.changeFilter('nonMembersCanCall')" class="th-width-85">
+          <i class="fa fa-video-camera"></i><span class="caret"></span>
+        </th>
+
+        <!-- Organization dataCollector flag -->
+        <th ng-click="OrgList.changeFilter('isDataCollector')" class="th-width-85">
+          <i class="fa fa-file-text"></i><span class="caret"></span>
+        </th>
+
+        <!-- Organization Admin -->
+        <th class="th-width-85">
+          Login
+        </th>
+
+        <!-- Action button -->
+        <th class="th-width-100">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="org in OrgList.orgs | filter:OrgList.search track by org.value._id ">
+
+        <!-- Organization ID -->
+        <td style="word-wrap: break-word;">{{org.value._id}}</td>
+
+        <!-- Organization Address / City / State / ZipCode -->
+        <td>{{org.value.Address}}. {{org.value.City}}. {{org.value.State}}. {{org.value['Zip Code']}}</td>
+
+        <!-- Organization Email -->
+        <td>{{org.value.Email}}</td>
+
+        <!-- Organization Telephone / Fax -->
+        <td>
+          <i class="fa fa-phone"></i> {{org.value.Telephone}}<br />
+          <i class="fa fa-fax"></i> {{org.value.Fax}}
+        </td>
+
+        <!-- Organization Type -->
+        <td class="text-center">{{org.value.type}}</td>
+
+        <!-- Organization Partner -->
+        <td class="text-center">{{org.value.isPartner}}</td>
+
+        <!-- Organization Notification flag -->
+        <td class="text-center">
+          <i ng-if="OrgList.options.showPush(org.value)" class="fa fa-check"></i>
+          <i ng-if="!OrgList.options.showPush(org.value)" class="fa fa-close"></i>
+        </td>
+
+        <!-- Organization videoChat flag -->
+        <td class="text-center">
+          <i ng-if="OrgList.options.showVideo(org.value)" class="fa fa-check"></i>
+          <i ng-if="!OrgList.options.showVideo(org.value)" class="fa fa-close"></i>
+        </td>
+
+        <!-- Organization dataCollector flag -->
+        <td class="text-center">
+          <i ng-if="OrgList.options.showReports(org.value)" class="fa fa-check"></i>
+          <i ng-if="!OrgList.options.showReports(org.value)" class="fa fa-close"></i>
+        </td>
+
+        <!-- Organization Admin -->
+        <td class="text-center">
+          <div ng-if="org.value.adminUserName"  class="btn-group" dropdown is-open="statusAdmin.isopen">
+            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" dropdown-toggle ng-disabled="org.value.isArchived">
+              {{org.value.adminUserName}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li ng-click="OrgList.deleteOrgAdmin(org)"><a href="">Delete User</a></li>
+            </ul>
+          </div>
+
+          <div ng-if="!org.value.adminUserName"
+               ng-click="OrgList.createOrgAdmin(org)"
+               ng-disabled="org.value.isArchived"
+               class='btn btn-sm btn-success'>Setup</div>
+        </td>
+
+        <!-- Action button -->
+        <td class="text-center" >
+          <div class="btn-group" dropdown is-open="status.isopen">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+              Select <span class="caret"></span>
+  	    </button>
+  	    <ul class="dropdown-menu" role="menu">
+              <li ng-if="!org.value.isArchived" ng-click="OrgList.editOrg(org.value._id)"><a href="">Edit</a></li>
+  	      <li ng-click="OrgList.setOrgState(org, org.value.isArchived)">
+                <a href="">{{org.value.isArchived ? "Activate" : "Archive" }}</a>
+              </li>
+              <li ng-click="OrgList.deleteOrg(org)"><a href="">Delete</a></li>
+  	    </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination-associates">
+    <pagination total-items="OrgList.total_rows"
+                items-per-page="OrgList.itemsPerPage"
+                max-size="8"
+                ng-model="OrgList.currentPage"
+                ng-change="OrgList.pageChanged()"
+                boundary-links="true"
+                class="pagination-sm">
+    </pagination>
+  </div>
+ </div>
+</div>
+
+
+<!--  Save Spinner -->
+<div class='spinner' ng-show="OrgList.spinner">
+  <i class="fa fa-5x fa-spinner fa-spin"></i>
+</div>

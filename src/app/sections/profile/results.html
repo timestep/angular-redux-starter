@@ -1,0 +1,194 @@
+<div>
+  <h4>Results</h4>
+
+  <div ng-show="!toggle">
+    <i ng-click="toggle =! toggle"
+       style="cursor: copy"
+       class="fa fa-4x fa-flask"></i>
+  </div>
+  <i ng-show="toggle"
+     ng-click="toggle =! toggle"
+     style="cursor: pointer"
+     class="fa fa-2x fa-close"
+     ng-show="toggle">
+  </i>
+
+  <div ng-show="toggle">
+    <select ng-model="model"
+      ng-options="result.id as result.label for result in data">
+    </select>
+  </div>
+
+  <!-- should put this in its own directive -->
+  <div ng-show="toggle && model === 'FEV1'">
+    <div class="row">
+      <div class="col-sm-12">
+        <select class="fev1"
+          ng-model="profile.session.fev1.wholeNum"
+          ng-options="val for val in profile.fev1Value"
+          ng-change="onFevChange()">
+        </select>
+        .
+        <select class="fev1"
+          ng-model="profile.session.fev1.firstDecimal"
+          ng-options="val for val in profile.fev1Decimal"
+          ng-change="onFevChange()">
+        </select>
+
+        <select class="fev1"
+          ng-model="profile.session.fev1.secondDecimal"
+          ng-options="val for val in profile.fev1Decimal"
+          ng-change="onFevChange()">
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        on
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form_group select_group">
+          <div class="select_wrap">
+            <select placeholder="Day"
+              ng-model="profile.session.fev1.day"
+              ng-options="d for d in profile.days"
+              ng-change="onFevChange()">
+            </select>
+            <label>Day</label>
+          </div>
+
+          <div class="select_wrap">
+            <select placeholder="Month"
+              ng-model="profile.session.fev1.month"
+              ng-change="onFevChange()">
+              <option value="01">Jan</option>
+              <option value="02">Feb</option>
+              <option value="03">Mar</option>
+              <option value="04">Apr</option>
+              <option value="05">May</option>
+              <option value="06">Jun</option>
+              <option value="07">Jul</option>
+              <option value="08">Aug</option>
+              <option value="09">Sep</option>
+              <option value="10">Oct</option>
+              <option value="11">Nov</option>
+              <option value="12">Dec</option>
+            </select>
+            <label>Month</label>
+          </div>
+
+          <div class="select_wrap">
+            <select placeholder="Year"
+              ng-model="profile.session.fev1.year"
+              ng-options="y for y in profile.resultYears"
+              ng-change="onFevChange()">
+            </select>
+            <label>Year</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <span class="text-danger"
+          ng-show="!validFEV1Form">You must fill out all fields before saving.
+        </span>
+        <span class="text-danger"
+          ng-show="!validDate"> Please choose a day that is before today.
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <button class="btn btn-default center-block"
+          ng-click="clearFevAnswers()">Clear
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FENO -->
+  <div ng-show="toggle && model === 'FENO'">
+    <div class="row">
+      <div class="col-sm-12">
+        <input type="number"
+          ng-model="profile.session.feno.value"
+          ng-change="onFenoChange()"> pbb
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        on
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form_group select_group">
+          <div class="select_wrap">
+            <select placeholder="Day"
+              ng-model="profile.session.feno.day"
+              ng-options="d for d in profile.days"
+              ng-change="onFenoChange()">
+            </select>
+            <label>Day</label>
+          </div>
+
+          <div class="select_wrap">
+            <select placeholder="Month"
+              ng-model="profile.session.feno.month"
+              ng-change="onFenoChange()">
+              <option value="01">Jan</option>
+              <option value="02">Feb</option>
+              <option value="03">Mar</option>
+              <option value="04">Apr</option>
+              <option value="05">May</option>
+              <option value="06">Jun</option>
+              <option value="07">Jul</option>
+              <option value="08">Aug</option>
+              <option value="09">Sep</option>
+              <option value="10">Oct</option>
+              <option value="11">Nov</option>
+              <option value="12">Dec</option>
+            </select>
+            <label>Month</label>
+          </div>
+
+          <div class="select_wrap">
+            <select placeholder="Year"
+              ng-model="profile.session.feno.year"
+              ng-options="y for y in profile.resultYears"
+              ng-change="onFenoChange()">
+            </select>
+            <label>Year</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <span class="text-danger"
+          ng-show="!validFENOForm">You must fill out all fields before saving, with the FENO Value being between 0 and 250.
+        </span>
+        <span class="text-danger"
+          ng-show="!validDate"> Please choose a day that is before today.
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <button class="btn btn-default center-block"
+          ng-click="clearFenoAnswers()">Clear
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- end of FENO -->
+</div>

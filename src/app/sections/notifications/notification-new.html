@@ -1,0 +1,742 @@
+<div class="container alert">
+  <h2 class="text-left bottom-space">New Notification</h2>
+  <!-- STEP 1 select type and template-->
+  <form>
+    <div class="row box">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-1">
+            <span class="number">1</span>
+          </div>
+          <div class="col-md-11">
+            <h1><small>Define your Notification</small></h1>
+          </div>
+        </div>
+        <div class="col-md-12 horizontal-line"></div>
+            </div>
+            <!-- ******* Notification type -->
+            <div class="col-md-12">
+        <div class="row">
+	  <div class="col-md-2">
+	    <h2><small>Notification Type *</small></h2>
+	  </div>
+	  <div class="col-md-2">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationType" value="health" checked>
+		<i class="fa fa-exclamation-triangle fa-lg text-warning"></i> Health alert
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-2">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationType" value="enviroment" checked>
+		<i class="fa fa-bolt fa-lg text-warning"></i> Weather alert
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-2">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationType" value="reminder">
+		<i class="fa fa-clock-o fa-lg text-success"></i> Reminder
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-2">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationType" value="coupon">
+		<i class="fa fa-ticket fa-lg text-info"></i> Coupon
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-2">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationType" value="promotion">
+		<i class="fa fa-certificate fa-lg text-primary"></i> Promotion
+	      </label>
+	    </div>
+	  </div>
+	</div>
+	<div class="col-md-12 horizontal-line"></div>
+      </div>
+      <!-- Notification template -->
+      <div class="col-md-12">
+	<div class="row">
+	  <div class="col-md-3">
+	    <h2><small>Notification Template *</small></h2>
+	  </div>
+	  <div class="col-md-3">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationTemplate" value="text" checked>
+		<i class="fa fa-file-text-o fa-lg"></i>Text only
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-3">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationTemplate" value="img">
+		<i class="fa fa-file-picture-o fa-lg"></i> Image only
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-3">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationTemplate" value="text_img" checked>
+		Text &amp; Image
+	      </label>
+	    </div>
+	  </div>
+	</div><!-- row -->
+	<br>
+	<div class="row">
+	  <div class="col-md-3 col-md-offset-3">
+	    <div class="form-group">
+	      <label for="n_title" class="control-label">Title</label>
+	      <input type="text" class="form-control" name="n_title" placeholder="Notification Title">
+	    </div>
+	  </div>
+	  <div class="col-md-3">
+	    <div class="form-group">
+	      <label for="n_description" class="control-label">Message</label>
+	      <textarea class="form-control" rows="1" placeholder="Notification message"></textarea>
+	    </div>
+	  </div>
+	  <div class="col-md-3 ">
+	    <div class="form-group">
+	      <label for="n_img" class="control-label">Upload image</label>
+	      <input type="file" class="form-control" name="n_img" accept="image/*">
+	    </div>
+	  </div>
+	  <!--  ******* image here -->
+	  <div>
+	  </div>
+	</div>
+      </div>
+    </div>
+    <!-- END STEP 1 -->
+    <!-- STEP 2 -->
+    <div class="row box">
+      <div class="col-md-12">
+	<div class="row">
+	  <div class="col-md-1">
+	    <span class="number">2</span>
+	  </div>
+	  <div class="col-md-11">
+	    <h1><small>When will we send the Notification?</small></h1>
+	  </div>
+	</div>
+	<div class="col-md-12 horizontal-line"></div>
+      </div>
+      <!-- Frequency -->
+      <div class="col-md-12">
+	<div class="row">
+	  <div class="col-md-3">
+	    <h2><small>Notification Frequency *</small></h2>
+	  </div>
+	  <div class="col-md-2">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationfrequency" value="text_img" checked>
+		Daily
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-2">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationfrequency" value="text_img" >
+		Weekly
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-2">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationfrequency" value="text_img" >
+		Monthly
+	      </label>
+	    </div>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-md-2 col-md-offset-3">
+	    <div class="form-group">
+	      <label for="n_title" class="control-label">Time</label>
+	      <input type="time" class="form-control" name="n_time">
+	    </div>
+	  </div>
+	  <div class="col-md-2">
+	    <div class="form-group">
+	      <label class="control-label">Day</label>
+	      <select class="form-control">
+		<option value="mon">Monday</option>
+		<option value="tue">Tuesday</option>
+		<option value="wed">Wednesday</option>
+		<option value="thu">Thursday</option>
+		<option value="fri">Friday</option>
+		<option value="sat">Saturday</option>
+		<option value="sun">Sunday</option>
+	      </select>
+	    </div>
+	  </div>
+	  <div class="col-md-2">
+	    <div class="form-group">
+	      <label class="control-label">Date</label>
+	      <input type="date" class="form-control">
+	    </div>
+	  </div>
+	</div>
+	<div class="col-md-12 horizontal-line"></div>
+	<!-- Limited Period -->
+	<div class="row">
+	  <div class="col-md-3">
+	    <h2><small>Limited Period</small></h2>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+	        <input type="radio" name="notificationPeriod" value="text_img" checked>
+	        Yes
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+	        <input type="radio" name="notificationPeriod" value="text" checked>
+	        No
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1 vertical-center">
+	    <div class="form-group">
+	      <label>From</label>
+	      <input type="text" class="form-control" name="n_title" placeholder="21 May">
+	    </div>
+	  </div>
+	  <div class="col-md-1 vertical-center">
+	    <div class="form-group">
+	      <label>To</label>
+	      <input type="text" class="form-control" placeholder="30 Dec">
+	    </div>
+	  </div>
+	</div>
+      </div>
+    </div>
+    <!-- end STEP-2  -->
+    <!-- STEP 3 age, location and conditions-->
+    <div class="row box">
+      <div class="col-md-12">
+	<div class="row">
+	  <div class="col-md-1">
+	    <span class="number">3</span>
+	  </div>
+	  <div class="col-md-11">
+	    <h1><small>Who should receive the Notification</small></h1>
+	  </div>
+	</div>
+	<div class="col-md-12 horizontal-line"></div>
+      </div>
+      <!-- Gender -->
+      <div class="col-md-12">
+	<div class="row">
+	  <div class="col-md-2">
+	    <h2><small>Gender</small></h2>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationGender" value="text_img" checked>
+		All
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationGender" value="text" >
+		Female
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="notificationGender" value="img">
+		Male
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1 col-md-offset-1">
+	    <!-- Age -->
+	    <h2><small>Age</small></h2>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="form-group">
+	      <label>From</label>
+	      <input type="text" class="form-control" placeholder="0">
+	    </div>
+	  </div>
+
+	  <div class="col-md-1">
+	    <div class="form-group">
+	      <label>To</label>
+	      <input type="text" class="form-control" placeholder="100">
+	    </div>
+	  </div>
+	</div>
+      </div>
+      <!-- Location -->
+      <div class="col-md-12 horizontal-line"></div>
+      <div class="col-md-12">
+	<div class="row">
+	  <div class="col-md-2">
+	    <h2><small>Location</small></h2>
+	  </div>
+	  <div class="col-md-3">
+	    <div class="form-group">
+	      <label for="n_asso" class="control-label">Associate</label>
+	      <input type="text" class="form-control" name="n_asso" placeholder="All">
+	    </div>
+	  </div>
+	  <div class="col-md-3">
+	    <div class="form-group">
+	      <label for="n_city" class="control-label">City</label>
+	      <input type="text" class="form-control" name="n_city" placeholder="All">
+	    </div>
+	  </div>
+	  <div class="col-md-3">
+	    <div class="form-group">
+	      <label for="n_state" class="control-label">State</label>
+	      <input type="text" class="form-control" name="n_state" placeholder="All">
+	    </div>
+	  </div>
+	</div>
+      </div> <!-- end location -->
+      <div class="col-md-12 horizontal-line"></div>
+      <!-- Medical conditions and Medications-->
+      <div class="col-md-12">
+	<div class="row">
+	  <div class="col-md-2">
+	    <h2><small>Medical Conditions</small></h2>
+	  </div>
+
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="medical_condition">
+		N/A
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="medical_condition" checked>
+		Any
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <a class="btn btn-warning btn-md btn-block" href="" role="button">Select</a>
+	  </div>
+	  <!-- Medications -->
+	  <div class="col-md-2 col-md-offset-2">
+	    <h2><small>Medications</small></h2>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="medications">
+		N/A
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="medications" checked>
+		Any
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <a class="btn btn-warning btn-md btn-block" href="" role="button">Select</a>
+	  </div>
+	</div>
+      </div><!-- end Medical conditions -->
+      <div class="col-md-12 horizontal-line"></div>
+      <!-- Trees -->
+      <div class="col-md-12">
+	<h1><small>Allergies</small></h1>
+	<div class="row">
+	  <div class="col-md-2">
+	    <h2><small>Trees</small></h2>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="trees">
+		N/A
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="trees" checked>
+		Any
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <a class="btn btn-warning btn-md btn-block" href="" role="button">Select</a>
+	  </div>
+	  <!-- Grass -->
+	  <div class="col-md-2 col-md-offset-2">
+	    <h2><small>Grass</small></h2>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="grass">
+		N/A
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="grass" checked>
+		Any
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <a class="btn btn-warning btn-md btn-block" href="" role="button">Select</a>
+	  </div>
+	</div>
+      </div> <!-- end trees and grass -->
+      <div class="col-md-12 horizontal-line"></div>
+      <!-- Weeds and Spores -->
+      <div class="col-md-12">
+	<div class="row">
+	  <div class="col-md-2">
+	    <h2><small>Weeds</small></h2>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="weeds">
+		N/A
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="weeds" checked>
+		Any
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <a class="btn btn-warning btn-md btn-block" href="" role="button">Select</a>
+	  </div>
+	  <!-- Spores -->
+	  <div class="col-md-2 col-md-offset-2">
+	    <h2><small>Mold Spores</small></h2>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="mold">
+		N/A
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="mold" checked>
+		Any
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <a class="btn btn-warning btn-md btn-block" href="" role="button">Select</a>
+	  </div>
+	</div>
+      </div> <!-- end weeds and spores -->
+      <div class="col-md-12 horizontal-line"></div>
+      <!-- Drugs and Animals -->
+      <div class="col-md-12">
+	<div class="row">
+	  <div class="col-md-2">
+	    <h2><small>Drugs</small></h2>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="drugs">
+		N/A
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="drugs" checked>
+		Any
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <a class="btn btn-warning btn-md btn-block" href="" role="button">Select</a>
+	  </div>
+
+	  <!-- Animals -->
+	  <div class="col-md-2 col-md-offset-2">
+	    <h2><small>Animals</small></h2>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="animals">
+		N/A
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="animals" checked>
+		Any
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <a class="btn btn-warning btn-md btn-block" href="" role="button">Select</a>
+	  </div>
+	</div>
+      </div> <!-- end Drugs and Animals -->
+      <div class="col-md-12 horizontal-line"></div>
+      <!-- Food nad others -->
+      <div class="col-md-12">
+	<div class="row">
+	  <div class="col-md-2">
+	    <h2><small>Food</small></h2>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="food">
+		N/A
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="food" checked>
+		Any
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <a class="btn btn-warning btn-md btn-block" href="" role="button">Select</a>
+	  </div>
+	  <!-- Others -->
+	  <div class="col-md-2 col-md-offset-2">
+	    <h2><small>Others</small></h2>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="other">
+		N/A
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <div class="radio">
+	      <label>
+		<input type="radio" name="other" checked>
+		Any
+	      </label>
+	    </div>
+	  </div>
+	  <div class="col-md-1">
+	    <a class="btn btn-warning btn-md btn-block" href="" role="button">Select</a>
+	  </div>
+	</div>
+      </div> <!-- end food and others -->
+      <div class="col-md-12 horizontal-line bottom-space"></div>
+      <div class="row">
+	<div class="col-md-2 col-md-offset-5">
+	  <button type="submit" class="btn btn-lg btn-block btn-success">Save</button>
+	</div>
+      </div>
+    </div> <!-- end -->
+</div>
+</form>
+<!-- END STEP 3 -->
+</div>
+
+<!--
+    POPUP WHEN CLICK ON Select - ALL THE DATA IS IN THE FILE:
+    kagen-app-cordova/www/resources/kagen-directories/medical-conditions.json -->
+
+<!--<div class="container alert">
+    <form>
+      <div class="row box">
+	<h1><small>Please select Medical Conditions</small></h1>
+	column 1
+	<div class="col-md-4">
+	  <div class="checkbox col-md-10">
+	    <label>
+	      <input type="checkbox"> Allergic Conjunctivitis
+	    </label>
+	  </div>
+	  <div class="checkbox col-md-10">
+	    <label>
+	      <input type="checkbox"> Allergic Rhinitis (Hay Fever)
+	    </label>
+	  </div>
+	  <div class="checkbox col-md-10">
+	    <label>
+	      <input type="checkbox"> Anaphylaxis
+	    </label>
+	  </div>
+	  <div class="checkbox col-md-10">
+	    <label>
+	      <input type="checkbox"> Angioedema
+	    </label>
+	  </div>
+	  <div class="checkbox col-md-10">
+	    <label>
+	      <input type="checkbox"> Arthritis
+	    </label>
+	  </div>
+	  <div class="checkbox col-md-10">
+	    <label>
+	      <input type="checkbox"> Osteoarthritis
+	    </label>
+	  </div>
+	  <div class="checkbox col-md-10">
+	    <label>
+	      <input type="checkbox"> Non-Allergic Rhinitis
+	    </label>
+	  </div>
+	  <div class="checkbox col-md-10">
+	    <label>
+	      <input type="checkbox"> Rheumatoid Arthritis
+	    </label>
+	  </div>
+	</div>-->
+<!-- column 2
+     <div class="col-md-4">
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Asthma
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Bee Sting Shock
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Bronchitis
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> COPD
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Contact Dermatitis
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Sinusitis
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Vasculitis
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Migraine Headaches
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Nasal Polyps
+	 </label>
+       </div>
+     </div>-->
+<!-- column 3
+     <div class="col-md-4">
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Eczema
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Eosinophilic Esophagitis
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Exercise-Induced Asthma
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Gastro-Esophageal Reflux
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Hives (Urticaria)
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Sinus Headaches
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Hypersensitivity Pneumonitis
+	 </label>
+       </div>
+       <div class="checkbox col-md-10">
+	 <label>
+	   <input type="checkbox"> Immune Deficiency)
+	 </label>
+       </div>
+     </div>
+     <div class="row form-group top-space-50">
+       <div class="col-md-12 col-md-offset-5">
+	 <button type="submit" class="btn btn-success">Save</button></div>
+     </div>
+</div>
+</div>
+</form>
+</div>-->

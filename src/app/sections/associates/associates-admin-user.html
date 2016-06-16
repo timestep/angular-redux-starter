@@ -1,0 +1,98 @@
+<div class="container" ng-class="{blur : orgAdmin.spinner}">
+  <div class="row">
+    <div class="col-md-6">
+      <form class="form-horizontal"
+            name="orgAdminCreateForm"
+            role="form"
+            ng-submit="orgAdminCreateForm.$valid && orgAdmin.createOrgAdmin(orgAdmin.email, orgAdmin.password, orgAdmin.org._id)">
+
+        <!--  Form Item: ID - REQUIERD -->
+        <div class="form-group">
+          <label for="associateId" class="col-sm-3 control-label">Associate Id</label>
+          <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="associateId"
+                   name="associateId"
+                   ng-model="orgAdmin.org._id"
+                   ng-disabled="true"
+                   required/>
+          </div>
+        </div>
+
+        <!--  Form Item: Email -->
+        <div class="form-group">
+          <label for="email" class="col-sm-3 control-label">Email</label>
+          <div class="col-sm-9">
+            <input type="email"
+                   class="form-control"
+                   name="email"
+                   id="email"
+                   ng-model="orgAdmin.email"
+                   required/>
+            <div ng-show="orgAdminCreateForm.$error.email" class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>
+              Please enter a valid email.
+            </div>
+          </div>
+        </div>
+
+        <!--  Form Item: Password -->
+        <div class="form-group">
+          <label for="password" class="col-sm-3 control-label">Password</label>
+          <div class="col-sm-9">
+            <input type="password"
+                   class="form-control"
+                   name="password"
+                   id="password"
+                   ng-change="orgAdmin.checkPassword(orgAdmin.password, orgAdmin.verifyPassword)"
+                   ng-model="orgAdmin.password"
+                   required/>
+          </div>
+        </div>
+
+      <!--  Form Item: Verify Password -->
+        <div class="form-group">
+          <label for="verifyPassword" class="col-sm-3 control-label">Verify Password</label>
+          <div class="col-sm-9">
+            <input type="password"
+                   class="form-control"
+                   name="verifyPassword"
+                   id="verifyPassword"
+                   ng-model="orgAdmin.verifyPassword"
+                   ng-change="orgAdmin.checkPassword(orgAdmin.password, orgAdmin.verifyPassword)"
+                   required/>
+            <div ng-show="orgAdmin.verifyPassword && (!orgAdmin.validOrgAdmin || !orgAdmin.passwordComplexitySatisfied) " class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>
+              <span ng-show="!orgAdmin.validOrgAdmin">Passwords do not match.</span>
+              <span ng-show="!orgAdmin.passwordComplexitySatisfied">Password must include a minimum of:<ul><li>8 characters</li><li>1 upper case letter</li><li>1 lower case letter</li><li>1 digit or special character</li></ul></span>
+            </div>
+          </div>
+        </div>
+
+
+        <!--  Form Item: Create/Cancel Button -->
+        <div class="form-group">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-2">
+            <button type="submit"
+                    class="btn btn-success"
+                    ng-disabled="!orgAdmin.validOrgAdmin || !orgAdminCreateForm.$valid || !orgAdmin.passwordComplexitySatisfied">
+              Create
+            </button>
+          </div>
+          <div class="col-sm-2">
+            <input ng-click="orgAdmin.close()" type="button" class="btn btn-info" value="Cancel"/>
+          </div>
+          <div class="col-sm-4"></div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--  Save Spinner -->
+<div class='spinner' ng-show="orgAdmin.spinner">
+  <i class="fa fa-5x fa-spinner fa-spin"></i>
+</div>

@@ -1,0 +1,60 @@
+import { fromJS } from 'immutable';
+import {
+  ACTIVE_MEMBER,
+  ACTIVE_SEARCH
+} from '../utils/constants.jsx';
+
+/* Constants */
+
+// Members
+const REQUEST_MEMBERS = 'REQUEST_MEMBERS';
+const REJECT_REQUEST_MEMBERS = 'REJECT_REQUEST_MEMBERS';
+const RESOLVE_REQUEST_MEMBERS = 'RESOLVE_REQUEST_MEMBERS';
+
+// Member
+const REJECT_REQUEST_MEMBER = 'REJECT_REQUEST_MEMBER';
+const REQUEST_MEMBER = 'REQUEST_MEMBER';
+const RESOLVE_REQUEST_MEMBER = 'RESOLVE_REQUEST_MEMBER';
+
+
+// notifications
+const REQUEST_SEND_NOTIFICATION = 'REQUEST_SEND_NOTIFICATION';
+const REJECT_SEND_NOTIFICATION = 'REJECT_SEND_NOTIFICATION';
+const RESOLVE_SEND_NOTIFICATION = 'RESOLVE_SEND_NOTIFICATION';
+
+/* Reducer */
+
+const INITIAL_STATE = fromJS({
+  loading: false
+});
+
+export default function loadingReducer(state = INITIAL_STATE, action = {}) {
+  switch (action.type) {
+
+    case ACTIVE_SEARCH.STATE.REQUEST_SEARCH_MEMBERS:
+    case ACTIVE_MEMBER.STATE.REQUEST_SAVE_MEMBER_PROFILE:
+    case REQUEST_MEMBERS:
+    case REQUEST_MEMBER:
+    case REQUEST_SEND_NOTIFICATION:
+      return state.merge({
+        loading: true
+      });
+
+    case ACTIVE_SEARCH.STATE.REJECT_SEARCH_MEMBERS:
+    case ACTIVE_SEARCH.STATE.RESOLVE_SEARCH_MEMBERS:
+    case ACTIVE_MEMBER.STATE.REJECT_SAVE_MEMBER_PROFILE:
+    case ACTIVE_MEMBER.STATE.RESOLVE_SAVE_MEMBER_PROFILE:
+    case REJECT_REQUEST_MEMBER:
+    case REJECT_REQUEST_MEMBERS:
+    case REJECT_SEND_NOTIFICATION:
+    case RESOLVE_REQUEST_MEMBER:
+    case RESOLVE_REQUEST_MEMBERS:
+    case RESOLVE_SEND_NOTIFICATION:
+      return state.merge({
+        loading: false
+      });
+
+    default:
+      return state;
+  }
+}

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <center>
+        <h2>{{allergens.org.id}}</h2>
+      </center>
+      Rank the top three allergens.
+      <ul class="top-allergen-list">
+        <li ng-repeat="allergen in allergens.items track by $index">
+          <input id="allergen"
+                 ng-model="allergens.items[$index].res"
+                 type="number" />
+          <label for="allergen">{{allergen.label}}</label>
+        </li>
+      </ul>
+
+      <center>
+        <button style="margin:10px"
+                class="btn btn-success"
+                ng-click="allergens.submit()">Save</button>
+
+        <button style="margin:10px"
+                class="btn btn-info"
+                ng-click="allergens.close()">Cancel</button>
+      </center>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div id="notificationDetail">
+  <img class="iphoneTemplate" src="../images/iphone5.png" height="725" />
+  <div class="screenContainer">
+    <h1>{{notification.title}}</h1>
+    <div class="body scroll">
+      <div class="notification-date">{{notification.lastSentTimestamp | dateTime}}</div>
+      <p>
+        <img ng-show="notification.image" class="notification-image" ng-src="{{notification.image}}"/>
+      </p>
+      <p class="notification-message">{{notification.message}}</p>
+    </div>
+    <div class="footer">
+      <div class="button-container">
+        <button class="btn btn-primary">Dismiss</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="ngdialog-buttons">
+      <button class="btn btn-info" ng-click="closeThisDialog()">OK</button>
+    </div>
+  </div>
+</div>

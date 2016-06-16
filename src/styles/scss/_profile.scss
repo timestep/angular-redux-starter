@@ -1,0 +1,31 @@
+.profile input,
+.profile select {
+  margin: 10px;
+  border:1px solid rgba(0,0,0,0.1);
+  width:300px;
+  font-size: 1.5rem;
+}
+
+.profile select.fev1 {
+  width: initial;
+}
+
+.gender-select-right {
+  text-align:right;
+}
+
+.gender-select-left {
+  text-align:left;
+}
+
+.gender-select {
+  color: rgba(0,0,0,0.1);
+
+  i {
+    cursor: pointer;
+  }
+
+  .active {
+    color: $blue;
+  }
+}

@@ -1,0 +1,317 @@
+<div class="container" ng-class="{blur : OrgEdit.spinner}">
+  <div class="row">
+    <div class="col-md-6">
+      <form class="form-horizontal" name="associatesForm" role="form" ng-submit="associatesForm.$valid && OrgEdit.save()">
+
+        <!--  Form Item: ID - REQUIERD -->
+        <div class="form-group">
+          <label for="associateId" class="col-sm-3 control-label">Associate Id</label>
+          <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   ng-model="OrgEdit.org._id"
+                   ng-change="OrgEdit.checkId(OrgEdit.org._id)"
+                   ng-disabled="OrgEdit.editView"
+                   required/>
+            <div ng-show="OrgEdit.dupeId" class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>
+              Associate ID already in use.
+            </div>
+          </div>
+        </div>
+
+        <!--  Form Item: Email -->
+        <div class="form-group">
+          <label for="email" class="col-sm-3 control-label">Associate email</label>
+          <div class="col-sm-9">
+            <input type="email"
+                   class="form-control"
+                   name="email"
+                   ng-model="OrgEdit.org.Email"/>
+            <div ng-show="associatesForm.email.$error.email" class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>
+              Please enter a valid email.
+            </div>
+          </div>
+        </div>
+
+        <!--  Form Item: Label -->
+        <div class="form-group">
+          <label for="email" class="col-sm-3 control-label">Label</label>
+          <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   name="label"
+                   ng-model="OrgEdit.org.label"/>
+          </div>
+        </div>
+
+        <!--  Form Item: Associate Type -->
+        <div class="form-group">
+          <label for="type" class="col-sm-3 control-label">Associate Type</label>
+          <div class="col-sm-9">
+            <select ng-model="OrgEdit.orgType"
+                    ng-options="orgType.type for orgType in OrgEdit.orgTypes"
+                    ng-change="OrgEdit.updatePresets(OrgEdit.orgType)">
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="OrgEdit.orgType.type.indexOf('Clinic') !== -1">
+          <label for="clinicSubType" class="col-sm-3 control-label">Clinic Sub Type</label>
+          <div class="col-sm-9">
+            <select ng-model="OrgEdit.org.clinicSubType" id="clinicSubType"
+                    ng-options="clinicSubType for clinicSubType in OrgEdit.clinicSubTypes">
+            </select>
+          </div>
+        </div>
+
+        <!--  Form Item: Kagen Data Collector toggle -->
+        <div class="form-group">
+          <label for="showKagenReports"
+                 class="col-sm-5 control-label">
+            <i class="fa fa-file-text"></i> Kagen Portal Reports
+          </label>
+          <div class="col-sm-1">
+            <input type="checkbox"
+                   id="showKagenReports"
+                   ng-model="OrgEdit.org.isKagenDataCollector"
+                   ng-click="OrgEdit.setDataCollector()" />
+          </div>
+        </div>
+
+        <!--  Form Item: Data Collector toggle -->
+        <div class="form-group">
+          <label for="showReports"
+                class="col-sm-5 control-label">
+            <i class="fa fa-file-text"></i> Reports
+          </label>
+          <div class="col-sm-1">
+            <input type="checkbox"
+                   id="showReports"
+                   ng-model="OrgEdit.options.showReports"
+                   ng-disabled="OrgEdit.org.isKagenDataCollector" />
+          </div>
+        </div>
+
+        <!--  Form Item: Push toggle -->
+        <div class="form-group">
+          <label for="showPush" class="col-sm-5 control-label"><i class="fa fa-envelope"></i> Notifications</label>
+          <div class="col-sm-1">
+            <input type="checkbox"
+                   id="showPush"
+                   ng-model="OrgEdit.options.showPush"/>
+          </div>
+        </div>
+
+        <!--  Form Item: Video toggle -->
+        <div class="form-group">
+          <label for="showVideo" class="col-sm-5 control-label"><i class="fa fa-video-camera"></i> Quick Chat ! <sup>©</sup></label>
+          <div class="col-sm-1">
+            <input type="checkbox"
+                   id="showVideo"
+                   ng-model="OrgEdit.options.showVideo"/>
+          </div>
+        </div>
+
+        <!--  Form Item: Website -->
+        <div class="form-group">
+          <label for="website" class="col-sm-3 control-label">Website</label>
+          <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   ng-model="OrgEdit.org.Website"/>
+          </div>
+        </div>
+
+        <!--  Form Item: First Name -->
+        <div class="form-group">
+          <label for="firstName" class="col-sm-3 control-label">First Name</label>
+          <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   ng-model="OrgEdit.org.First"/>
+          </div>
+        </div>
+
+        <!--  Form Item: Last Name -->
+        <div class="form-group">
+          <label for="lastName" class="col-sm-3 control-label">Last Name</label>
+          <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   ng-model="OrgEdit.org.Last"/>
+          </div>
+        </div>
+
+        <!--  Form Item: Address -->
+        <div class="form-group">
+          <label for="address" class="col-sm-3 control-label">Address</label>
+          <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   ng-model="OrgEdit.org.Address"/>
+          </div>
+        </div>
+
+        <!--  Form Item: City -->
+        <div class="form-group">
+          <label for="city" class="col-sm-3 control-label">City</label>
+          <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   ng-model="OrgEdit.org.City"/>
+          </div>
+        </div>
+
+        <!--  Form Item: State -->
+        <div class="form-group">
+          <label for="state" class="col-sm-3 control-label">State</label>
+          <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   ng-model="OrgEdit.org.State"/>
+          </div>
+        </div>
+
+        <!--  Form Item: ZipeCode -->
+        <div class="form-group">
+          <label for="zip" class="col-sm-3 control-label">ZipCode</label>
+          <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   ng-model="OrgEdit.org['Zip Code']"/>
+          </div>
+        </div>
+
+        <!--  Form Item: Telephone Number -->
+        <div class="form-group">
+          <label for="telephone" class="col-sm-3 control-label">Telephone</label>
+          <div class="col-sm-9">
+            <input ng-pattern="/\d{3}-\d{3}-\d{4}|\(\d{3}\) \d{3}-\d{4}/"
+                   class="form-control"
+                   name="telephone"
+                   maxlength="14"
+                   ng-model="OrgEdit.org.Telephone"/>
+            <div ng-show="!associatesForm.telephone.$valid" class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>
+              Please enter a valid telephone number.<br />
+              Format: ###-###-#### OR (###) ###-####
+            </div>
+          </div>
+        </div>
+
+        <!--  Form Item: Cell Number -->
+        <div class="form-group">
+          <label for="cell" class="col-sm-3 control-label">Cell</label>
+          <div class="col-sm-9">
+            <input ng-pattern="/\d{3}-\d{3}-\d{4}|\(\d{3}\) \d{3}-\d{4}/"
+                   class="form-control"
+                   name="cell"
+                   maxlength="14"
+                   ng-model="OrgEdit.org['Personal Cell']"/>
+            <div ng-show="!associatesForm.cell.$valid" class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>
+              Please enter a valid cell number.<br />
+              Format: ###-###-#### OR (###) ###-####
+            </div>
+          </div>
+        </div>
+
+        <!--  Form Item: Fax Number -->
+        <div class="form-group">
+          <label for="fax" class="col-sm-3 control-label">Fax</label>
+          <div class="col-sm-9">
+            <input ng-pattern="/\d{3}-\d{3}-\d{4}|\(\d{3}\) \d{3}-\d{4}/"
+                   class="form-control"
+                   name="fax"
+                   maxlength="14"
+                   ng-model="OrgEdit.org.Fax"/>
+            <div ng-show="!associatesForm.fax.$valid" class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>
+              Please enter a valid fax number.<br />
+              Format: ###-###-#### OR (###) ###-####
+            </div>
+          </div>
+        </div>
+
+        <!--  Form Item: Latitude -->
+        <div class="form-group">
+          <label for="lat" class="col-sm-3 control-label">Latitude</label>
+          <div class="col-sm-9">
+            <input type="number"
+                   step="any"
+                   min="-90"
+                   max="90"
+                   class="form-control"
+                   name="lat"
+                   ng-model="OrgEdit.org.lat"/>
+            <div ng-show="associatesForm.lat.$error.min || associatesForm.lat.$error.max ||associatesForm.lat.$error.number"
+                 class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>
+              Please enter a valid Latitude: -90 to 90
+            </div>
+          </div>
+        </div>
+
+        <!--  Form Item: Longitude -->
+        <div class="form-group">
+          <label for="lng" class="col-sm-3 control-label">Longitude</label>
+          <div class="col-sm-9">
+            <input type="number"
+                   step="any"
+                   min="-180"
+                   max="180"
+                   class="form-control"
+                   name="lng"
+                   ng-model="OrgEdit.org.lng"/>
+            <div ng-show="associatesForm.lng.$error.min || associatesForm.lng.$error.max ||associatesForm.lng.$error.number"
+                 class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>
+              Please enter a valid Longitude: -180 to 180
+            </div>
+          </div>
+        </div>
+
+        <!--  Form Item: Reports URL -->
+        <div class="form-group">
+          <label for="reportsUrl" class="col-sm-3 control-label">Reports URL</label>
+          <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   ng-model="OrgEdit.org.reportsURL"/>
+          </div>
+        </div>
+
+        <!--  Form Item: Create/Cancel Button -->
+        <div class="form-group">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-2">
+            <button ng-if="OrgEdit.editView"
+                    type="submit"
+                    class="btn btn-success"
+                    ng-disabled="OrgEdit.dupeId || !associatesForm.$valid">
+              Save
+            </button>
+            <button ng-if="!OrgEdit.editView"
+                    type="submit"
+                    class="btn btn-success"
+                    ng-disabled="OrgEdit.dupeId || !associatesForm.$valid">
+              Create
+            </button>
+          </div>
+          <div class="col-sm-2">
+            <input ng-click="OrgEdit.close()" type="button" class="btn btn-info" value="Cancel"/>
+          </div>
+          <div class="col-sm-4"></div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--  Save Spinner -->
+<div class='spinner' ng-show="OrgEdit.spinner">
+  <i class="fa fa-5x fa-spinner fa-spin"></i>
+</div>

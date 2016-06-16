@@ -1,0 +1,40 @@
+<form role="login"
+      id="loginForm"
+      name="loginForm"
+      ng-submit="login.doLogin($event,login.inputUsername,login.inputPassword)">
+
+  <h3 class="">Login to
+    <br><span><img src="/images/KagenAir-Logo-1.png" class="logo-login"></span>
+  </h3>
+
+  <div class="form-group">
+    <input type="text"
+           class="form-control"
+           ng-model="login.inputUsername"
+           placeholder="Email"
+           ng-disabled="login.spinner"
+           required/>
+  </div>
+  <div class="form-group">
+    <input type="password"
+           class="form-control"
+           ng-model="login.inputPassword"
+           placeholder="Password"
+           ng-disabled="login.spinner"
+           required/>
+  </div>
+  <button type="submit"
+          class="btn btn-blue center-block"
+          ng-disabled="login.spinner">Login
+  </button>
+
+  <div class='spinner' ng-show="login.spinner">
+    <i class="fa fa-4x fa-spinner fa-spin"></i>
+  </div>
+</form>
+
+<br>
+<div ng-click="login.reset(login.inputUsername)"
+     class="btn btn-blue center-block navbar-static-top"
+     ng-disabled="login.spinner">Forgot password
+</div>

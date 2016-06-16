@@ -1,0 +1,56 @@
+form[name='NotificationForm'] {
+  input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+    background-color: #FDD;
+  }
+
+  input.ng-valid.ng-touched, textarea.ng-valid.ng-touched {
+    background-color: #DFD;
+  }
+}
+
+i.icon-allergyHotSpots {color: $allergy-hot-spot;}
+i.icon-congratulations {color: $congratulations;}
+i.icon-coupon {color: $coupon;}
+i.icon-didYouKnow {color: $did-you-know;}
+i.icon-message {color: $message;}
+i.icon-profile {color: $profile;}
+i.icon-remember {color: $remember;}
+i.icon-tissue {color: $tissue;}
+i.icon-warning {color: $warning;}
+i.icon-noaa {color: $noaa;}
+
+#notificationDetail .iphoneTemplate {position: relative; left:35px;}
+#notificationDetail .screenContainer {position: absolute;top: 123px;left: 79px;right: 80px; bottom: 140px;padding: 20px;}
+#notificationDetail h1 {font-size: 2rem;text-align: center; padding:0.5em 1em;color:#62768f;}
+#notificationDetail .notification-date {text-align:right; font-size: 14px; color: #62768f;}
+#notificationDetail .notification-message {color: #62768f;font-size: 1.2rem;margin: 0 0 10px;}
+#notificationDetail .body {max-height: 380px; overflow: hidden;}
+.screenContainer .footer:before {
+  content: ' ';
+  display: block;
+  width: 90%;
+  height: 2px;
+  background: -webkit-linear-gradient(left, #FAFAF5 5%, #E4E4DE, #FAFAF5 95%);
+  background: linear-gradient(to right, #FAFAF5 5%, #E4E4DE, #FAFAF5 95%);
+  box-shadow: 0 -1px 2px 0px rgba(0, 0, 0, 0.04);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.screenContainer .footer {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+}
+.notification-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+}
+.button-container {
+  text-align: center;
+  margin-top: 10px;
+}

@@ -1,0 +1,174 @@
+@import "z-index";
+
+#overview {
+  .container-full {
+        padding: 0 2em;
+    @media (min-width: 768px){
+    padding: 0 9em;
+    }
+  }
+  .vertical-padding {
+    padding: 4em 0;
+  }
+  h1, h2, h3 {
+    color: #fff;
+    line-height: 1.4;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, .5);
+    margin-top: 20px;
+    font-weight: 300;
+  }
+  h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin-top: 0;
+    font-weight: 400;
+  }
+  h2 {
+    font-size: 2.8rem;
+  }
+  h3 {
+    font-size: 2rem;
+  }
+  sup {
+    font-size: 40%;
+    top: -1em;
+  }
+  .btn-outline {
+    border: 2px solid #fff;
+    background-color: transparent;
+    color: #FFF;
+    margin: 1em;
+    &:hover {
+      background-color: rgba(255, 255, 255, .3);
+      color: #FFF;
+    }
+  }
+  .app-store-icon {
+    width: 160px;
+  }
+  .reviews {
+    background-color: #2a73e2;
+    h1 {
+      font-weight: 400;
+      font-size: 40px;
+      color: #fff;
+      text-align: center;
+    }
+    .padding-bottom {
+      padding-bottom: 50px;
+    }
+  }
+  /* ======== *
+   * SECTIONS *
+   * ======== */
+
+  .scrollToTop {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    position: fixed;
+    top: 550px;
+    right: 20px;
+    display: none;
+    background-color: rgba(25, 107, 170, 0.5);
+    border-radius: 50%;
+    z-index: z('OverviewContainer');
+  }
+  .scrollToTop:hover {
+    text-decoration: none;
+  }
+  .module {
+    background: #FFF;
+    p, h1, h2, h3 {
+      color: $blue;
+      text-shadow: none;
+    }
+  }
+  .parallax {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  li {
+    list-style-type: none;
+  }
+  // Mockup images
+  .iphone-weather {
+    background: url(/images/iphone6-weather2.png) no-repeat;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100vh;
+    background-position: bottom;
+    text-align: center;
+    .map-animated {
+      position: relative;
+      top: 59%;
+      width: 321px;
+    }
+  }
+  .mockup-personal {
+    background: url(/images/holding-iphone.png) no-repeat;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100vh;
+    background-position: bottom;
+  }
+  .mockup-aller-rhythm {
+    background: url(/images/phone-aller.png) no-repeat;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100vh;
+    background-position: bottom;
+  }
+  .mockup-chat {
+    background: url(/images/phone-chat.png) no-repeat;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100vh;
+    background-position: bottom;
+    display: none;
+    @media (min-width: 768px){
+      display: inline;
+    }
+  }
+  .mockup-notification {
+    background: url(/images/phone-notification.png) no-repeat;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100vh;
+    background-position: bottom;
+  }
+  .doctor-ipad {
+    background: url(/images/woman-with-ipad.jpg) no-repeat;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    background-size: 70vw;
+    background-position: bottom right;
+    text-align: left;
+  }
+  .hero-img {
+    width: 100%;
+    max-width: 500px;
+  }
+  .parallax-1 {
+    background-image: url("../images/grass-1a.png");
+  }
+  .parallax-2 {
+    background-image: url("../images/spores-1.png");
+  }
+  .parallax-3 {
+    background-image: url("../images/trees-2.png");
+  }
+  .parallax-4 {
+    background-image: url("../images/grass-1a.png");
+  }
+}

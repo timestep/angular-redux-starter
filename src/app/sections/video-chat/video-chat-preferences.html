@@ -1,0 +1,55 @@
+<div class="modal-body preferences" ng-hide="clinicList.clinics" ng-class="videoChatPreferences.saveBusy? 'save-busy': ''">
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- HOURS OF OPERATION -->
+      <h4>Hours of Operation</h4>
+      <div class="row">
+        <div class="col-xs-6">
+          <h5>Open Time</h5>
+          <input ng-model="videoChatPreferences.time.start.hours" type="number" min="0" max="23" ng-change="videoChatPreferences.dirtyTime()"/>
+          : <input ng-model="videoChatPreferences.time.start.minutes" type="number" min="0" max="59" ng-change="videoChatPreferences.dirtyTime()"/>
+        </div>
+        <div class="col-xs-6">
+          <h5>Close Time</h5>
+          <input ng-model="videoChatPreferences.time.end.hours" type="number" min="0" max="23" ng-change="videoChatPreferences.dirtyTime()"/>
+          : <input ng-model="videoChatPreferences.time.end.minutes" type="number" min="0" max="59" ng-change="videoChatPreferences.dirtyTime()"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- TIME ZONE -->
+          <h4>Time Zone</h4>
+          <ui-select ng-model="videoChatPreferences.prefs.videoTimeZone" ng-change="videoChatPreferences.dirty('videoTimeZone')"
+                     theme="bootstrap">
+            <ui-select-match placeholder="Enter a timezone">{{$select.selected.toString()}}</ui-select-match>
+            <ui-select-choices repeat="zone in videoChatPreferences.zoneList"
+                               refresh="videoChatPreferences.refreshZoneList($select.search)"
+                               refresh-delay="0">
+              {{zone}}
+            </ui-select-choices>
+          </ui-select>
+        </div>
+      </div>
+      <div class="row row-buffer">
+        <div class="col-lg-12">
+          <!-- Default WAIT TIME -->
+          <h4>Default Wait Time (minutes)</h4>
+          <div class="input-group">
+            <input type="number" class="form-control" placeholder="10" ng-model="videoChatPreferences.prefs.videoMinutesToWait" ng-change="videoChatPreferences.dirty('videoMinutesToWait')">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- SAVE/CANCEL BUTTONS -->
+          <button class="btn btn-success" ng-click="videoChatPreferences.save()">
+            <span class="fa fa-save" aria-hidden="true"> Save</span>
+          </button>
+          <button class="btn btn-link" ng-click="videoChatPreferences.close()">
+            <span class="fa fa-close" aria-hidden="true"> Cancel</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

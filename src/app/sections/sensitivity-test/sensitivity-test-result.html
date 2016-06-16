@@ -1,0 +1,39 @@
+<div class="questionnaire questionnaire-results">
+  <p>Your Degree of Sensitivity is
+    <span ng-class="result.sensitivityTest.data.scoreRange.class">
+      {{result.sensitivityTest.data.score}}
+    </span>
+  </p>
+
+  <div>
+    <div id="resultgauge" class="sensitometer-result"></div>
+    <p>Sensitometer<sup>™</sup></p>
+  </div>
+  <hr>
+
+  <p class="">This means you have a
+    <span ng-class="result.sensitivityTest.data.scoreRange.class">
+      {{result.sensitivityTest.data.scoreRange.title}}
+    </span>
+    Degree of Hypersensitivity.
+  </p>
+
+  <p class="">
+    <span ng-if="result.sensitivityTest.data.scoreRange.class ==='good'">
+      You easily tolerate changes in weather, odors, sunlight and hormone levels.
+    </span>
+
+    <span ng-if="result.sensitivityTest.data.scoreRange.class ==='mild'">
+      You are uncomfortable with changes in weather, odors, sunlight or hormone levels.
+    </span>
+
+    <span ng-if="result.sensitivityTest.data.scoreRange.class ==='moderate'">
+      You are highly sensitive to changes in weather, odors, sunlight or hormone levels.
+    </span>
+
+    <span ng-if="result.sensitivityTest.data.scoreRange.class ==='severe'">
+      You are extremely sensitive to anything that changes inside or outside of your body – any little change is a big change.
+    </span>
+  </p>
+
+</div>

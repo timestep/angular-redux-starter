@@ -1,0 +1,11 @@
+<h1 style="color:black">Rules Filters</h1>
+<div ng-if="notification.rules.gender">Gender: {{notification.rules.gender}}</div>
+<div ng-if="notification.rules.location.city">City: {{notification.rules.location.city}}</div>
+<div ng-if="notification.rules.location.state">State: {{notification.rules.location.state}}</div>
+<div ng-if="notification.rules.age">Age From: {{notification.rules.age.from}} To: {{notification.rules.age.to}}</div>
+<div ng-if="notification.rules.medicalConditions">Medical Conditions: {{notification.rules.medicalConditions.filter}} {{notification.rules.medicalConditions.any}}</div>
+<div ng-if="notification.rules.medications">Medications: {{notification.rules.medications.filter}} {{notification.rules.medications.any}}</div>
+<div ng-if="notification.rules.allergens">Allergens: {{notification.rules.allergens.filter}} {{notification.rules.allergens.anyCategories}}</div>
+<div class="ngdialog-buttons">
+  <button class="btn btn-info" ng-click="closeThisDialog()">OK</button>
+</div>

@@ -1,0 +1,37 @@
+<div class="container top-space-50">
+  <div class="row box text-center">
+    <div class="col-lg-12" ng-class="{blur:!sensitivity.pageReady}">
+      <h2>Sensitivity Test</h2>
+      <form name="test_form">
+        <div ng-repeat="question in sensitivity.sensitivityTest.data.questions">
+          <h4 class="top-space-50">{{question.title}}</h4>
+          <div class="radio_group">
+            <div class="allergy_radio" ng-repeat='answer in question.answers'>
+              <div class="allergy_label">{{answer.text}}</div>
+              <input radiobutton type="radio"
+                     class="radiobutton"
+                     id="{{question.name + $index}}"
+                     name="{{question.name + $index}}"
+                     value="{{answer.value}}"
+                     ng-model="question.score"
+                     ng-change="sensitivity.sensitivityTest.updateScore(question, answer)"
+                     ng-click="sensitivity.refresh()"
+                     required/>
+              <label for="{{question.name + $index}}"></label>
+              <div class="allergy_description">{{answer.desc}}</div>
+            </div>
+          </div>
+        </div>
+        <input type="button"
+               class="btn btn-primary center-block"
+               value="Submit Test"
+               ng-click="sensitivity.sensitivityTest.submit()"
+               ng-disabled="test_form.$invalid"/>
+          <div ng-messages="test_form.$error" ng-show="test_form.$invalid && test_form.$dirty">
+            <div ng-message="required">Please answer all questions</div>
+          </div>
+      </form>
+      <h2><label id="result"></label></h2>
+    </div>
+  </div>
+</div>

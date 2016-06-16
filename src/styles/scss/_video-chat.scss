@@ -1,0 +1,39 @@
+/****  Video Chat Styles  ****/
+
+#video-chat {
+  padding-bottom: 20px;
+
+  iframe.video-chat-iframe {
+    display: inline-block;
+    border: none;
+    min-width: 840px;
+    min-height: 315px;
+  }
+
+  .controls {
+    list-style: none;
+    padding: 0;
+
+    li {
+      float: left;
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .badge {
+    background: $brand-red;
+    color: #fff;
+  }
+
+  .isodate {
+    width: 5.8em;
+  }
+}
+
+.center {
+  text-align: center;
+}

@@ -1,0 +1,28 @@
+/*
+
+This z-index file is meant to organize the layers and have everything accessible in one place for reference.
+
+To use the function in CSS, add your layer and unit in the format displayed in $z-layers.
+Then in your CSS, follow the example below:
+
+.example {
+  z-index: z('Navigation');
+}
+
+Note: do not forget to import this into the CSS file using @import "z-index";
+
+*/
+
+$base-z-index: 0;
+
+$z-layers: (
+  'Navigation':         1000,
+  'OverviewContainer':  999,
+  'ModalContainer':     900,
+  'DatePicker':         20,
+  'ProfileSaveButton':  10
+);
+
+@function z($layer) {
+  @return map-get($z-layers, $layer);
+}

@@ -1,0 +1,54 @@
+<div class="container reference top-space-50">
+  <h3 class="text-left bottom-space">Reference Library</h3>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="row box">
+				<div class="col-md-4">
+					<h4>The Allergy Family<sup>&reg;</sup> Guide</h4>
+				</div>
+				<div class="col-md-8">
+				  <a href="../resources/The_Allergy_Family_Guide.pdf" target="_blank">
+				  <div id="pdf-1" class="img-responsive"></div>
+				  </a>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row box">
+				<div class="col-md-4">
+					<h4>Allergy Inside<b>Out<sup>&trade;<sup></b></h4>
+				</div>
+				<div class="col-md-8">
+				  <a href="../resources/Allergy_InsideOut.pdf" target="_blank">
+				  <div id="pdf-2" class="img-responsive"></div>
+				  </a>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="session.userCtx.dataCollector || session.userCtx.role === 'operator'">
+		<div class="col-md-6">
+			<div class="row box">
+				<div class="col-md-4">
+					<h4>Aeroallergen Photo<b>Library<sup>&trade;<sup></b></h4>
+					<div ng-show="session.userCtx.dataCollector">
+            <br />
+            <a href="http://allernet.net/photolibrary/Aeroallergen.html"
+              onClick="javascript:window.open('http://allernet.net/photolibrary/Aeroallergen.html','Windows','width=775,height=610,toolbar=no,menubar=no,scrollbars=yes,resizable=yes,location=no,directories=no,status=no'); return false;">
+              <button class="btn btn-info">See Interactive Version</button>
+            </a>
+            <br />
+            <p style="margin-top:20px;">To login to the Interactive version, use username and password: 'guest'.</p>
+          </div>
+				</div>
+				<div class="col-md-8">
+				  <a href="../resources/PhotoLibrary_Transcribed.pdf" target="_blank">
+				  <div id="pdf-3" class="img-responsive"></div>
+				  </a>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-6">
+		</div>
+	</div>
+</div>

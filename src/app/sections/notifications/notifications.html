@@ -1,0 +1,91 @@
+<div class="container top-space-50">
+  <h3 class="text-left bottom-space">Notifications Portal</h3>
+  <div class="row form-group">
+    <div class="col-md-8">
+      <button type="button" ui-sref="notifications.create({organizationId:session.userCtx.orgId})" class="btn btn-default"><i class="fa fa-plus"></i> New Notification</button>
+    </div>
+    <div class="col-md-2 form-group">
+      <h4 class="pull-right"><i class="fa fa-search"></i>Search</h4>
+    </div>
+    <div class="col-md-2 form-group">
+      <input type="text" class="form-control pull-right" ng-model="NotificationList.search"/>
+    </div>
+  </div>
+  <div class="row box">
+    <table class="table table-hover info" ng-init="NotificationList.showActive(session.userCtx.orgId)">
+      <thead>
+      <tr class="filter-carets">
+        <th ng-if="session.userCtx.role === 'operator'" ng-click="NotificationList.changeFilter('organizationName')">Organization<span class="caret"></span></th>
+        <th ng-click="NotificationList.changeFilter('type')">Type<span class="caret"></span></th>
+        <th ng-click="NotificationList.changeFilter('title')" class="text-center">Title<span class="caret"></span></th>
+        <th ng-click="NotificationList.changeFilter('template')">View<span class="caret"></span></th>
+        <th>Image</th>
+        <th>Rules</th>
+        <th ng-click="NotificationList.changeFilter('beginDate')">Date Start<span class="caret"></span></th>
+        <th ng-click="NotificationList.changeFilter('endDate')">Date End<span class="caret"></span></th>
+        <th ng-click="NotificationList.changeFilter('frequency')">Frequency<span class="caret"></span></th>
+        <th ng-click="NotificationList.changeFilter('sendTime')">Time<span class="caret"></span></th>
+        <th ng-click="NotificationList.changeFilter('enabled')">Status<span class="caret"></span></th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="notification in NotificationList.NotificationList | orderBy:NotificationList.field | filter:NotificationList.search">
+        <td ng-if="session.userCtx.role === 'operator'">{{notification.organizationName}}</td>
+        <!-- Type column -->
+        <td class="text-center" ng-switch="notification.type">
+          <i ng-switch-when="Allergy Hot Spot" class="icon-allergyHotSpots"></i>
+          <i ng-switch-when="Congratulations" class="icon-congratulations"></i>
+          <i ng-switch-when="Coupon" class="icon-coupon"></i>
+          <i ng-switch-when="Did You Know" class="icon-didYouKnow"></i>
+          <i ng-switch-when="Personal Message" class="icon-message"></i>
+          <i ng-switch-when="Severe Weather" class="icon-noaa"></i>
+          <i ng-switch-when="Warning" class="icon-warning"></i>
+          <i ng-switch-when="Remember" class="icon-remember"></i>
+          <i ng-switch-when="Not feeling well" class="icon-tissue"></i>
+          <i ng-switch-when="Profile" class="icon-profile"></i>
+          <svg ng-switch-when="Quick Chat" width="15" height="15" style="position: relative;top: 3px;" viewBox="0 0 196 196"><use xlink:href="#icon-call"></use></svg>
+          <br>{{notification.type}}</td>
+        <!-- Title column -->
+        <td class="text-center">{{notification.title}}</td>
+        <!-- Template column -->
+        <td class="text-center"><a ng-click="NotificationList.showTemplatePreview(notification)" ng-switch="notification.template">
+          <i ng-switch-when="Text" class="fa fa-file-text fa-lg text-muted"></i>
+          <i ng-switch-when="Text+Image" class="fa fa-newspaper-o fa-lg text-muted"></i>
+          <i ng-switch-when="Image" class="fa fa-file-image-o fa-lg text-muted"></i>
+        </a></td>
+        <td><img ng-if="notification.image" ng-src="{{notification.image}}" height="32" width="32"/></td>
+        <!-- Rules column -->
+        <td class="text-center"><a ng-click="NotificationList.showRulesPreview(notification)">
+          <i class="fa fa-cogs fa-lg text-primary"></i>
+        </a></td>
+        <!-- Date Start column  -->
+        <td class="text-center">{{notification.beginDate| utcDate}}</td>
+        <!-- Date end column -->
+        <td class="text-center">{{notification.endDate | utcDate}}</td>
+        <!-- Frequency column -->
+        <td class="text-center">{{notification.frequency}}</td>
+        <!-- Time column -->
+        <td class="text-center">{{notification.sendTime}}</td>
+        <!-- Status column -->
+        <td class="text-center">{{notification.status}}</td>
+        <!-- Action Column -->
+        <td>
+          <div class="btn-group bottom-space" dropdown>
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+              Select <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a ui-sref="notifications.edit({organizationId:notification.organizationName, notificationId:notification.id})">Edit</a></li>
+              <li ng-click="NotificationList.deleteNotification(notification.organizationName, notification.id)"><a href="">Delete</a></li>
+              <li ng-if="notification.status == 'Enabled'" ng-click="NotificationList.disableNotification(notification.organizationName, notification.id)"><a href="">Disable</a></li>
+              <li ng-if="notification.status == 'Disabled'" ng-click="NotificationList.enableNotification(notification.organizationName, notification.id)"><a href="">Enable</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- end row -->
+</div>

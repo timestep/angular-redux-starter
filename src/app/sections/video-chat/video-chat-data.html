@@ -1,0 +1,67 @@
+<div class="container top-space-50" id="video-chat">
+  <!-- <button type="button" class="btn btn-default btn-sm close"><i class="fa fa-close fa-lg"></i> Close</button> -->
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Video Chat Sessions</h3>
+    </div>
+    <div class="col-md-10">
+      <ul class="list-inline">
+        <li>
+          <h4>Total Calls <span class="badge">{{VCData.totalCalls}}</span></h4>
+        </li>
+      </ul>
+      <nav>
+        <pagination ng-model="VCData.currentPage"
+                    total-items="VCData.totalCalls"
+                    items-per-page="VCData.callsPerPage"
+                    ng-change="VCData.switchPage()"
+                    max-size="6"
+                    boundary-links="true">
+        </pagination>
+      </nav>
+    </div>
+    <div class="col-md-1">
+      <a download="{{VCData.getDownloadName()}}"
+         class="btn btn-default pull-right"
+         ng-href="{{VCData.blobCSV}}"
+         ng-disabled="VCData.disableExport"><i class="fa fa-file"></i> Export Log</a>
+    </div>
+    <div class="col-md-1">
+      <button type="button"
+              class="btn btn-default pull-right"
+              ng-click="VCData.refresh()">Refresh</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-info"
+           ng-repeat="dayGroup in VCData.logs">
+        <!-- Default panel contents -->
+        <div class="panel-heading">{{dayGroup.day}}</div>
+
+        <!-- List group -->
+        <ul class="list-group">
+          <li class="list-group-item"
+              ng-repeat="call in dayGroup.calls">
+            <ul class="list-unstyled">
+              <li>Name: {{call.first_name + ' ' + call.last_name}}</li>
+              <li>Email: {{call.email}}</li>
+              <li>Phone number: {{call.phone_number}}</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <nav>
+        <pagination ng-model="VCData.currentPage"
+                    total-items="VCData.totalCalls"
+                    items-per-page="VCData.callsPerPage"
+                    ng-change="VCData.switchPage()"
+                    max-size="6"
+                    boundary-links="true">
+        </pagination>
+      </nav>
+    </div>
+  </div>
+
+</div>
+<!-- end row -->

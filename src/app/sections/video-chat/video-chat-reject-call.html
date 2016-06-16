@@ -1,0 +1,67 @@
+<div class="container" ng-class="{blur : RejectCall.spinner}">
+  <div class="row">
+    <div class="col-md-6">
+      <form class="form-horizontal"
+            name="RejectCallForm"
+            role="form"
+            ng-submit="RejectCallForm.$valid && RejectCall.submit()">
+
+      <div class="form-group">
+        <label class="col-sm-12 center">What message would you like to send this user?</label>
+      </div>
+
+      <!-- Form Item: Default Message -->
+      <div class="form-group">
+        <label for="defaultMessage" class="col-sm-3 control-label">Default Message</label>
+        <div class="col-sm-9">
+          <input type="checkbox"
+                 class="form-control"
+                 id="defaultMessage"
+                 name="defaultMessage"
+                 ng-change="RejectCall.toggleDefaultMessage()"
+                 ng-model="RejectCall.defaultMessage"/>
+        </div>
+      </div>
+
+      <!--  Form Item: Message -->
+      <div class="form-group">
+        <label for="message" class="col-sm-3 control-label">Message</label>
+        <div class="col-sm-9">
+          <input type="text"
+                 ng-required="true"
+                 class="form-control"
+                 id="message"
+                 name="message"
+                 ng-disabled="RejectCall.defaultMessage"
+                 ng-model="RejectCall.message"/>
+        </div>
+      </div>
+
+      <!--  Form Item: Send Cancel Button -->
+      <div class="form-group">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2">
+          <button type="submit"
+                  class="btn btn-success"
+                  ng-disabled="!RejectCallForm.$valid">
+            Send
+          </button>
+        </div>
+        <div class="col-sm-2">
+          <input type="button"
+                 class="btn btn-info"
+                 value="Cancel"
+                 ng-click="RejectCall.close()"/>
+        </div>
+        <div class="col-sm-4"></div>
+      </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--  Save Spinner -->
+<div class='spinner' ng-show="RejectCall.spinner">
+  <i class="fa fa-5x fa-spinner fa-spin"></i>
+</div>

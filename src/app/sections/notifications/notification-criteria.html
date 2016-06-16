@@ -1,0 +1,20 @@
+
+  <form name="criteriaForm" ng-submit="Notification.save()">
+    <div class="row alert">
+	    <h3><small>Please select</small></h3>
+      <div ng-repeat="(key, section) in Notification.AllergenColumns" ng-hide="key !== Notification.criteriaType.id">
+        <div ng-repeat="column in section" class="col-md-4">
+          <div ng-repeat="item in column" class="checkbox col-md-10">
+            <label>
+              <input type="checkbox" ng-model="item.selected"> {{item.name}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row form-group">
+       <div class="col-md-2 col-md-offset-5">
+	      <button type="submit" class="btn btn-lg btn-success">Done</button>
+       </div>
+    </div>
+  </form>

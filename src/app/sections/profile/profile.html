@@ -1,0 +1,162 @@
+<br>
+<div class="white" ng-show="Profile.pageReady">
+
+  <!--   EMAIL AND AVATAR -->
+  <p>
+    <h2>{{Profile.session.email}}</<h2></h2>
+    <img class="img-circle avatar" ng-src="{{Profile.profilePhoto}}" width="" height="" alt=""/>
+  </p>
+
+  <center>
+    <fieldset id="name" class="profile form_group">
+
+      <!--   GENDER -->
+      <hr />
+
+      <h4>Gender</h4>
+      <div class="row gender-select">
+        <div class="col-sm-6 gender-select-right">
+          <i ng-click="Profile.genderSelectedMale =! Profile.genderSelectedMale;
+                       Profile.genderSelectedFemale = false"
+             ng-class="{active : Profile.genderSelectedMale}"
+             class="fa fa-4x fa-male">
+          </i>
+        </div>
+        <div class="col-sm-6 gender-select-left">
+          <i ng-click="Profile.genderSelectedFemale =! Profile.genderSelectedFemale;
+                       Profile.genderSelectedMale = false"
+             ng-class="{active : Profile.genderSelectedFemale}"
+             class="fa fa-4x fa-female">
+          </i>
+        </div>
+      </div>
+
+      <!-- DATE OF BIRTH -->
+      <hr />
+
+      <h4>Date of Birth</h4>
+      <div id="birthday_select_group" class="form_group select_group">
+        <div class="select_wrap">
+          <select id="birthday_day"
+                  name="birthday_day"
+                  placeholder="Day"
+                  ng-model="Profile.session.birthdayDay"
+                  ng-options="d for d in Profile.days">
+          </select>
+          <label for="birthday_day">Day</label>
+        </div>
+
+        <div class="select_wrap">
+          <select id="birthday_month"
+                  name="birthday_month"
+                  placeholder="Month"
+                  ng-model="Profile.session.birthdayMonth">
+            <option value="01">Jan</option>
+            <option value="02">Feb</option>
+            <option value="03">Mar</option>
+            <option value="04">Apr</option>
+            <option value="05">May</option>
+            <option value="06">Jun</option>
+            <option value="07">Jul</option>
+            <option value="08">Aug</option>
+            <option value="09">Sep</option>
+            <option value="10">Oct</option>
+            <option value="11">Nov</option>
+            <option value="12">Dec</option>
+          </select>
+          <label for="birthday_month">Month</label>
+        </div>
+
+        <div class="select_wrap">
+          <select id="birthday_year"
+                  name="birthday_year"
+                  placeholder="Year"
+                  ng-model="Profile.session.birthdayYear"
+                  ng-options="y for y in Profile.years">
+          </select>
+          <label for="birthday_year">Year</label>
+        </div>
+      </div>
+
+      <!-- NAME AND ADDRESS -->
+      <hr />
+
+      <h4>Name & Address</h4>
+      <input class="form-control" type="text" placeholder="First Name" ng-model="Profile.session.firstName"/>
+      <input class="form-control" type="text" placeholder="Last Name"  ng-model="Profile.session.lastName"/>
+      <input class="form-control" type="text" placeholder="Home Phone" ng-model="Profile.session.phone" />
+      <input class="form-control" type="text" placeholder="Cell"       ng-model="Profile.session.cell" />
+      <input class="form-control" type="text" placeholder="Street"     ng-model="Profile.session.street1" />
+      <input class="form-control" type="text" placeholder="Street"     ng-model="Profile.session.street2" />
+      <input class="form-control" type="text" placeholder="City"       ng-model="Profile.session.city" />
+      <input class="form-control" type="text" placeholder="Zip"        ng-model="Profile.session.zipCode" />
+      <div>
+        <label for='state'>
+        <select class="form-control" placeholder='State / Province'
+                ng-model="Profile.session.state"
+                ng-options="state.name for state in Profile.states track by state.name">
+        </select>
+      </div>
+
+      <!-- Medical Conditions / Household Pets / Current Medications / Known Allergies -->
+      <hr />
+
+      <div class="row">
+        <div class="col-sm-6">
+          <multiselect title="Medical Conditions"
+                icon="user-md"
+                toggle="showMedCond"
+                data="Profile.medsData"
+                model="Profile.medsModel">
+          </multiselect>
+        </div>
+        <div class="col-sm-6">
+          <multiselect title="Pets"
+                icon="heart"
+                toggle="showPets"
+                data="Profile.petsData"
+                model="Profile.petsModel">
+          </multiselect>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <multiselect title="Current Medications"
+                icon="medkit"
+                toggle="showMeds"
+                dropdown-list="Profile.setup"
+                profile="Profile">
+          </multiselect>
+        </div>
+        <div class="col-sm-6">
+          <multiselect title="Known Allergies"
+                icon="stethoscope"
+                toggle="showMeds"
+                dropdown-list="Profile.foodSetup"
+                profile="Profile">
+          </multiselect>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <results
+            data="Profile.resultsData"
+            model="Profile.resultsModel"
+            profile="Profile">
+          </results>
+        </div>
+      </div>
+
+    </fieldset>
+  </center>
+
+  <!-- SAVE BUTTON -->
+  <hr />
+
+  <button class="btn btn-primary center-block"
+          ng-disabled="Profile.pageReady === false"
+          ng-click="Profile.save()">Save
+  </button>
+</div>

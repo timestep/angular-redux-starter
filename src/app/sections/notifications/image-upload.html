@@ -1,0 +1,6 @@
+<div>
+  <input ng-if="!ngModel" type="file" accept="image/*" required ng-model="imageSelect" file-change="showThumbnail($event, files)" class="form-control"/>
+  <canvas></canvas>
+  <button ng-if="ngModel" type="button" class="btn btn-md btn-warning" ng-click="removeImage()" >Remove Image</button>
+  <button ng-if="ngModel" type="button" class="btn btn-md btn-warning" ng-click="rotate()">Rotate <i class="fa fa-repeat"></i></button>
+</div>

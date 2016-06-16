@@ -1,0 +1,197 @@
+<div ng-controller='MainCtrl as main'>
+
+  <!-- Viewng the site as another user -->
+  <div class="navbar-viewas-user" ng-show="session.viewUserCtx.username">
+    You are currently viewing the portal of {{session.viewUserCtx.firstName + " " + session.viewUserCtx.lastName + " DOB: " + (session.viewUserCtx.DOB || 'N/A')}}
+      <a ng-click="main.stopViewingSiteAs()">Done</a>
+  </div>
+
+
+  <nav class="navbar navbar-default navbar-fixed-top"
+    ng-class="{'push-down-navbar' : session.viewUserCtx.username}"
+    role="navigation">
+    <div class="container-fluid">
+
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-nav"
+          ng-click="isCollapsed = !isCollapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div ng-click="main.changeKagenLogoRoute()"><img src="images/KagenAir-Logo-1.png" class="logo"></div>
+      </div>
+
+      <!-- NAV -->
+      <div class="collapse navbar-collapse kagen-header" id="header-nav">
+
+        <!-- ADMIN USER NAV -->
+        <ul class="nav navbar-nav " ng-show="session.userCtx.role==='operator' && session.viewUserCtx.role !== 'app-user'">
+          <li ui-sref-active="active"><a ui-sref="associates"><i class="fa fa-building"></i> Associates</a></li>
+          <li ui-sref-active="active"><a ui-sref="users"><i class="fa fa-list"></i> Users</a></li>
+          <li ui-sref-active="active"><a ui-sref="report"><i class="fa fa-file-text"></i> Reports</a></li>
+          <li ui-sref-active="active"><a ui-sref="notifications.list"><i class="fa fa-envelope"></i> Notifications</a></li>
+          <li ui-sref-active="active"><a ui-sref="watches"><i class="fa fa-bolt"></i> NWS Watches</a></li>
+          <li ui-sref-active="active"><a ui-sref="videochat"><i class="fa fa-video-camera"></i> Quick Chat ! <sup>©</sup></a></li>
+          <li ui-sref-active="active"><a ui-sref="video-chat-history"><i class="fa fa-history"></i> Call History</a></li>
+          <li ui-sref-active="active"><a ui-sref="quickchatbilling"><i class="fa fa-usd"></i> Quick Chat Billing</a></li>
+          <li ui-sref-active="active"><a ui-sref="reference"><i class="fa fa-book"></i> Reference</a></li>
+        </ul>
+
+        <!-- MOBILE APP USER NAV -->
+        <ul class="nav navbar-nav" ng-show="session.viewUserCtx.role === 'app-user' || session.userCtx.role === 'app-user'">
+          <li ui-sref-active="active"><a ui-sref="allerrhythm"><i class="fa fa-bolt"></i> AllerRhythm<sup>&reg;</sup></a></li>
+          <li ui-sref-active="active"><a ui-sref="profile"><i class="fa fa-cog fa-lg"></i> Profile</a></li>
+        </ul>
+
+        <!-- ORG USER NAV -->
+        <ul class="nav navbar-nav" ng-show="session.userCtx.role === 'orgadmin' && session.viewUserCtx.role !== 'app-user'">
+          <li ui-sref-active="active">
+            <a ui-sref="members"><i class="fa fa-list"></i> Members</a>
+          </li>
+          <li ui-sref-active="active" ng-show="session.userCtx.pushNotifications">
+            <a ui-sref="notifications.list"><i class="fa fa-envelope"></i> Notifications</a>
+          </li>
+          <li ui-sref-active="active" ng-show="session.userCtx.videoChat">
+            <a ui-sref="videochat"><i class="fa fa-video-camera"></i> Quick Chat ! <sup>©</sup></a>
+          </li>
+          <li ui-sref-active="active" ng-show="session.userCtx.videoChat">
+            <a ui-sref="video-chat-history"><i class="fa fa-history"></i> Call History</a>
+          </li>
+          <li ui-sref-active="active" ng-show="session.userCtx.dataCollector">
+            <a ui-sref="reports"><i class="fa fa-file-text"></i> Reports</a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref="reference"><i class="fa fa-book"></i> Reference</a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+
+          <!-- About Us -->
+          <li ng-show="!session.userCtx.role">
+            <button type="button"
+                    class="btn btn-sm btn-blue"
+                    ng-click="main.showAboutUs()">
+              <i class="fa fa-question-circle"></i> About
+            </button>
+          </li>
+
+          <!-- Reference Library -->
+          <li ng-show="!session.userCtx.role">
+            <button type="button"
+                    class="btn btn-sm btn-blue"
+                    ng-click="main.showReference()">
+              <i class="fa fa-file-text-o"></i> Reference Library
+            </button>
+          </li>
+
+          <!-- Hypersensitivity Test -->
+          <li ng-show="session.userCtx.role === 'app-user'">
+            <button type="button"
+                    class="btn btn-sm btn-blue"
+                    ui-sref="sensitivitytest">
+              <i class="fa fa-file-text-o"></i>Sensitivity Test
+            </button>
+          </li>
+
+          <li>
+            <!-- LOGOUT -->
+            <button ng-click="main.logout()"
+                    ng-show="session.userCtx.name"
+                    type="button"
+                    class="btn btn-sm btn-blue">
+              <i class="fa fa-user"></i> Logout {{session.userCtx.name}}
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <nav class='collapse collapse-nav' collapse='!isCollapsed' >
+    <ul class='nav navbar-nav navbar-right'>
+
+      <!-- ADMIN USER NAV -->
+      <ul class="nav navbar-nav" ng-show="session.userCtx.role === 'operator'">
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="associates"><i class="fa fa-building"></i>  Associates</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="users"><i class="fa fa-list"></i>  Users</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="report"><i class="fa fa-file-text"></i> Reports</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="notifications.list"><i class="fa fa-envelope"></i> Notifications</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="watches"><i class="fa fa-bolt"></i> NWS Watches</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="videochat"><i class="fa fa-video-camera"></i> Quick Chat ! <sup>©</sup></a>
+        </li>
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="video-chat-history"><i class="fa fa-history"></i> Call History</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="quickchatbilling"><i class="fa fa-usd"></i> Quick Chat Billing</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="reference"><i class="fa fa-book"></i> Reference</a>
+        </li>
+      </ul>
+
+       <!-- MOBILE APP USER NAV -->
+      <ul class="nav navbar-nav" ng-show="session.userCtx.role === 'app-user'">
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="allerrhythm"><i class="fa fa-bolt"></i> AllerRhythm<sup>&reg;</sup></a>
+        </li>
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="profile"><i class="fa fa-cog fa-lg"></i> Profile</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="sensitivitytest"><i class="fa fa-file-text-o"></i> Sensitivity Test</a>
+        </li>
+      </ul>
+
+      <!-- ORG USER NAV -->
+      <ul class="nav navbar-nav" ng-show="session.userCtx.role === 'orgadmin'">
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="members"><i class="fa fa-list"></i> Members</a>
+        </li>
+        <li ui-sref-active="active" ng-show="session.userCtx.pushNotifications">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="notifications.list"><i class="fa fa-envelope"></i> Notifications</a>
+        </li>
+        <li ui-sref-active="active" ng-show="session.userCtx.videoChat">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="videochat"><i class="fa fa-video-camera"></i> Quick Chat ! <sup>©</sup></a>
+        </li>
+        <li ui-sref-active="active" ng-show="session.userCtx.dataCollector">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="reports.list"><i class="fa fa-file-text"></i> Reports</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ng-click="isCollapsed = !isCollapsed" ui-sref="reference"><i class="fa fa-book"></i> Reference</a>
+        </li>
+      </ul>
+
+      <!-- Reference Library -->
+      <li ng-show='!session.userCtx.role'>
+        <a ng-click="main.showReference();isCollapsed = !isCollapsed">Reference Library</a>
+      </li>
+
+      <!-- About Us -->
+      <li ng-show='!session.userCtx.role'>
+        <a ng-click="main.showAboutUs(); isCollapsed = !isCollapsed">About</a>
+      </li>
+
+      <!-- Login / Logout -->
+      <li ng-show='session.userCtx.name'>
+        <a ng-click='main.logout(); isCollapsed = !isCollapsed'>Logout</a>
+      </li>
+
+    </ul>
+  </nav>
+</div>

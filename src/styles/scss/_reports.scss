@@ -1,0 +1,90 @@
+#reports-list {
+  color: #000;
+  padding: 25px;
+}
+
+#reports {
+  color: #000;
+  padding: 25px;
+}
+
+.risk-level {
+  text-align: center;
+  height: 22px;
+  margin: auto;
+  line-height: 22px;
+  font-size: 2rem;
+}
+
+.risk-level-1 {
+  color: $brand-green;
+}
+
+.risk-level-2 {
+  color: $brand-yellow;
+}
+
+.risk-level-3 {
+  color: $brand-orange;
+}
+
+.risk-level-4 {
+  color: $brand-red;
+}
+
+.report {
+  margin: 100px;
+}
+
+.report-complete {
+  background: rgba(0,0,0,.1)
+}
+
+.report-top-display li {
+  text-align: left;
+  margin: auto;
+  width: 50px;
+}
+
+.top-allergen-list {
+  padding: 10px;
+  -moz-column-count: 2;
+  -moz-column-gap: 20px;
+  -webkit-column-count: 2;
+  -webkit-column-gap: 20px;
+  column-count: 2;
+  column-gap: 20px;
+
+  input {
+    width: 50px;
+  }
+  li {
+    list-style-type: none;
+  }
+}
+
+.report-history-date {
+  width:150px;
+  height:30px !important;
+  display:inline;
+}
+
+.risk-level-status {
+  text-align: center;
+  font-size: 20px;
+
+  i {
+    font-size: 100px;
+  }
+}
+
+.reports-display-cards {
+  margin: 5px;
+  background: #FFFFFF;
+  width: 100%;
+  border-radius: 5px;
+
+  .row {
+    padding: 10px;
+  }
+}

@@ -1,0 +1,183 @@
+<div class="top-space-50 report" ng-class="{ blur : report.spinner}">
+  <h2 class="text-left bottom-space">Report History</h2>
+  <div ng-show="report.pageReady">
+    <div class="row form-group">
+      <div class="col-md-11">
+        <input class="report-history-date"
+               type="date"
+               ng-disabled="!report.pageReady"
+               ng-change="report.enableDateFilter(report.date)"
+               ng-model="report.date"
+               placeholder="yyyy-mm-dd" />
+          <button type="button"
+                  class="btn btn-primary"
+                  ng-disabled="!report.pageReady"
+                  ng-click="report.exportData()">
+                  <i class="fa fa-bar-chart"></i> Export
+        </button>
+      </div>
+      <div class="col-md-1">
+        <button type="button"
+                class="btn btn-default"
+                ng-disabled="!report.pageReady"
+                ng-click="report.viewTodaysData()">
+                <i class="fa fa-reply"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="row box-white">
+      <table class="table table-striped info report-top-display">
+
+        <thead>
+          <tr>
+            <th class="th-width-10">Edit</th>
+            <th class="th-width-10">Time</th>
+            <th class="th-width-10">Date</th>
+            <th class="th-width-10">Id</th>
+            <th class="text-center th-width-310">Trees</span></th>
+            <th class="text-center th-width-310">Weeds</th>
+            <th class="text-center th-width-310">Grass</th>
+            <th class="text-center th-width-320">Mold Spores</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="r in report.reportHistory">
+
+            <!-- Edit column -->
+            <td class="text-center">
+                <a ui-sref="report.edit({reportId:r._id})">Edit</a>
+           </td>
+
+            <!-- Time column -->
+            <td class="text-center">{{r.timestamp | date: 'shortTime'}}</td>
+
+            <!-- Date column -->
+            <td class="text-center">{{r.timestamp | date}}</td>
+
+            <!-- URL column -->
+            <td class="text-center" style="text-overflow: ellipsis">
+              {{r.clinicId}}
+            </td>
+
+            <!-- Trees column -->
+            <td class="text-center">
+              <div class="btn-group bottom-space" dropdown>
+                <span ng-if="r.report['Trees'].levelNotAvailable">No Data</span>
+                <span ng-if="!r.report['Trees'].levelNotAvailable">{{report.allergenLevelLabels[r.report['Trees'].level]}}</span>
+              </div>
+
+              <div class="form-group">
+                <b>Concentration</b>
+                <input type="text"
+                       class="form-control"
+                       ng-value="r.report['Trees'].concentrationNotAvailable ? '0' : r.report['Trees'].concentration"
+                       disabled="disabled" />
+              </div>
+
+              <div class="bottom-space">
+                <b>Top Allergens</b>
+                <ol ng-show="r.report['Trees'].detailedConcentrations">
+                  <li ng-repeat="item in r.report['Trees'].detailedConcentrations | orderBy: 'concentration'">
+                    <font size="2px">{{item.allergen}}</font>
+                  </li>
+                </ol>
+              </div>
+            </td>
+
+            <!-- Weeds column -->
+            <td class="text-center">
+              <div class="btn-group bottom-space" dropdown>
+                <span ng-if="r.report['Weeds'].levelNotAvailable">No Data</span>
+                <span ng-if="!r.report['Weeds'].levelNotAvailable">{{report.allergenLevelLabels[r.report['Weeds'].level]}}</span>
+
+              </div>
+
+              <div class="form-group">
+                <b>Concentration</b>
+                <input type="text"
+                       class="form-control"
+                       ng-value="r.report['Weeds'].concentrationNotAvailable ? '0' : r.report['Weeds'].concentration"
+                       disabled="disabled" />
+              </div>
+
+              <div class="bottom-space">
+                <b>Top Allergens</b>
+                <ol ng-show="r.report['Weeds'].detailedConcentrations">
+                  <li ng-repeat="item in r.report['Weeds'].detailedConcentrations  | orderBy: 'concentration'">
+                    <font size="2px">{{item.allergen}}</font>
+                  </li>
+                </ol>
+              </div>
+            </td>
+
+            <!-- Grass column -->
+            <td class="text-center">
+              <div class="btn-group bottom-space" dropdown>
+                <span ng-if="r.report['Grass'].levelNotAvailable">No Data</span>
+                <span ng-if="!r.report['Grass'].levelNotAvailable">{{report.allergenLevelLabels[r.report['Grass'].level]}}</span>
+              </div>
+
+              <div class="form-group">
+                <b>Concentration</b>
+                <input type="text"
+                       class="form-control"
+                       ng-value="r.report['Grass'].concentrationNotAvailable ? '0' : r.report['Grass'].concentration"
+                       disabled="disabled" />
+              </div>
+
+              <div class="bottom-space">
+                <b>Top Allergens</b>
+                <ol ng-show="r.report['Grass'].detailedConcentrations">
+                  <li ng-repeat="item in r.report['Grass'].detailedConcentrations | orderBy: 'concentration'">
+                    <font size="2px">{{item.allergen}}</font>
+                  </li>
+                </ol>
+              </div>
+            </td>
+
+            <!-- Mold Spores Column -->
+            <td class="text-center">
+              <div class="btn-group bottom-space" dropdown>
+                <span ng-if="r.report['Mold Spores'].levelNotAvailable">No Data</span>
+                <span ng-if="!r.report['Mold Spores'].levelNotAvailable">{{report.allergenLevelLabels[r.report['Mold Spores'].level]}}</span>
+
+              </div>
+
+              <div class="form-group">
+                <b>Concentration</b>
+                <input type="text"
+                       class="form-control"
+                       ng-value="r.report['Mold Spores'].concentrationNotAvailable ? '0' : r.report['Mold Spores'].concentration"
+                       disabled="disabled" />
+              </div>
+
+              <div class="bottom-space">
+                <b>Top Allergens</b>
+                <ol ng-show="r.report['Mold Spores'].detailedConcentrations">
+                  <li ng-repeat="item in r.report['Mold Spores'].detailedConcentrations  | orderBy: 'concentration'">
+                    <font size="2px">{{item.allergen}}</font>
+                  </li>
+                </ol>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <pagination total-items="report.total_rows"
+                items-per-page="report.itemsPerPage"
+                max-size="8"
+                ng-change="report.pageChange()"
+                ng-model="report.currentPage"
+                boundary-links="true"
+                class="pagination-sm">
+    </pagination>
+  </div>
+</div>
+
+<!--  Save Spinner -->
+<div class='spinner' ng-show="report.spinner">
+    <i class="fa fa-5x fa-spinner fa-spin"></i>
+</div>

@@ -1,0 +1,14 @@
+.dropdownarrow {
+  margin-left: 5px !important;
+}
+
+.dropdownbtn {
+  &:focus {
+    outline-color: transparent;
+    outline-style: none;
+  }
+
+  &:active {
+    outline: none !important;
+  }
+}

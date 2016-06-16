@@ -1,0 +1,53 @@
+<div class="contact-us-content">
+
+  <div class="col-md-12">
+    <h3>Contact KagenAir<sup>&#8482;</sup></h3>
+    <p>How may we help you today?</p>
+  </div>
+
+  <form role="contact"
+        id="contactForm"
+        name="loginForm"
+        ng-submit="contact.submit()">
+
+    <div class="form-group col-md-6">
+      <div>First Name</div>
+      <input type="text"
+             class="form-control"
+             ng-model="contact.firstName"
+             required />
+    </div>
+
+    <div class="form-group col-md-6">
+      <div>Last Name</div>
+      <input type="text"
+             class="form-control"
+             ng-model="contact.lastName"
+             required />
+    </div>
+
+    <div class="form-group col-md-12">
+      <div>Email Address</div>
+      <input type="text"
+             class="form-control"
+             ng-model="contact.email"
+             required />
+    </div>
+
+    <div class="form-group col-md-12">
+      <div>Message</div>
+      <textarea class="form-control"
+                ng-model="contact.message"
+                rows="3"
+                required></textarea>
+    </div>
+
+    <div class="form-group">
+      <button type="submit"
+              class="btn btn-blue center-block">Submit
+      </button>
+    </div>
+
+  </form>
+
+</div>

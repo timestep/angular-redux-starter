@@ -1,0 +1,81 @@
+@font-face {
+  font-family: 'icomoon';
+  src:url('../fonts/icomoon.eot?-c3482f');
+  src:url('../fonts/icomoon.eot?#iefix-c3482f') format('embedded-opentype'),
+  url('../fonts/icomoon.woff?-c3482f') format('woff'),
+  url('../fonts/icomoon.ttf?-c3482f') format('truetype'),
+  url('../fonts/icomoon.svg?-c3482f#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-allergyHotSpots:before {
+  content: "\e600";
+}
+
+.icon-congratulations:before {
+  content: "\e601";
+}
+
+.icon-coupon:before {
+  content: "\e602";
+}
+
+.icon-didYouKnow:before {
+  content: "\e603";
+}
+
+.icon-message:before {
+  content: "\e604";
+}
+
+.icon-noaa .path1:before {
+  content: "\e605";
+  color: rgb(0, 126, 198);
+}
+.icon-noaa .path2:before {
+  content: "\e606";
+  margin-left: -1em;
+  color: rgb(38, 63, 120);
+}
+.icon-noaa .path3:before {
+  content: "\e607";
+  margin-left: -1em;
+  color: rgb(38, 63, 120);
+}
+.icon-noaa .path4:before {
+  content: "\e608";
+  margin-left: -1em;
+  color: rgb(38, 63, 120);
+}
+
+.icon-profile:before {
+  content: "\e609";
+}
+
+.icon-remember:before {
+  content: "\e60a";
+}
+
+.icon-tissue:before {
+  content: "\e60b";
+}
+
+.icon-warning:before {
+  content: "\e60c";
+}
+

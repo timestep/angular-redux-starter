@@ -1,0 +1,96 @@
+// ----------- Brand Colours -----------
+
+.bold {
+  font-weight: 700;
+}
+
+// ----------- Base Variables -----------
+
+$base-radius: 5px;
+$base-padding: 1rem;
+$base-spacing: 12px;
+$nav-height: 80px;
+
+// ----------- Kagen-Air Colours -----------
+
+$blue: #1896d4 !default;
+
+$blue-dark20: darken($blue, 20%) !default;
+
+$grey-90: lighten(#000, 10%);
+$grey-80: lighten(#000, 20%);
+$grey-70: lighten(#000, 30%);
+$grey-50: lighten(#000, 50%);
+$grey-40: lighten(#000, 60%);
+$grey-30: lighten(#000, 70%);
+$grey-20: lighten(#000, 80%);
+$grey-10: lighten(#000, 90%);
+$grey-5 : darken(#fff, 5%);
+
+
+// ----------- Media Query Sizes -----------
+
+$sm: 768px;
+$md: 992px;
+$lg: 1200px;
+
+
+/* ----------------------------------------------------------- */
+/* [ VARS ] */
+/* ----------------------------------------------------------- */
+
+
+$blue                         : #5A9EEE;
+$backgroundGrey               : #F4F6E9;
+$textContainerBackgroundGrey  : #FCFCF7;
+$textGrey                     : #616D64;
+
+// This was named placheolder but actually seems to be a background color...
+$placeholderColor             : #BCBFB3;
+$specialistBackgroundColor    : #171D1A;
+$specialistTextColor          : #7B7D73;
+
+// Form Styles (shared with listbox)
+$field_height: 43;
+$field_color: #666;
+$form_group_background: #F9FAF4;
+
+$header-height: 48;
+$width: 10px;
+
+// BRAND COLOURS
+$background-primary: #FFFEFB;
+$background-primary-darker: darken($background-primary, 3%);
+$background-primary-lighter: lighten($background-primary, 10%);
+
+$brand-blue: #5A9EEE;
+$brand-blue-darker: darken($brand-blue, 30%);
+$brand-blue-lighter: lighten($brand-blue, 25%);
+$brand-yellow: #F4D501;
+$brand-orange: #F9B95A;
+$brand-red: #F1465B;
+$brand-green: #69D194;
+$brand-green-darker: darken($brand-green, 30%);
+
+// Grayscale
+$gray: #9caabb;
+$gray-darker: darken($gray, 20%);
+$gray-lighter: lighten($gray, 20%);
+$gray-transparent: lighten($gray, 25%);
+
+// Notification Icon colours
+$allergy-hot-spot: #CC0000;
+$congratulations: #755199;
+$coupon: #408533;
+$did-you-know: #87C8E3;
+$message: #4B4B4B;
+$profile: #4B4B4B;
+$remember: #E4AE08;
+$tissue: #D96B48;
+$warning: #E4AE08;
+$noaa: #263F78;
+
+// Scrollbar colours
+$scrollbar-thumb: #C1C1C1;
+$scrollbar-bg: #FAFAFA;
+$scrollbar-border: #F3F3F3;

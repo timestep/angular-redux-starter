@@ -1,0 +1,399 @@
+<div class="container alert" ng-class="{blur : NotificationEdit.spinner}">
+  <h2 class="text-left bottom-space">Notification</h2>
+  <!-- STEP 1 select type and template-->
+  <form class="form-horizontal"
+    name="NotificationForm"
+    role="form"
+    ng-submit="NotificationForm.$valid && NotificationEdit.save()">
+    <div class="row box">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-1">
+            <span class="number">1</span>
+          </div>
+          <div class="col-md-11">
+            <h1><small>Define your Notification</small></h1>
+          </div>
+        </div>
+        <div class="col-md-12 horizontal-line"></div>
+      </div>
+      <!-- ******* Notification type -->
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-2">
+            <h2><small>Notification Type *</small></h2>
+          </div>
+          <div ng-repeat="type in NotificationEdit.types" class="col-md-2">
+            <div class="radio">
+              <label>
+                <input ng-model="NotificationEdit.notification.type"
+                  ng-change="NotificationEdit.changeType()"
+                  type="radio"
+                  name="notificationType"
+                  value="{{type}}"
+                  required>
+                <span ng-switch="type">
+                  <i ng-switch-when="Allergy Hot Spot" class="icon-allergyHotSpots"></i>
+                  <i ng-switch-when="Congratulations" class="icon-congratulations"></i>
+                  <i ng-switch-when="Coupon" class="icon-coupon"></i>
+                  <i ng-switch-when="Did You Know" class="icon-didYouKnow"></i>
+                  <i ng-switch-when="Personal Message" class="icon-message"></i>
+                  <i ng-switch-when="Severe Weather" class="icon-noaa"></i>
+                  <i ng-switch-when="Warning" class="icon-warning"></i>
+                  <i ng-switch-when="Remember" class="icon-remember"></i>
+                  <i ng-switch-when="Not feeling well" class="icon-tissue"></i>
+                  <i ng-switch-when="Profile" class="icon-profile"></i>
+                  <svg ng-switch-when="Quick Chat" width="15" height="15" style="position: relative;top: 3px;" viewBox="0 0 196 196"><use xlink:href="#icon-call"></use></svg>
+                  {{type}}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 horizontal-line"></div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-2">
+            <h2><small>Notification Link</small></h2>
+          </div>
+          <div class="col-md-2">
+            <div class="radio">
+              <label>
+                <input ng-model="NotificationEdit.notification.link"
+                  ng-change="NotificationEdit.changeLink()"
+                  type="radio"
+                  name="notificationLink"
+                  value="">None
+              </label>
+            </div>
+          </div>
+          <div ng-repeat="link in NotificationEdit.links" class="col-md-2">
+            <div class="radio">
+              <label>
+                <input ng-model="NotificationEdit.notification.link"
+                  ng-change="NotificationEdit.changeLink()"
+                  type="radio"
+                  name="notificationLink"
+                  value="{{link}}">{{link}}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 horizontal-line"></div>
+      </div>
+      <!-- Notification template -->
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3">
+            <h2><small>Notification Template *</small></h2>
+          </div>
+          <div ng-repeat="template in NotificationEdit.templates" class="col-md-3">
+            <div class="radio" ng-hide="template.indexOf('Image') !== -1 && NotificationEdit.hideTemplates">
+              <label>
+                <input ng-model="NotificationEdit.notification.template" required type="radio" name="notificationTemplate" value="{{template}}">
+                <span ng-switch="template">
+                  <i ng-switch-when="Text" class="fa fa-file-text fa-lg text-muted"></i>
+                  <i ng-switch-when="Text+Image" class="fa fa-newspaper-o fa-lg text-muted"></i>
+                  <i ng-switch-when="Image" class="fa fa-file-image-o fa-lg text-muted"></i>
+                  {{template}}</span>
+              </label>
+            </div>
+          </div>
+        </div><!-- row -->
+        <br>
+        <div class="row output-padding">
+
+          <div class="col-md-3 col-md-offset-3">
+            <div class="form-group">
+              <label for="n_title" class="control-label">Title</label>
+              <input type="text"
+                class="form-control"
+                name="notificationTitle"
+                ng-model="NotificationEdit.notification.title"
+                placeholder="Notification Title"
+                required>
+            </div>
+          </div>
+
+          <div class="col-md-3" ng-if="NotificationEdit.notification.template.indexOf('Text') !== -1" ng-hide="NotificationEdit.hideMessage">
+            <div class="form-group">
+              <label for="n_description" class="control-label">Message</label>
+              <textarea class="form-control"
+                rows="1"
+                name="NotificationMessage"
+                ng-model="NotificationEdit.notification.message"
+                placeholder="Notification message">
+              </textarea>
+            </div>
+          </div>
+
+          <div class="col-md-3" ng-if="NotificationEdit.notification.template.indexOf('Image') !== -1">
+            <div class="form-group">
+              <label for="imageSelect" class="control-label">Image</label>
+              <image-upload ng-model="NotificationEdit.notification.image" max-height="130"></image-upload>
+            </div>
+          </div>
+          <div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END STEP 1 -->
+    <!-- STEP 2 -->
+    <div class="row box">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-1">
+            <span class="number">2</span>
+          </div>
+          <div class="col-md-11">
+            <h1><small>When will we send the Notification?</small></h1>
+          </div>
+        </div>
+        <div class="col-md-12 horizontal-line"></div>
+      </div>
+      <!-- Frequency -->
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3">
+            <h2><small>Notification Frequency *</small></h2>
+          </div>
+          <div ng-repeat="frequency in NotificationEdit.frequencies" class="col-md-2">
+            <div class="radio">
+              <label>
+                <input ng-model="NotificationEdit.notification.frequency" type="radio" name="notificationfrequency" value="{{frequency}}"/>
+                {{frequency}}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <h2><small>Time</small></h2>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group input-time">
+              <label for="n_time" class="control-label"> ({{NotificationEdit.notification.timezone}})</label>
+              <timepicker id="n_time" ng-model="NotificationEdit.notification.timeMoment" ng-change="NotificationEdit.timeChanged()"></timepicker>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-md-2">
+          </div>
+
+          <div class="col-md-2 col-md-offset-1">
+            <div ng-if="NotificationEdit.notification.frequency === 'Weekly'" class="form-group">
+              <label for="sendWeekday" class="control-label">Day</label>
+              <select id="sendWeekday" class="form-control" ng-model="NotificationEdit.notification.sendWeekday" required>
+                <option ng-repeat="day in NotificationEdit.daysOfTheWeek" value="{{day.id}}" ng-selected="day.id === NotificationEdit.notification.sendWeekday">{{day.value}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div ng-if="NotificationEdit.notification.frequency === 'Monthly'"  class="form-group">
+              <label for="sendDay" class="control-label">Date</label>
+              <select id="sendDay" ng-model="NotificationEdit.notification.sendDay" ng-options="n for n in NotificationEdit.dayRange" class="form-control"></select>
+            </div>
+           </div>
+          </div>
+        </div>
+        <div class="col-md-12 horizontal-line"></div>
+        <!-- Limited Period -->
+        <div class="row output-padding">
+
+        <!-- temporal -->
+          <div class="col-md-3">
+            <h2><small>Limited Period</small></h2>
+          </div>
+
+          <div class="col-md-1" ng-repeat="n in ['No','Yes']">
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="NotificationEdit.notification.periodFilter" name="notificationPeriod" value="{{n}}"/>
+                {{n}}
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-2 vertical-center" ng-if="NotificationEdit.notification.periodFilter==='Yes'">
+            <div class="form-group">
+              <label for="beginDate">From</label>
+              <p class="input-group">
+                <input type="text" name="NotificationFromDate" class="form-control" ng-model="NotificationEdit.notification.beginDateDate" datepicker-popup="{{'yyyy-MM-dd'}}"
+                       is-open="NotificationEdit.beginDateOpened" ng-required="true" close-text="Close" date-validator/>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="NotificationEdit.openBeginDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-2 vertical-center" ng-if="NotificationEdit.notification.periodFilter==='Yes'">
+            <div class="form-group">
+              <label for="endDate">To</label>
+              <p class="input-group">
+                <input type="text" name="notificationToDate" class="form-control" ng-model="NotificationEdit.notification.endDateDate" datepicker-popup="{{'yyyy-MM-dd'}}"
+                       is-open="NotificationEdit.endDateOpened" ng-required="true" close-text="Close" date-validator/>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="NotificationEdit.openEndDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+          <!-- temporal -->
+        </div>
+      </div>
+
+    <!-- end STEP-2  -->
+    <!-- STEP 3 age, location and conditions-->
+    <div class="row box">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-1">
+            <span class="number">3</span>
+          </div>
+          <div class="col-md-11">
+            <h1><small>Who should receive the Notification</small></h1>
+          </div>
+        </div>
+        <div class="col-md-12 horizontal-line"></div>
+      </div>
+      <!-- Gender -->
+      <div class="col-md-12">
+        <div class="row output-padding">
+          <div class="col-md-2">
+            <h2><small>Gender</small></h2>
+          </div>
+          <div class="col-md-1" ng-repeat="sex in NotificationEdit.sexes">
+            <div class="radio">
+              <label>
+                <input type="radio" value="{{sex}}" ng-model="NotificationEdit.notification.rules.gender">
+                {{sex}}
+              </label>
+            </div>
+          </div>
+          <div class="col-md-1 col-md-offset-1">
+            <!-- Age -->
+            <h2><small>Age</small></h2>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <label>From</label>
+              <input ng-model="NotificationEdit.notification.rules.age.from" type="number" min="0" max="120" class="form-control" placeholder="0">
+            </div>
+          </div>
+
+          <div class="col-md-1">
+            <div class="form-group">
+              <label>To</label>
+              <input ng-model="NotificationEdit.notification.rules.age.to" type="number" min="0" max="120" class="form-control" placeholder="100">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Location -->
+      <div class="col-md-12 horizontal-line"></div>
+      <div class="col-md-12">
+        <div class="row output-padding">
+          <div class="col-md-2">
+            <h2><small>Location</small></h2>
+          </div>
+          <div ng-if="session.userCtx.role === 'operator'" class="col-md-3">
+            <div class="form-group">
+              <label for="organizationName" class="control-label">Associate</label>
+              <select class="form-control" name="organizationName" ng-model="NotificationEdit.notification.organizationName" ng-options="organization for organization in NotificationEdit.organizationList">
+                <option value="" selected>Any</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="n_city" class="control-label">City</label>
+              <input type="text" class="form-control" ng-model="NotificationEdit.notification.rules.location.city" name="n_city" typeahead="city.city for city in NotificationEdit.cities | filter:$viewValue | limitTo:8" placeholder="All">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="n_state" class="control-label">State</label>
+              <input type="text" name="n_state" placeholder="All" ng-model="NotificationEdit.notification.rules.location.state" typeahead="state for state in NotificationEdit.states | filter:$viewValue | limitTo:8" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div> <!-- end location -->
+      <div class="col-md-12 horizontal-line"></div>
+      <div class="col-md-12">
+        <div class="row">
+          <div ng-repeat="item in NotificationEdit.medicalCriteriaRows">
+            <div class="{{$index ? 'col-md-2 col-md-offset-2' : 'col-md-2'}}">
+              <h2><small>{{item.name}}</small></h2>
+            </div>
+            <div class="col-md-1">
+              <div class="radio">
+                <label>
+                  <input type="radio" ng-click="NotificationEdit.removeCheckedItems(item)" ng-model="NotificationEdit.notification.rules[item.id]" value="N/A"/>
+                  N/A
+                </label>
+              </div>
+            </div>
+            <div class="col-md-1">
+              <div class="radio">
+                <label>
+                  <input type="radio" ng-click="NotificationEdit.removeCheckedItems(item)" ng-model="NotificationEdit.notification.rules[item.id]" value="Any"/>
+                  Any
+                </label>
+              </div>
+            </div>
+            <div class="col-md-1">
+              <a class="btn btn-warning btn-md btn-block" ng-click="NotificationEdit.showCriteriaDialog(item)" role="button">Select<span class="badge">{{NotificationEdit.selectedButton(item)}}</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 horizontal-line"></div>
+      <div class="col-md-12">
+        <h1><small>Allergies</small></h1>
+      </div>
+      <div ng-repeat-start="row in NotificationEdit.allergenCriteriaRows" class="col-md-12">
+        <div class="row">
+          <div ng-repeat-start="item in row" class="{{$index ? 'col-md-2 col-md-offset-2' : 'col-md-2'}}">
+            <h2><small>{{item.name}}</small></h2>
+          </div>
+          <div class="col-md-1">
+            <div class="radio">
+              <label>
+                <input type="radio" ng-click="NotificationEdit.removeCheckedItems(item)" ng-model="NotificationEdit.notification.rules[item.id]" value="N/A">
+                N/A
+              </label>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="radio">
+              <label>
+                <input type="radio" ng-click="NotificationEdit.removeCheckedItems(item)" ng-model="NotificationEdit.notification.rules[item.id]" value="Any">
+                Any
+              </label>
+            </div>
+          </div>
+          <div ng-repeat-end class="col-md-1">
+            <a class="btn btn-warning btn-md btn-block" ng-click="NotificationEdit.showCriteriaDialog(item)" role="button">Select<span class="badge">{{NotificationEdit.selectedButton(item)}}</span></a>
+          </div>
+        </div>
+      </div>
+      <div ng-repeat-end class="col-md-12 horizontal-line bottom-space"></div>
+      <div class="row bottom-space">
+        <div class="col-md-2 col-md-offset-5">
+          <button type="submit" class="btn btn-lg btn-success">Save</button>
+        </div>
+        <div class="col-md-2">
+          <button ng-click="NotificationEdit.cancelEdit()" class="btn btn-lg btn-warning">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class='spinner' ng-show="NotificationEdit.spinner">
+  <i class="fa fa-5x fa-spinner fa-spin"></i>
+</div>

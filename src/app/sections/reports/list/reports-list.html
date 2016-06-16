@@ -1,0 +1,65 @@
+<div class="top-space-50">
+  <div class="white row">
+
+
+    <p ng-hide="list.reports.length >= 0">
+      Loading Reports
+      <span class="fa fa-spinner fa-spin"></span>
+    </p>
+
+    <p ng-show="list.reports.length == 0">
+      No reports created yet for this allergy clinic.
+    </p>
+
+    <div class="form-group col-sm-8">
+      <label class="col-sm-2 control-label"
+             for="allergyClinics">
+             Allergy Clinic
+      </label>
+
+      <div class="col-sm-10">
+        <select class="form-control"
+                id="allergyClinics"
+                ng-model="list.selectedClinic"
+                ng-change="list.updateSelectedClinic(list.selectedClinic)"
+                ng-options="clinic.id for clinic in list.clinics">
+        </select>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <button ng-disabled="!list.selectedClinic"
+              ng-click="list.createReport(list.selectedClinic.id)"
+              class="btn btn-primary btn-lg">
+              <span class="fa fa-plus"></span>
+              Create Report
+      </button>
+    </div>
+
+    <table class="table table-striped"
+           ng-show="list.reports.length > 0">
+      <tr>
+        <th class='text-center'>Report Date</th>
+        <th class='text-center'>Clinic</th>
+        <th class='text-center'></th>
+      </tr>
+
+      <tr ng-repeat="report in list.reports |
+                     orderBy:'value.timestamp' |
+                     reverse">
+        <td>{{report.value.timestamp | date}} {{report.value.timestamp | date: 'shortTime'}}</td>
+        <td>{{report.value.clinicId}}
+        <td>
+          <div class="btn-group">
+            <a ui-sref="reports.edit({reportId:report.id})"
+               type="button"
+               class="btn btn-sm btn-default">
+               <span class="fa fa-edit"></span>
+               Edit
+            </a>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

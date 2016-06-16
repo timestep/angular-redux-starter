@@ -1,0 +1,58 @@
+.switch {
+    border: 2px solid #ccc;
+    width: 50px;
+    height: 22px;
+    border-radius: 13px;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+}
+
+.switch-toggle {
+    background: #ABABA1;
+    box-shadow: 1px 1px 1px #ccc;
+    width: 16px;
+    height: 16px;
+    left: 1px;
+    top: 1px;
+    border-radius: 12px;
+    position: relative;
+    -webkit-transform: translate(left, 0);
+    -webkit-transition: -webkit-transform 0.2s ease-in-out;
+    -moz-transform: translate(left, 0);
+    -moz-transition: -webkit-transform 0.2s ease-in-out;
+    transform: translate(left, 0);
+    transition: left .2s ease-in-out;
+}
+
+.switch.on {
+  border: 0px;
+
+}
+
+.switch.on .switch-toggle {
+  background: #FFF;
+  top: 3px;
+  left: 30px;
+}
+
+
+@media all and (max-width: 800px) {
+  .switch {
+    width: 34px;
+  }
+
+  .switch.on .switch-toggle {
+    left: 15px;
+  }
+}
+
+@media all and (max-width: 500px) {
+  .switch {
+    width: 28px;
+  }
+
+  .switch.on .switch-toggle {
+    left: 10px;
+  }
+}

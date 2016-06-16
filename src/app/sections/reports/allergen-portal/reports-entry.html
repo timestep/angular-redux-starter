@@ -1,0 +1,278 @@
+<div class="report top-space-50">
+  <h2 class="text-left bottom-space">Allergen Portal</h2>
+  <div ng-show="report.pageReady">
+    <div class="row form-group">
+      <div class="col-md-10"></div>
+      <div class="col-md-2">
+        <button type="button"
+                class="btn btn-default pull-right"
+                ng-disabled="!report.pageReady"
+                ng-click="report.viewAllData()">
+                <i class="fa fa-history "></i>Report History
+        </button>
+      </div>
+    </div>
+    <pagination total-items="report.total_rows"
+                items-per-page="report.itemsPerPage"
+                max-size="8"
+                ng-model="report.currentPage"
+                ng-change="report.pageChange()"
+                boundary-links="true"
+                class="pagination-sm">
+    </pagination>
+
+    <div class="row box-white">
+      <table class="table info report-top-display">
+        <thead>
+          <tr>
+            <th class="th-width-10">Time</th>
+            <th class="th-width-10">Date</th>
+            <th class="th-width-10">City</th>
+            <th class="th-width-10">State</th>
+            <th class="th-width-10">Id</th>
+            <th class="th-width-10">URL</th>
+            <th class="text-center th-width-310"></span></th>
+            <th class="text-center th-width-310"></th>
+            <th class="text-center th-width-310"></th>
+            <th class="text-center th-width-310"></th>
+            <th class="text-center th-width-100"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- FISRT ROW -->
+          <tr ng-repeat="r in report.clinics"
+              ng-class="{'report-complete': report.isLastReportDateFromToday(r)}">
+
+
+            <!-- Time column -->
+            <td class="text-center">{{r.value.lastReportEntered | date: 'shortTime'}}</td>
+
+            <!-- Date column -->
+            <td class="text-center">{{r.value.lastReportEntered | date}}</td>
+
+            <!-- City column -->
+            <td>{{r.value.City}}</td>
+
+            <!-- State column -->
+            <td>{{r.value.State}}</td>
+
+            <!-- id column -->
+            <td class="text-center">
+              <font size="2px">{{r.id}}</font>
+            </td>
+
+            <!-- URL column -->
+            <td class="text-center">
+              <a ng-show="r.value.reportsURL.substr(0,4) !== 'http'"
+                 ng-href="http://{{r.value.reportsURL}}"
+                 target="_blank">
+                 <i class="fa fa-link"></i>
+              </a>
+              <a ng-show="r.value.reportsURL.substr(0,4) === 'http'"
+                 ng-href="{{r.value.reportsURL}}"
+                target="_blank">
+                <i class="fa fa-link"></i>
+              </a>
+            </td>
+
+            <!-- Trees column -->
+            <td class="text-center">
+
+              <!-- VALUE -->
+              <div class="btn-group bottom-space" dropdown>
+                <b>Trees</b><br />
+                <select ng-model="r.reports.report['Trees'].level"
+                        ng-options="level.id as level.label for level in report.allergenValues">
+                </select>
+              </div>
+
+              <!-- CONCENTRATION -->
+              <div class="form-group">
+                <b>Concentration</b>
+                <input type="text"
+                       class="form-control"
+                       placeholder="0"
+                       ng-model="r.reports.report['Trees'].concentration"
+                       ng-disabled="r.reports.report['Trees'].level === -1" />
+              </div>
+
+              <!-- VALUE -->
+              <div class="bottom-space">
+                <div><b>Top Allergens</b></div>
+                <button ng-click="report.getTopAllergens($index, report.treesData, r, 'Trees')"
+                        ng-disabled="r.reports.report['Trees'].level=== -1"
+                        type="button"
+                        class="btn btn-blue btn-sm">
+                        <i class="fa fa-hand-o-up"></i> Select 3
+                </button>
+                <ol class="report-top-display">
+                  <li ng-repeat="item in r.reports.report['Trees'].detailedConcentrations | orderBy: 'concentration'"
+                      ng-if="item.concentration">
+                      <font size="2px">{{item.allergen}}</font>
+                  </li>
+                </ol>
+              </div>
+            </td>
+
+            <!-- Weeds column -->
+            <td class="text-center">
+
+              <!-- VALUE -->
+              <div class="btn-group bottom-space" dropdown>
+                <b>Weeds</b><br />
+                <select ng-model="r.reports.report['Weeds'].level"
+                        ng-options="level.id as level.label for level in report.allergenValues">
+                </select>
+              </div>
+
+              <!-- CONCENTRATION -->
+              <div class="form-group">
+                <b>Concentration</b>
+                <input type="text"
+                       class="form-control"
+                       placeholder="0"
+                       ng-model="r.reports.report['Weeds'].concentration"
+                       ng-disabled="r.reports.report['Weeds'].level === -1" />
+              </div>
+
+              <!-- VALUE -->
+              <div class="bottom-space">
+                <div><b>Top Allergens</b></div>
+                <button ng-click="report.getTopAllergens($index, report.weedsData, r, 'Weeds')"
+                        ng-disabled="r.reports.report['Weeds'].level === -1"
+                        type="button"
+                        class="btn btn-blue btn-sm">
+                        <i class="fa fa-hand-o-up"></i> Select 3
+                </button>
+
+                <ol class="report-top-display">
+                  <li ng-repeat="item in r.reports.report['Weeds'].detailedConcentrations  | orderBy: 'concentration'"
+                      ng-if="item.concentration">
+                      <font size="2px">{{item.allergen}}</font>
+                  </li>
+                </ol>
+              </div>
+            </td>
+
+            <!-- Grass column -->
+            <td class="text-center">
+
+              <!-- VALUE -->
+              <div class="btn-group bottom-space" dropdown>
+                <b>Grass</b><br />
+                <select ng-model="r.reports.report['Grass'].level"
+                        ng-options="level.id as level.label for level in report.allergenValues">
+                </select>
+              </div>
+
+              <!-- CONCENTRATION -->
+              <div class="form-group">
+                <b>Concentration</b>
+                <input type="text"
+                       class="form-control"
+                       placeholder="0"
+                       ng-model="r.reports.report['Grass'].concentration"
+                       ng-disabled="r.reports.report['Grass'].level === -1" />
+              </div>
+
+              <!-- VALUE -->
+              <div class="bottom-space">
+                <div><b>Top Allergens</b></div>
+                <button ng-click="report.getTopAllergens($index, report.grassData, r, 'Grass')"
+                        ng-disabled="r.reports.report['Grass'].level=== -1"
+                        type="button"
+                        class="btn btn-blue btn-sm">
+                        <i class="fa fa-hand-o-up"></i> Select 3
+                </button>
+
+                <ol class="report-top-display">
+                  <li ng-repeat="item in r.reports.report['Grass'].detailedConcentrations  | orderBy: 'concentration'"
+                      ng-if="item.concentration">
+                      <font size="2px">{{item.allergen}}</font>
+                  </li>
+                </ol>
+              </div>
+            </td>
+
+            <!-- MOLD column -->
+            <td class="text-center">
+
+              <!-- VALUE -->
+              <div class="btn-group bottom-space" dropdown>
+                <b>Mold Spores</b><br />
+                <select ng-model="r.reports.report['Mold Spores'].level"
+                        ng-options="level.id as level.label for level in report.allergenValues">
+                </select>
+              </div>
+
+              <!-- CONCENTRATION -->
+              <div class="form-group">
+                <b>Concentration</b>
+                <input type="text"
+                       class="form-control"
+                       placeholder="0"
+                       ng-model="r.reports.report['Mold Spores'].concentration"
+                       ng-disabled="r.reports.report['Mold Spores'].level === -1" />
+              </div>
+
+              <!-- VALUE -->
+              <div class="bottom-space">
+                <div><b>Top Allergens</b></div>
+                <button ng-click="report.getTopAllergens($index, report.moldData, r, 'Mold Spores')"
+                        ng-disabled="r.reports.report['Mold Spores'].level === -1"
+                        type="button"
+                        class="btn btn-blue btn-sm">
+                        <i class="fa fa-hand-o-up"></i> Select 3
+                </button>
+
+                <ol class="report-top-display">
+                  <li ng-repeat="item in r.reports.report['Mold Spores'].detailedConcentrations | orderBy: 'concentration'"
+                      ng-if="item.concentration">
+                      <font size="2px">{{item.allergen}}</font>
+                  </li>
+                </ol>
+              </div>
+            </td>
+
+            <!-- Action Column -->
+            <td>
+              <div class="form-group">
+                <button ng-show="r.noData && report.isLastReportDateFromToday(r)"
+                        type="button"
+                        class="btn btn-warning btn-sm"
+                        ng-disabled="report.saving"
+                        ng-click="report.undoReport(r)">
+                        <i class="fa fa-save"></i>Undo
+                </button>
+
+                <button ng-show="!r.noData && report.isLastReportDateFromToday(r)"
+                        type="button"
+                        class="btn btn-info btn-sm"
+                        ng-disabled="report.saving || r.noData"
+                        ng-click="report.reviseReports(r)">
+                        <i class="fa fa-save"></i>Edit
+                </button>
+                <button ng-show="!report.isLastReportDateFromToday(r)"
+                        type="button"
+                        class="btn btn-success btn-sm"
+                        ng-disabled="report.saving"
+                        ng-click="report.createReport(r)">
+                        <i class="fa fa-save"></i>Save
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <pagination total-items="report.total_rows"
+                items-per-page="report.itemsPerPage"
+                max-size="8"
+                ng-model="report.currentPage"
+                ng-change="report.pageChange()"
+                boundary-links="true"
+                class="pagination-sm">
+    </pagination>
+  </div>
+</div>

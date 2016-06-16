@@ -1,0 +1,13 @@
+[
+  {"name": "Allergy Hot Spot", "operator" : true, "orgAdmin": false},
+  {"name": "Congratulations", "operator" : false, "orgAdmin": false},
+  {"name": "Coupon", "operator" : true, "orgAdmin": false},
+  {"name": "Did You Know", "operator" : false, "orgAdmin": false},
+  {"name": "Personal Message", "operator" : true, "orgAdmin": true},
+  {"name": "Warning", "operator" : true, "orgAdmin": true},
+  {"name": "Severe Weather", "operator" : false, "orgAdmin": false},
+  {"name": "Remember", "operator" : true, "orgAdmin": false},
+  {"name": "Not feeling well", "operator" : true, "orgAdmin": false},
+  {"name": "Profile", "operator" : true, "orgAdmin": false},
+  {"name": "Quick Chat", "operator": true, "orgAdmin": true}
+]

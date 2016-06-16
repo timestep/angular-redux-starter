@@ -1,0 +1,688 @@
+@import "allerrhythm";
+@import "multiselector";
+@import "modal-box";
+@import "variables";
+@import "video-chat";
+@import "sensitivity-test";
+@import "profile";
+@import "pagination";
+@import 'pmp';
+@import "notifications";
+@import "overview";
+@import "reports";
+@import "watches";
+@import "utilities";
+@import "views";
+@import "members";
+@import "fixed-data-tables";
+@import "datepicker";
+@import "z-index";
+
+/****  Overview Styles  ****/
+body {
+  background-color: $brand-blue;
+  margin-top: $nav-height;
+  font-size: 13px;
+
+  @media (min-width: 768px){
+    font-size: 14px;
+  }
+}
+
+
+a {
+  color: rgba(255, 255, 255, 1);
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.navbar {
+  background-color: #fff;
+  font-size: 1.6rem;
+  border-bottom: 2px solid $brand-blue;
+  height: $nav-height;
+  background-image: none;
+  border-bottom: none
+}
+
+.navbar-viewas-user {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: z('Navigation');
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: black;
+  background-color: #D0CECE;
+
+  a {
+    padding-left: 15px;
+    color: $brand-blue;
+    cursor: pointer;
+  }
+}
+
+.push-down-navbar {
+  top: 30px;
+}
+
+.navbar-nav {
+  li {
+    a {
+      padding: 30px 15px;
+    }
+  }
+  .active > a {
+    background-color: $brand-blue !important;
+    color: #FFF !important;
+  }
+}
+
+.navbar img.logo {
+  margin-top: 22px;
+  max-height: 42px;
+  margin-right: 50px;
+}
+
+.logo {
+  margin: 26px 15px 0;
+  max-width: 140px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: $background-primary;
+}
+
+.white {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #000;
+  }
+
+  text-align: center;
+}
+
+.modal-dialog {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #000;
+  }
+}
+
+.kagen-background {
+  background-image: url(../images/2191-KAA-Splash_Screen-4-Landscape-2@2x.jpg);
+  background-position: center bottom;
+  background-size: cover;
+  padding: $base-padding * 5 0;
+  margin-top: -$base-padding * 2;
+  color: #fff;
+}
+
+.row-buffer {
+  margin-bottom: 15px;
+}
+
+
+#user {
+  margin-top: 165px;
+}
+
+#loginForm {
+  margin: 15px;
+  text-align: center;
+}
+
+#icon {
+  margin-bottom: 60px;
+}
+
+#features .row {
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+.benefit_text {
+  padding: 1.5em 0;
+}
+
+.footer {
+  background-color: $brand-blue;
+  margin-bottom: 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  padding: 4rem 1rem;
+  border-top: 1px solid $brand-blue-lighter;
+
+  a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+  }
+
+  small {
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+}
+
+
+.map {
+  width: 100%;
+}
+
+img.btn1,
+img.btn2,
+img.btn3,
+img.btn4 {
+  height: 100px;
+  width: 80%;
+}
+
+.logo-login {
+  width: 57%;
+  padding: 20px;
+}
+
+.btn-blue {
+  color: #fff;
+  background-color: $blue;
+  border-color: $blue;
+}
+
+.btn-blue:hover,
+.btn-blue:focus,
+.btn-blueactive,
+.btn-blue.active {
+  color: #fff;
+  background-color: $blue-dark20;
+  border-color: $blue-dark20;
+}
+
+.font-white {
+  color: #fff;
+}
+
+.top-space {
+  padding-top: $base-padding*6;
+}
+
+.top-space-50 {
+  padding-top: $base-padding*4;
+}
+
+.no-padding {
+   padding: 0 !important;
+}
+
+.bottom-space {
+  margin-bottom: $base-padding*2;
+}
+
+.highlight {
+  color: $brand-red;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.app-icon {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  padding: $base-padding;
+}
+
+/*****   Nav styles *****/
+
+.navbar-right {
+  .btn-blue {
+    margin: 20px 15px 0px 0px;
+  }
+}
+
+/*****   Associates Styles  *****/
+
+.associates {
+  h3 {
+    color:#fff;
+  }
+}
+
+.th-width-65 {
+  width: $width * 6.5;
+}
+
+.th-width-100 {
+  width: $width * 10;
+}
+
+.th-width-110 {
+  width: $width * 11.5;
+}
+
+.th-width-120 {
+  width: $width * 12;
+}
+
+.th-width-125 {
+  width: $width * 12.6;
+}
+
+/*****   Box class should replace .associates above so it is less specific  *****/
+.box {
+  background-color: $background-primary-lighter;
+  border-radius: 4px;
+  padding: 4px;
+  margin-bottom: 20px;
+  width: 100%;
+
+  .btn-blue {
+    margin-top: 30px;
+  }
+
+  p {
+    color: $gray-darker;
+  }
+
+  h2 {
+    color: $gray;
+  }
+
+  a {
+    color: $brand-blue;
+  }
+
+  .input-group {
+    margin-bottom: 10px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    color: $gray;
+  }
+}
+
+.th-width-100 {
+  width: $width * 10;
+}
+
+.th-width-120 {
+  width: $width * 12;
+}
+
+.th-action {
+  width: 100px;
+}
+
+.col-md-10 {
+  h2 {
+    color: #777;
+  }
+}
+
+/* Panel Styling */
+.panel {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    color: #000;
+  }
+}
+
+.panel-info {
+  border: 1px solid $brand-blue-darker;
+  .panel-heading {
+    color: $brand-blue-darker;
+    background-color: $brand-blue-lighter;
+    border-color: $brand-blue-darker;
+  }
+}
+
+/*****    Notifications Styles   *****/
+
+.alert {
+  .col-md-1 {
+    padding-left: 5px;
+  }
+  .top-space-50 {
+    padding-top: 90px;
+  }
+  .btn-warning {
+    background-color: #F7F7F7;
+    border-color: #eee;
+    color: #777;
+    .badge {
+      color: #4E7CF0;
+      background-color: rgba(246,246,246,0);
+      padding: 0 0 0 4px;
+      }
+  }
+  p,
+  h1,
+  h5,
+  h6 {
+    color: #777;
+    text-align: left;
+    }
+    a {
+    color: #fff;
+    }
+
+   h3 small {
+      font-size:3rem;
+      padding-left: 20px;
+      color: $blue;
+    }
+  }
+
+  h2,
+  h3,
+  h4 {
+    color: #fff;
+    margin-top: 0px;
+    small {
+      color: $gray-darker;
+      font-size: 16px;
+    }
+  }
+  h2 small {
+       padding-left: 20px;
+  }
+
+  h1 {
+    margin-top: 0;
+      small {
+      color: inherit;
+      }
+  }
+
+  h4 {
+    margin-top: 10px;
+    line-height: 1.4;
+  }
+
+  .btn-success {
+    /*margin-left: 62px;*/
+  }
+
+  .btn-blue {
+    margin-top: 0px;
+    /*width: 76px;*/
+  }
+
+  .fa {
+    padding-right: 3px;
+  }
+
+  th {
+    min-width: 20px;
+    max-width: 120px;
+  }
+
+  .btn-sm {
+    padding: 5px 4px;
+  }
+
+  .text-warning {
+    color: $brand-yellow;
+  }
+
+  .text-success {
+    color: $brand-green;
+  }
+
+  .text-primary {
+    color: $brand-blue;
+  }
+.vertical-line {
+      border-right: 1px solid $brand-blue-lighter;
+}
+
+.horizontal-line {
+        border-top: 1px solid $brand-blue-lighter;
+        /*margin-left: -16px; arreglar esto si es como el otro*/
+        margin-top: 5px;
+        margin-bottom: 10px;
+}
+
+.number {
+  border-radius: 50%;
+  font-weight: bolder;
+  color: #fff;
+  background-color: $blue;
+  width: 100px;
+  height: 100px;
+  font-size: 46px;
+  font-size: 46px;
+  padding: 2px 16px;
+  margin: 0 auto;
+}
+
+.vertical-center {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.output-padding {
+    .col-md-1, .col-md-2, .col-md-3{
+    padding-right: 25px;
+    padding-left: 25px;
+    }
+  }
+
+  .input-time {
+    margin-top: -25px;
+    margin-bottom: 0px;
+
+    label {
+      position: relative;
+      top: 23px;
+    }
+    .glyphicon-chevron-down {
+      top: -6px;
+      font-weight: lighter;
+    }
+    .glyphicon-chevron-up {
+      top: 11px;
+      font-weight: lighter;
+    }
+  }
+
+
+/*****    Reports Styles   *****/
+
+.box-white {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 2px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+
+  .btn-blue {
+    margin-top: 8px;
+  }
+
+  p,
+  h1,
+  h3,
+  h4,
+  h5,
+  h6,
+  a {
+    color: #777;
+    text-align: left;
+  }
+
+  a {
+    color: $brand-blue;
+  }
+
+  .checkbox {
+    margin-top: 0;
+  }
+
+  .btn {
+    width: 85px;
+    margin-top: 8px;
+  }
+
+  .btn-default {
+    margin-top: 8px;
+  }
+
+  input {
+    width: 85px;
+    margin: 0 auto;
+  }
+}
+
+/* business page */
+
+.info th {
+  text-align: center;
+}
+
+.modal-content {
+  padding-top: 25px;
+}
+
+.filter-carets th:nth-child(-n+9) {
+  cursor: pointer;
+}
+
+.blur {
+  opacity: 0.2;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  color: $brand-blue;
+}
+
+/*reference library*/
+.reference {
+  h4 {
+    color: $blue;
+  }
+}
+
+#pdf-1{
+  background: url(../images/FamilyGuide-md-color.png) no-repeat;
+  height: 387px;
+  width: 300px;
+  margin: auto;
+  box-shadow:  2px 2px 7px #efefef;
+  &:hover{
+    background: url(../images/FamilyGuide-md.png) no-repeat;
+  }
+}
+
+#pdf-2{
+  background: url(../images/InsideOut-md-color.png) no-repeat;
+  height: 387px;
+  width: 300px;
+  margin: auto;
+  box-shadow:  2px 2px 7px #efefef;
+  &:hover{
+    background: url(../images/InsideOut-md.png) no-repeat;
+  }
+}
+#pdf-3{
+  background: url(../images/PhotoLibrary-md-gray.png) no-repeat;
+  height: 387px;
+  width: 300px;
+  margin: auto;
+  box-shadow:  2px 2px 7px #efefef;
+  &:hover{
+    background: url(../images/PhotoLibrary-md.png) no-repeat;
+  }
+}
+
+.app-modal-window-reference .modal-dialog {
+  width: 90%;
+}
+
+.app-modal-window-aboutus .modal-dialog {
+  .about-us-content {
+    padding: 10px;
+  }
+}
+
+/*header bar font size*/
+.kagen-header {
+  font-size: 1.25rem;
+}
+
+/*header bar collaspe breakpoints*/
+@media (max-width: 1410px) {
+  .navbar-header {
+    float: none;
+  }
+  .navbar-toggle {
+    display: block;
+  }
+  .navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .navbar-collapse.collapse {
+    display: none!important;
+  }
+  .navbar-nav {
+    float: none!important;
+    margin: 7.5px -15px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .navbar-nav>li {
+    float: none;
+  }
+  .navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+@media (min-width: 1410px) {
+  .collapse-nav {
+    ul {
+       display: none;
+     }
+  }
+}
