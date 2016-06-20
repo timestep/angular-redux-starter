@@ -6,13 +6,15 @@ exports.eslint = {
   exclude: /node_modules/,
 };
 
-exports.babel = {
-  test: /\.jsx?$/,
+exports.istanbulInstrumenter = {
+  test: /^(.(?!\.test))*\.ts$/,
+  loader: 'istanbul-instrumenter-loader',
+};
+
+exports.ts = {
+  test: /\.ts$/,
+  loader: 'awesome-typescript-loader',
   exclude: /node_modules/,
-  loader: 'babel-loader',
-  query: {
-    presets: ['es2015'],
-  },
 };
 
 exports.html = {

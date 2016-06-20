@@ -1,47 +1,70 @@
 'use strict';
 
+process.env.TEST = true;
+
+const plugins = require('./webpack/plugins');
 const loaders = require('./webpack/loaders');
 const postcssInit = require('./webpack/postcss');
 
 module.exports = (config) => {
+  const coverage = config.singleRun ? ['coverage'] : [];
+
   config.set({
     frameworks: [
-      'mocha',
       'chai',
       'sinon',
-      'source-map-support',
+      'jasmine',
     ],
 
-    files: ['./src/tests.entry.ts'],
+    plugins: [
+      'karma-chai',
+      'karma-sinon',
+      'karma-jasmine',
+      'karma-sourcemap-writer',
+      'karma-sourcemap-loader',
+      'karma-webpack',
+      'karma-coverage',
+      'karma-mocha-reporter',
+      'karma-spec-reporter',
+      'karma-chrome-launcher',
+    ],
+
+    files: [
+      './src/tests.entry.ts',
+      {
+        pattern: '**/*.map',
+        served: true,
+        included: false,
+        watched: true,
+      },
+    ],
 
     preprocessors: {
-      './src/**/*.ts': [
+      './src/tests.entry.ts': [
         'webpack',
         'sourcemap',
       ],
-      './src/**/!(*.test|tests.*).ts': [
-        'coverage',
-      ],
+      './src/**/!(*.test|tests.*).(ts|js)': [
+        'sourcemap',
+      ].concat(coverage),
     },
 
     webpack: {
       entry: './src/tests.entry.ts',
       devtool: 'inline-source-map',
-      verbose: true,
+      verbose: false,
       resolve: {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.js'],
       },
       module: {
-        loaders: [
-          loaders.tsTest,
-        ],
-        postLoaders: [
-          loaders.istanbulInstrumenter,
-        ],
+        loaders: combinedLoaders(),
+        postLoaders: config.singleRun
+          ? [ loaders.istanbulInstrumenter ]
+          : [ ],
       },
       stats: { colors: true, reasons: true },
-      debug: true,
-      plugins: [],
+      debug: false,
+      plugins: plugins,
       postcss: postcssInit,
     },
 
@@ -49,7 +72,8 @@ module.exports = (config) => {
       noInfo: true, // prevent console spamming when running in Karma!
     },
 
-    reporters: ['mocha', 'coverage'],
+    reporters: ['mocha'].concat(coverage),
+
     // only output json report to be remapped by remap-istanbul
     coverageReporter: {
       reporters: [
@@ -67,6 +91,23 @@ module.exports = (config) => {
     autoWatch: true,
     browsers: ['Chrome'], // Alternatively: 'PhantomJS'
     captureTimeout: 6000,
-    singleRun: true,
   });
 };
+
+function combinedLoaders() {
+  return Object.keys(loaders).reduce(function reduce(aggregate, k) {
+    switch (k) {
+    case 'istanbulInstrumenter':
+    case 'tslint':
+      return aggregate;
+    case 'ts':
+    case 'tsTest':
+      return aggregate.concat([ // force inline source maps
+        Object.assign(loaders[k],
+          { query: { babelOptions: { sourceMaps: 'both' } } })]);
+    default:
+      return aggregate.concat([loaders[k]]);
+    }
+  },
+  []);
+}
