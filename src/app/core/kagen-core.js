@@ -1,6 +1,30 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-core', ['ka-allergen-categories', 'ka-allergy-reports',
-  'ka-session', 'ka-capitalize', 'ka-helper',
-  'ka-organizations', 'ka-notifications', 'ka-allergens', 'ka-watches'
-]);
+import allergenCategories from
+  './allergen-categories/allergen-categories-service.js';
+
+import allergyReports from
+  './allergy-reports/allergy-reports-service.js';
+
+import session from './session/session-service.js';
+import capitalize from './capitalize/capitalize-filter.js';
+import helper from './helper/helper-service.js';
+import organizations from './organizations/organizations-service.js';
+import notifications from './notifications/notifications-service.js';
+import allergens from './allergens/allergens-service.js';
+import watches from './watches/watches-service.js';
+
+export default angular.module(
+  'kagenSite.core',
+  [
+    allergenCategories,
+    allergyReports,
+    session,
+    capitalize,
+    helper,
+    organizations,
+    notifications,
+    allergens,
+    watches,
+  ]
+).name;

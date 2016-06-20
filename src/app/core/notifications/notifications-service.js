@@ -1,7 +1,7 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-notifications', [])
-  .factory('notifications', function ($http, $q) {
+export default angular.module('kagenSite.notifications', [])
+  .factory('notifications', function($http, $q) {
     var notificationDefaultTemplate = {data: {
       rules: {
         gender: 'All',
@@ -283,4 +283,3 @@ angular.module('ka-notifications', [])
       }
     };
   });
-

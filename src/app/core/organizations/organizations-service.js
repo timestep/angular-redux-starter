@@ -1,6 +1,6 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-organizations', [])
+export default angular.module('kagenSite.organizations', [])
   .factory('organizations', function ($http) {
     var DEFAULT_ORGS_SORT = '_id';
     var DEFAULT_ORGS_LIMIT = 25;

@@ -1,8 +1,8 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-capitalize', [])
-  .filter('capitalize', function () {
-    return function (input) {
+export default angular.module('kagenSite.capitalize', [])
+  .filter('capitalize', function() {
+    return function(input) {
       return input[0].toUpperCase() + input.slice(1);
     };
   });

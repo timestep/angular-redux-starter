@@ -1,6 +1,5 @@
-'use strict';
 
-angular.module('ka-allergy-reports', [])
+export default angular.module('kagenSite.allergyReports', [])
   .service('reportsUrlService', function () {
     return {
       getReportUrl: function (organizationId) {
@@ -109,4 +108,4 @@ angular.module('ka-allergy-reports', [])
         return report;
       }
     };
-  });
+  }).name;

@@ -1,6 +1,6 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-session', ['ka-helper', 'ka-organizations'])
+export default angular.module('kagenSite.session', ['ka-helper', 'ka-organizations'])
   .service('session', function Session($q, $log, $window, $http, $rootScope, $state, helper, organizations) {
     var LS_USER_ORGID = 'user.orgId'; //Localstorage key for the current user's organization id
     var LS_AUTH_TOKEN = 'Authorization';

@@ -1,6 +1,6 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-helper',[])
+angular.module('kagenSite.helper',[])
   .filter('offset', function () {
     return function (items, start) {
       start = parseInt(start, 10);

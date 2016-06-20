@@ -1,10 +1,10 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-allergen-categories', [])
+export default angular.module('kagenSite.allergenCategories', [])
   .value('allergenCategories', ['Trees', 'Weeds', 'Grass', 'Mold Spores'])
   .value('allergenLevels', [0, 1, 2, 3, 4])
   .value('allergenLevelLabels', ['Absent', 'Low', 'Medium', 'High', 'Very High'])
-  .service('allergensFor', function () {
+  .service('allergensFor', function() {
     return {
       data: {
         'Animals': {
@@ -185,7 +185,7 @@ angular.module('ka-allergen-categories', [])
           'Sycamore': null,
           'Walnut, Black': null,
           'Willow, Black': null,
-          'Unknown': null
+          'Unknown': null,
         },
         'Weeds': {
           'Cocklebur': null,
@@ -207,8 +207,8 @@ angular.module('ka-allergen-categories', [])
           'Sagebrush': null,
           'Sorrel, Red': null,
           'Tumbleweed': null,
-          'Unknown': null
-        }
-      }
+          'Unknown': null,
+        },
+      },
     };
-  });
+  }).name;

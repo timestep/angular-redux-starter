@@ -1,6 +1,6 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-allergens', [])
+export default angular.module('kagenSite.allergens', [])
   .factory('allergens', function ($http) {
     return {
       getMedications: function () {
@@ -19,5 +19,3 @@ angular.module('ka-allergens', [])
       }
     };
   });
-
-

@@ -14,6 +14,7 @@ const basePlugins = [
   }),
   new SplitByPathPlugin([
     { name: 'vendor',  path: [ path.join(__dirname, '../', 'node_modules') ] },
+    { name: 'lib', path: [ path.join(__dirname, '../', 'lib') ] },
   ]),
   new HtmlWebpackPlugin({
     template: './src/index.html',
