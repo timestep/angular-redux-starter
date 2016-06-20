@@ -13,10 +13,7 @@ const basePlugins = [
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
   }),
   new SplitByPathPlugin([
-    {
-      name: 'vendor',
-      path: path.join(__dirname, '../', 'node_modules'),
-    },
+    { name: 'vendor',  path: [ path.join(__dirname, '../', 'node_modules') ] },
   ]),
   new HtmlWebpackPlugin({
     template: './src/index.html',
