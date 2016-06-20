@@ -27,6 +27,11 @@ exports.css = {
   exclude: /node_modules/,
 };
 
+exports.json = {
+  test: /\.json/,
+  loader: 'json-loader',
+};
+
 exports.svg = makeUrlLoader(/\.svg$/);
 exports.eot = makeUrlLoader(/\.eot$/);
 exports.woff = makeUrlLoader(/\.woff$/);

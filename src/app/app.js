@@ -4,7 +4,7 @@ import {
   angular,
   ngCookies
 } from 'angular';
-// import fetch from 'fetch';
+import fetch from 'isomorphic-fetch';
 // import ngCookies from 'ngCookies';
 import $ from 'jquery';
 

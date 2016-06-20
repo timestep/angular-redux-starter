@@ -38,6 +38,7 @@ module.exports = {
     loaders: [
       loaders.babel,
       loaders.html,
+      loaders.json,
       loaders.css,
       loaders.svg,
       loaders.eot,
