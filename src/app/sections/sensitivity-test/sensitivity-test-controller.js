@@ -1,7 +1,4 @@
-'use strict';
-
-angular.module('ka-sensitivity-test')
-  .controller('SensitivityTestCtrl', function (sensitivityTest, $timeout,
+export default function SensitivityTestCtrl(sensitivityTest, $timeout,
     ngProgress) {
     var vm = this;
 
@@ -11,4 +8,4 @@ angular.module('ka-sensitivity-test')
     vm.sensitivityTest.initialize();
 
     vm.sensitivityTest.data.score = 0;
-  });
+  };

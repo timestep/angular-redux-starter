@@ -1,6 +1,17 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-video-chat-preferences', ['ka-video-chat-prefs-sync', 'ka-timezone-autocomplete', 'ka-time-field-formatter'])
+import videoChatPrefsSync
+  from '../../core/video-chat/video-chat-session-service.js';
+
+import timezoneAutocomplete from '../../core/timezone-autocomplete.js';
+import timeFieldFormatter from '../../core/time-field-formatter.js';
+
+export default angular.module('kagenSite.videoChatPreferences',
+  [
+    videoChatPrefsSync,
+    timezoneAutocomplete,
+    timeFieldFormatter,
+  ])
   .controller('VideoChatPreferencesCtrl', function VideoChatPreferencesCtrl($modalInstance, videoChatPrefsSync, timezoneAutocomplete, timeFieldFormatter) {
     var vm = this;
     var pickPrefs = ['videoStartTime', 'videoEndTime', 'videoTimeZone', 'videoMinutesToWait'];
@@ -45,4 +56,4 @@ angular.module('ka-video-chat-preferences', ['ka-video-chat-prefs-sync', 'ka-tim
     vm.refreshZoneList = function (term) {
       vm.zoneList = timezoneAutocomplete.filterZones(term);
     };
-  });
+  }).name;

@@ -1,3 +1,4 @@
+import angular from 'angular';
 
 export default angular.module('kagenSite.allergyReports', [])
   .service('reportsUrlService', function () {
@@ -11,7 +12,7 @@ export default angular.module('kagenSite.allergyReports', [])
       }
     };
   })
-  .service('allergyReports', function (
+  .service('allergyReports', function(
     $state,
     $http,
     reportsUrlService,

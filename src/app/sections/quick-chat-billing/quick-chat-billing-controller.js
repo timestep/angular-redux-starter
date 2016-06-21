@@ -1,10 +1,4 @@
-'use strict';
-
-angular.module('ka-quick-chat-billing', [
-  'ka-generic-paginator',
-  'ka-csv-worker'
-])
-  .controller('QuickChatBillingCtrl', function QuickChatBillingCtrl(
+export default function QuickChatBillingCtrl(
     usageData,
     genericPaginator,
     csvWorker) {
@@ -65,4 +59,4 @@ angular.module('ka-quick-chat-billing', [
     };
 
     vm.init();
-  });
+  };

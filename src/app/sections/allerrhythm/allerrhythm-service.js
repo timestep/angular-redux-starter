@@ -1,8 +1,4 @@
-'use strict';
-
-angular.module('ka-allerrhythm')
-
-.service('allerrhythm', function ($http,
+export default function allerrhythmService ($http,
                                   $window,
                                   geolocation,
                                   profile) {
@@ -116,6 +112,6 @@ angular.module('ka-allerrhythm')
   }
 
   return {
-    start: start
+    start: start,
   };
-});
+}

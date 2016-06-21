@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-angular.module('kagenSite.helper',[])
+export default angular.module('kagenSite.helperSvc', [])
   .filter('offset', function () {
     return function (items, start) {
       start = parseInt(start, 10);
@@ -256,4 +256,4 @@ angular.module('kagenSite.helper',[])
         country: 'CANADA'
       }]
     };
-});
+}).name;

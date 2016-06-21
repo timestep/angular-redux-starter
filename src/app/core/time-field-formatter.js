@@ -1,7 +1,7 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-time-field-formatter', [])
-  .factory('timeFieldFormatter', function timeFieldFormatterService(){
+export default angular.module('kagenSite.timeFieldFormatter', [])
+  .factory('timeFieldFormatter', function timeFieldFormatterService() {
     function zeroPad(num, numZeros) {
       var n = Math.abs(num);
       var zeros = Math.max(0, numZeros - Math.floor(n).toString().length);
@@ -36,4 +36,5 @@ angular.module('ka-time-field-formatter', [])
     };
 
     return tff;
-  });
+  })
+  .name;

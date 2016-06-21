@@ -1,11 +1,10 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-video-chat-reject',
-              [
-                'ka-video-chat-queue'
-              ])
+import videoChatQueueSvc from
+  '../../core/video-chat/video-chat-queue-service.js';
 
-.controller('RejectCallCtrl', function (
+export default angular.module('kagenSite.videoChatReject', [videoChatQueueSvc])
+.controller('RejectCallCtrl', function(
   $http,
   $log,
   $modalInstance,
@@ -64,5 +63,4 @@ angular.module('ka-video-chat-reject',
       vm.message = previousMessage;
     }
   };
-
-});
+}).name;

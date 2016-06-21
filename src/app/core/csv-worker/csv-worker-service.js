@@ -1,7 +1,9 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-csv-worker', ['ka-csv-worker-instantiator'])
-  .factory('csvWorker', function csvWorkerService($q, csvWorkerInstantiator){
+import csvWorkerInstantiatorSvc from './csv-worker-instantiator-service.js';
+
+export default angular.module('kagenSite.csvWorkerSvc', [csvWorkerInstantiatorSvc])
+  .factory('csvWorker', function csvWorkerService($q, csvWorkerInstantiator) {
     var seq = 0;
     var completions = [];
     var worker = csvWorkerInstantiator.makeWorker();
@@ -31,4 +33,4 @@ angular.module('ka-csv-worker', ['ka-csv-worker-instantiator'])
     };
 
     return csvwkr;
-  });
+  }).name;

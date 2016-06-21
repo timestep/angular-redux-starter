@@ -1,8 +1,4 @@
-'use strict';
-
-angular.module('ka-contact-us', ['ka-helper'])
-
-.controller('ContactCtrl', function ($http, $modalInstance, helper) {
+export default function ContactCtrl($http, $modalInstance, helper) {
   var vm = this;
 
   vm.submit = function () {
@@ -28,4 +24,4 @@ angular.module('ka-contact-us', ['ka-helper'])
         $modalInstance.close();
       });
   };
-});
+}

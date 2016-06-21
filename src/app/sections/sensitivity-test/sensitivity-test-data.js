@@ -1,7 +1,4 @@
-'use strict';
-
-angular.module('ka-sensitivity-test')
-  .value('sensitivityTestData', {
+export const sensitivityTestData = {
     'header': 'Hypersensitivity Test',
     'scoreRanges': [{
       'minRange': 0,
@@ -128,4 +125,4 @@ angular.module('ka-sensitivity-test')
         'value': -1
       }]
     }]
-  });
+  };

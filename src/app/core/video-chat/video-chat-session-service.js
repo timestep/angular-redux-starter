@@ -1,10 +1,18 @@
-angular.module('ka-video-chat-session',
+import angular from 'angular';
+import session from '../session';
+import videoChatQueueSvc from './video-chat-queue-service.js';
+import videoChatPrefsSyncSvc from './video-chat-prefs-sync-service.js';
+import videoChatFrameSvc from './video-chat-frame-service.js';
+import videoChatReject from
+  '../../sections/video-chat/video-chat-reject-controller.js';
+
+export default angular.module('kagenSite.videoChatSessionSvc',
   [
-    'ka-session',
-    'ka-video-chat-queue',
-    'ka-video-chat-prefs-sync',
-    'ka-video-chat-frame',
-    'ka-video-chat-reject'
+    session,
+    videoChatQueueSvc,
+    videoChatPrefsSyncSvc,
+    videoChatFrameSvc,
+    videoChatReject,
   ])
   .factory('videoChatSession', function videoChatSessionService(
     $rootScope,
@@ -15,7 +23,6 @@ angular.module('ka-video-chat-session',
     videoChatQueue,
     videoChatPrefsSync,
     videoChatFrame) {
-
     var findCall = function findCall(callId) {
       return R.find(R.propEq('callId', callId), videoChatQueue.queue);
     };
@@ -120,4 +127,4 @@ angular.module('ka-video-chat-session',
     });
 
     return service;
-  });
+  }).name;

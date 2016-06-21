@@ -1,43 +1,39 @@
-'use strict';
+export default function reportsCreateCtrl(
+  allergenCategories,
+  allergenLevels,
+  allergenLevelLabels,
+  allergyReports,
+  $stateParams,
+  $state,
+  $log,
+  ngProgress) {
+  var vm = this;
 
-angular.module('ka-reports-create', ['ka-core', 'ka-reports-service'])
-  .controller('ReportsCreateCtrl', function (
-    allergenCategories,
-    allergenLevels,
-    allergenLevelLabels,
-    allergyReports,
-    $stateParams,
-    $state,
-    $log,
-    ngProgress) {
+  var clinicId = $stateParams.clinicId;
 
-    var vm = this;
+  vm.allergenCategories = allergenCategories;
+  vm.allergenLevels = allergenLevels;
+  vm.allergenLevelLabels = allergenLevelLabels;
+  vm.clearAllergenLevel = allergyReports.clearAllergenLevel;
+  vm.clearConcentrationLevel = allergyReports.clearConcentrationLevel;
+  vm.pageReady = true;
 
-    var clinicId = $stateParams.clinicId;
+  allergyReports.setLastViewedReport(clinicId);
 
-    vm.allergenCategories = allergenCategories;
-    vm.allergenLevels = allergenLevels;
-    vm.allergenLevelLabels = allergenLevelLabels;
-    vm.clearAllergenLevel = allergyReports.clearAllergenLevel;
-    vm.clearConcentrationLevel = allergyReports.clearConcentrationLevel;
-    vm.pageReady = true;
+  vm.report = allergyReports.getReportTemplate(clinicId);
 
-    allergyReports.setLastViewedReport(clinicId);
+  vm.save = function (report) {
+    vm.pageReady = false;
+    ngProgress.start();
+    allergyReports.createReport(report)
+      .then(function () {
+        vm.pageReady = true;
+        ngProgress.complete();
+        $state.go($state.previous.name);
+      }).then(null, $log.error);
+  };
 
-    vm.report = allergyReports.getReportTemplate(clinicId);
-
-    vm.save = function (report) {
-      vm.pageReady = false;
-      ngProgress.start();
-      allergyReports.createReport(report)
-        .then(function () {
-          vm.pageReady = true;
-          ngProgress.complete();
-          $state.go($state.previous.name);
-        }).then(null, $log.error);
-    };
-
-    vm.goBack = function () {
-      $state.go($state.previous.name);
-    };
-  });
+  vm.goBack = function () {
+    $state.go($state.previous.name);
+  };
+};

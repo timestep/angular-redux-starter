@@ -1,7 +1,4 @@
-'use strict';
-
-angular.module('ka-reports-edit', ['ka-core'])
-  .controller('ReportsEditCtrl', function (
+export default function ReportsEditCtrl(
     allergensFor,
     allergenCategories,
     allergenLevels,
@@ -81,4 +78,4 @@ angular.module('ka-reports-edit', ['ka-core'])
         });
         pageReady();
       }).then(null, $log.error);
-  });
+  };

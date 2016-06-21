@@ -282,4 +282,5 @@ export default angular.module('kagenSite.notifications', [])
         element[0].addEventListener('change', handler, false);
       }
     };
-  });
+  })
+  .name;

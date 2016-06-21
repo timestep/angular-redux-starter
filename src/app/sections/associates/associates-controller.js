@@ -1,7 +1,4 @@
-'use strict';
-
-angular.module('ka-associates')
-  .controller('AssociatesCtrl', function (
+export default function AssociatesCtrl(
     $modal,
     $log,
     $location,
@@ -280,4 +277,4 @@ angular.module('ka-associates')
 
     }
 
-  });
+  };

@@ -1,10 +1,10 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-csv-worker-instantiator', [])
+export default angular.module('kagenSite.csvWorkerInstantiator', [])
   .factory('csvWorkerInstantiator', function csvWorkerInstantiatorService() {
     return {
-      makeWorker: function () {
+      makeWorker: function() {
         return new Worker('/app/core/csv-worker/csv-worker.js');
-      }
+      },
     };
-  });
+  }).name;

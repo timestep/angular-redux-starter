@@ -1,12 +1,22 @@
-angular.module('ka-video-chat',
+import angular from 'angular';
+
+import session from '../../core/session';
+import videoChatControlsSvc
+  from '../../core/video-chat/video-chat-controls-service.js';
+import videoChatQueueSvc
+  from '../../core/video-chat/video-chat-queue-service.js';
+import videoChatSessionSvc
+  from '../../core/video-chat/video-chat-session-service.js';
+
+export default angular.module('kagenSite.videoChat',
   [
-    'ka-session',
-    'ka-video-chat-controls',
-    'ka-video-chat-queue',
-    'ka-video-chat-session'
+    session,
+    videoChatControlsSvc,
+    videoChatQueueSvc,
+    videoChatSessionSvc,
   ])
   .controller('VideoChatCtrl',
-    function (
+    function(
       $log,
       $modal,
       $state,
@@ -219,5 +229,4 @@ angular.module('ka-video-chat',
             $log.error(error);
           });
       };
-
-    });
+    }).name;

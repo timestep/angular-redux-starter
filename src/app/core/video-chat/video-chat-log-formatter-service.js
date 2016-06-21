@@ -1,6 +1,13 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-video-chat-log-formatter', ['ka-helper', 'ka-generic-paginator'])
+import helper from '../helper/helper-service.js';
+import genericPaginator from '../generic-paginator';
+
+export default angular.module('kagenSite.videoChatLogFormatterSvc',
+  [
+    helper,
+    genericPaginator
+  ])
   .factory('videoChatLogFormatter', function videoChatLogFormatterService(helper, genericPaginator){
     function repairEmails(rows) {
       return R.map(function (row) {
@@ -43,4 +50,4 @@ angular.module('ka-video-chat-log-formatter', ['ka-helper', 'ka-generic-paginato
       formatPage: R.compose(formatLogRows, genericPaginator),
       repairEmails: repairEmails
     };
-  });
+  }).name;

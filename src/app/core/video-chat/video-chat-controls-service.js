@@ -1,7 +1,10 @@
-angular.module('ka-video-chat-controls',
+import videoChatSessionSvc from './video-chat-session-service.js';
+import videoChatQueueSvc from './video-chat-queue-service.js';
+
+export default angular.module('kagenSite.videoChatControlsSvc',
   [
-    'ka-video-chat-session',
-    'ka-video-chat-queue'
+    videoChatSessionSvc,
+    videoChatQueueSvc,
   ])
   .factory('videoChatControls', function videoChatControlsService(
     videoChatSession,
@@ -42,4 +45,4 @@ angular.module('ka-video-chat-controls',
         return findCall(videoChatSession.state.currentCall);
       }
     };
-  });
+  }).name;

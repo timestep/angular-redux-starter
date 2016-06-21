@@ -1,52 +1,53 @@
-'use strict';
+export function profile($http, helper, session) {
+  var user = {};
 
-angular.module('ka-profile')
-  .service('profile', function ($http, helper, session) {
-    var user = {};
+  return {
+    updateProfile: function (profile) {
+      var username = session.viewUserCtx.username || session.userCtx.username;
+      return $http.put('/api/' + username + '/profile', profile);
+    },
+    getProfile: function (overrideUsername) {
+      // Default username to use is the one we have stored in the user context.
+      var username = session.viewUserCtx.username || session.userCtx.username;
 
-    return {
-      updateProfile: function (profile) {
-        var username = session.viewUserCtx.username || session.userCtx.username;
-        return $http.put('/api/' + username + '/profile', profile);
-      },
-      getProfile: function (overrideUsername) {
-        // Default username to use is the one we have stored in the user context.
-        var username = session.viewUserCtx.username || session.userCtx.username;
-
-        // If a username is passed to us, override the user context
-        // and try and fetch this user's profile instead.
-        if (overrideUsername) {
-          username = overrideUsername;
-        }
-
-        var getUserProfile = function () {
-          return $http.get('/api/' + username + '/profile')
-            .then(function (res) {
-              user.session = res.data;
-
-              if (session.viewUserCtx.username) {
-                session.updateViewUserCtx(res.data);
-              }
-            });
-        };
-        var getUserPhoto = function () {
-          user.profilePhoto = '';
-          return $http.get('/api/profile-photo/' + username)
-            .then(function (res) {
-                user.profilePhoto = 'data:image/jpg;base64,' + res.data;
-                return user;
-              },
-              function () {
-                user.profilePhoto = '';
-                return user;
-              });
-        };
-        return R.pCompose(getUserPhoto, getUserProfile)();
+      // If a username is passed to us, override the user context
+      // and try and fetch this user's profile instead.
+      if (overrideUsername) {
+        username = overrideUsername;
       }
-    };
-  })
-  .service('profileViewHelper', function (medicalConditions, householdPets,
-    currentMedications, knownAllergies) {
+
+      var getUserProfile = function () {
+        return $http.get('/api/' + username + '/profile')
+          .then(function (res) {
+            user.session = res.data;
+
+            if (session.viewUserCtx.username) {
+              session.updateViewUserCtx(res.data);
+            }
+          });
+      };
+      var getUserPhoto = function () {
+        user.profilePhoto = '';
+        return $http.get('/api/profile-photo/' + username)
+          .then(function (res) {
+              user.profilePhoto = 'data:image/jpg;base64,' + res.data;
+              return user;
+            },
+            function () {
+              user.profilePhoto = '';
+              return user;
+            });
+      };
+      return R.pCompose(getUserPhoto, getUserProfile)();
+    }
+  };
+}
+export function profileViewHelper(
+    medicalConditions,
+    householdPets,
+    currentMedications,
+    knownAllergies
+  ) {
     var fenoVariable;
     var fev1Variable;
     var getData = function (data) {
@@ -425,4 +426,4 @@ angular.module('ka-profile')
         type: 'otherFood'
       }]
     };
-  });
+  };

@@ -6,4 +6,5 @@ export default angular.module('kagenSite.watches', [])
         return $http.get('/api/nws-watches/');
       },
     };
-  });
+  })
+  .name;

@@ -1,10 +1,16 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-video-chat-data', [
-  'ka-video-chat-logs',
-  'ka-helper',
-  'ka-csv-worker',
-  'ka-video-chat-log-formatter'
+import videoChatLogsSvc from '../../core/video-chat/video-chat-logs-service.js';
+import helperSvc from '../../core/helper/helper-service.js';
+import csvWorkerSvc from '../../core/csv-worker/csv-worker-service.js';
+import videoChatLogFormatterSvc
+  from '../../core/video-chat/video-chat-log-formatter-service.js';
+
+export default angular.module('kagenSite.videoChatData', [
+  videoChatLogsSvc,
+  helperSvc,
+  csvWorkerSvc,
+  videoChatLogFormatterSvc,
 ])
   .controller('VideoChatDataCtrl', function VideoChatDataCtrl(
     videoChatLogs,
@@ -49,4 +55,4 @@ angular.module('ka-video-chat-data', [
     };
 
     vm.refresh();
-  });
+  }).name;

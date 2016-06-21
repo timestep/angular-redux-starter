@@ -1,8 +1,4 @@
-'use strict';
-
-angular.module('ka-allerrhythm', [])
-
-.controller('AllerRhythmCtrl', function (allerrhythm, session) {
+export default function allerrhythmController (allerrhythm, session) {
   var vm = this;
 
   /**
@@ -22,4 +18,4 @@ angular.module('ka-allerrhythm', [])
   };
 
   vm.init();
-});
+};

@@ -1,6 +1,6 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-video-chat-frame', [])
+export default angular.module('kagenSite.videoChatFrameSvc', [])
   .factory('videoChatFrame', function videoChatFrameService ($rootScope) {
     var other;
     var handlers = {};
@@ -55,4 +55,4 @@ angular.module('ka-video-chat-frame', [])
     };
 
     return service;
-  });
+  }).name;

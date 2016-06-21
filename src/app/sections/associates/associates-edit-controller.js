@@ -1,7 +1,4 @@
-'use strict';
-
-angular.module('ka-associates')
-  .controller('AssociatesEditCtrl', function (
+export default function AssociatesEditCtrl(
     $modalInstance,
     $log,
     organizations,
@@ -121,4 +118,4 @@ angular.module('ka-associates')
       vm.orgType = vm.orgTypes[0]; // 'Clinic' [default account type]
       vm.updatePresets(vm.orgType);
     }
-  });
+  };

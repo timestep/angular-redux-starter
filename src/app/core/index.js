@@ -6,7 +6,7 @@ import allergenCategories from
 import allergyReports from
   './allergy-reports/allergy-reports-service.js';
 
-import session from './session/session-service.js';
+import session from './session';
 import capitalize from './capitalize/capitalize-filter.js';
 import helper from './helper/helper-service.js';
 import organizations from './organizations/organizations-service.js';

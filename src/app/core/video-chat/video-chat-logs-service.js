@@ -1,6 +1,7 @@
-'use strict';
+import angular from 'angular';
+import session from '../session';
 
-angular.module('ka-video-chat-logs', ['ka-session'])
+export default angular.module('kagenSite.videoChatLogsSvc', [session])
   .factory('videoChatLogs', function videoChatLogsService($log, $http, session) {
     function restURI() {
       return '/api/videocalls/logs/' + session.userCtx.clinicId;
@@ -22,4 +23,4 @@ angular.module('ka-video-chat-logs', ['ka-session'])
     };
 
     return logmgr;
-  });
+  }).name;

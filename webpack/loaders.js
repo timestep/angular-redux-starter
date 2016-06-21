@@ -8,7 +8,9 @@ exports.eslint = {
 
 exports.babel = {
   test: /\.jsx?$/,
-  exclude: /node_modules/,
+  exclude: [
+    /node_modules/,
+  ],
   loader: 'babel-loader',
   query: {
     presets: ['es2015'],

@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 export default angular.module('kagenSite.allergens', [])
-  .factory('allergens', function ($http) {
+  .factory('allergens', function ($http){
     return {
       getMedications: function () {
         return $http.get('/api/medications');
@@ -18,4 +18,5 @@ export default angular.module('kagenSite.allergens', [])
         });
       }
     };
-  });
+  })
+  .name;

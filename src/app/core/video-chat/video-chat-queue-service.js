@@ -1,6 +1,7 @@
-'use strict';
+import angular from 'angular';
+import session from '../session';
 
-angular.module('ka-video-chat-queue', ['ka-session'])
+export default angular.module('kagenSite.videoChatQueueSvc', [session])
   .factory('videoChatQueue', function videoChatQueueService(
     $rootScope,
     $log,
@@ -68,4 +69,4 @@ angular.module('ka-video-chat-queue', ['ka-session'])
     }
 
     return qmgr;
-  });
+  }).name;

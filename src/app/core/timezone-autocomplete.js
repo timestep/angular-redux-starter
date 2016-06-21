@@ -1,10 +1,10 @@
-'use strict';
+import angular from 'angular';
 
-angular.module('ka-timezone-autocomplete', [])
-  .factory('timezoneAutocomplete', function timezoneAutocompleteService(){
+export default angular.module('kagenSite.timezoneAutocomplete', [])
+  .factory('timezoneAutocomplete', function timezoneAutocompleteService() {
     var zones = moment.tz.names();
     var tzac = {
-      filterZones: function (term) {
+      filterZones: function(term) {
         return R.sortBy
         (R.prop('length'),
          R.filter
@@ -18,4 +18,5 @@ angular.module('ka-timezone-autocomplete', [])
     };
 
     return tzac;
-  });
+  })
+  .name;

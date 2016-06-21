@@ -1,7 +1,4 @@
-'use strict';
-
-angular.module('ka-sensitivity-test')
-  .factory('sensitivityTest', function ($window, $log, $http, $modal, session,
+export default function sensitivityTest($window, $log, $http, $modal, session,
     sensitivityTestData) {
     var service = {};
     service.data = {};
@@ -67,4 +64,4 @@ angular.module('ka-sensitivity-test')
     service.initialize();
 
     return service;
-  });
+  };

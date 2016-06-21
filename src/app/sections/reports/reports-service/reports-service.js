@@ -1,7 +1,4 @@
-'use strict';
-
-angular.module('ka-reports-service', ['ka-core'])
-  .factory('reportsService', function (
+export default function reportsService(
     reportsUrlService,
     $http,
     allergenCategories) {
@@ -170,4 +167,4 @@ angular.module('ka-reports-service', ['ka-core'])
           });
     };
     return service;
-  });
+  };

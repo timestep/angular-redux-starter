@@ -129,4 +129,4 @@ export default angular.module('kagenSite.organizations', [])
         return $http.delete('/api/user/' + username);
       }
     };
-  });
+  }).name;

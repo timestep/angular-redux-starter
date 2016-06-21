@@ -1,6 +1,7 @@
-'use strict';
+import angular from 'angular';
+import session from '../session';
 
-angular.module('ka-video-chat-prefs-sync', ['ka-session'])
+export default angular.module('kagenSite.videoChatPrefsSyncSvc', [session])
   .factory('videoChatPrefsSync', function videoChatPrefsSyncService($log, $http, session){
     function restURI () {
       return '/api/organization/' + session.userCtx.clinicId;
@@ -48,4 +49,4 @@ angular.module('ka-video-chat-prefs-sync', ['ka-session'])
     };
 
     return pmgr;
-  });
+  }).name;
